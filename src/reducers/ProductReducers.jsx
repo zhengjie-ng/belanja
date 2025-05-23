@@ -83,7 +83,7 @@ export function productReducer(state, action) {
         merchant: {
           ...state.merchant,
           id: uuid(),
-          date: { ...state.date, d: day, m: month, y: year },
+          date: { ...state.date, d: day, m: month, year: year },
         },
       };
     }
@@ -91,8 +91,16 @@ export function productReducer(state, action) {
     case "SETTLE_LATER": {
       return {
         ...state,
-        bills: [...state.bills, state.merchant],
+        bills: [state.merchant, ...state.bills],
         merchant: defaultProduct.merchant,
+        user: {
+          ...state.user,
+          notifications: {
+            ...state.user.notifications,
+            notify: true,
+            list: [state.merchant.id, ...state.user.notifications.list],
+          },
+        },
       };
     }
 
@@ -257,6 +265,19 @@ export function productReducer(state, action) {
         ...state,
         bills: newBills,
         currentBill: newCurrentBill,
+      };
+    }
+
+    case "CLICK_NOTIFICATIONS": {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          notifications: {
+            ...state.user.notifications,
+            notify: false,
+          },
+        },
       };
     }
 

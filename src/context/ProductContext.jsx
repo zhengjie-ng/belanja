@@ -84,6 +84,11 @@ export function ProductProvider({ children }) {
     dispatch({ type: "BILL_SUBMIT" });
     navigate("/bills");
   };
+
+  const handlerClickNotifications = () => {
+    dispatch({ type: "CLICK_NOTIFICATIONS" });
+    navigate("/notifications");
+  };
   const data = {
     userList: state.userList,
     isLoggedIn: state.isLoggedIn,
@@ -109,6 +114,7 @@ export function ProductProvider({ children }) {
     handlerOnChangePayeePecentageInput,
     handlerChangeInputPayee,
     handlerBillSubmit,
+    handlerClickNotifications,
   };
 
   return (

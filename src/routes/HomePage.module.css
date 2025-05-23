@@ -51,6 +51,20 @@
   color: rgb(48, 48, 48);
 }
 
+.buttonActive {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(245, 18, 18);
+}
+
+.buttonActive:hover {
+  background-color: rgb(243, 92, 92);
+}
+
 .button:hover {
   border: 1px solid black;
   background-color: rgb(230, 222, 231);

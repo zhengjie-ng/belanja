@@ -1,0 +1,33 @@
+.divMain {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+  /* width: 90%; */
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.divMainSettled {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+  /* width: 90%; */
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 20px;
+  opacity: 50%;
+}
+
+.span {
+  text-transform: capitalize;
+  font-weight: 600;
+}

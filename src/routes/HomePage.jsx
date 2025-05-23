@@ -16,7 +16,16 @@ function HomePage() {
           <button className={styles.button} onClick={ctx.handlerLogoutClick}>
             ↩
           </button>
-          <button className={styles.button}>⩍</button>
+          <button
+            className={
+              ctx.user.notifications.notify
+                ? styles.buttonActive
+                : styles.button
+            }
+            onClick={ctx.handlerClickNotifications}
+          >
+            ⩍
+          </button>
         </div>
         <h3 className={styles.wallet}>${ctx.user.wallet}</h3>
       </div>

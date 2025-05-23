@@ -13,6 +13,7 @@ import PaymentPage from "./routes/PaymentPage";
 import SettlePage from "./routes/SettlePage";
 import Bill from "./routes/Bill";
 import Receipt from "./routes/Receipt";
+import Notifications from "./routes/Notifications";
 import PageNotFound from "./routes/PageNotFound";
 
 import styles from "./App.module.css";
@@ -31,6 +32,7 @@ function App() {
               <Route path="bills" element={<BillsPage />} />
               <Route path="wallet" element={<WalletPage />} />
               <Route path="account" element={<AccountPage />} />
+              <Route path="notifications" element={<Notifications />} />
               <Route path="bill/:id" element={<Bill />} />
               <Route path="bill/receipt/:id" element={<Receipt />} />
             </Route>
@@ -39,8 +41,6 @@ function App() {
             <Route path="settle" element={<SettlePage />} />
             <Route path="/*" element={<PageNotFound />} />
           </Routes>
-          {/* <footer className={styles.footer}></footer>
-          <Navigation /> */}
         </ProductProvider>
       </BrowserRouter>
     </div>

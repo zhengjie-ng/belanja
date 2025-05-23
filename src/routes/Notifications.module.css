@@ -1,0 +1,47 @@
+.divMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.divHeader {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.h2Header {
+  margin-bottom: 20px;
+  color: #5d3891;
+}
+
+.hrLine {
+  background-color: #5d3891;
+  width: 100%;
+  height: 3px;
+  color: #5d3891;
+  margin: 0px;
+  padding: 0px;
+}
+
+.link {
+  text-decoration: none;
+  width: 90%;
+  color: black;
+}
+
+.divNotifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: top;
+  justify-items: center;
+  width: 100%;
+  /* background-color: aqua; */
+  height: 765px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

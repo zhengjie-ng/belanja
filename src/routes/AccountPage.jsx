@@ -15,7 +15,7 @@ function AccountPage() {
           alt="User Photo"
         ></img>
         <h2 className={styles.walletText}>Balenja Wallet</h2>
-        <h2 className={styles.walletText}>{`$${ctx.user.wallet}`}</h2>
+        <h2 className={styles.wallet}>{`$${ctx.user.wallet}`}</h2>
       </div>
       <div className={styles.divButtons}>
         <button className={styles.buttonTopup}>💷 Top up</button>
