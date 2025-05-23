@@ -1,0 +1,76 @@
+.divMain {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(to top, #7f4fc3, #533281);
+  /* background-color: #5d3891; */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  justify-content: space-between;
+  /* box-shadow: 1px 1px 10px 1px rgb(169, 169, 169); */
+}
+
+.leftHeader {
+  color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.h2,
+.h3 {
+  color: rgb(237, 237, 237);
+  text-align: left;
+  margin-left: 20px;
+}
+
+.h2 {
+  margin-top: 40px;
+  font-size: 30px;
+}
+
+.h3 {
+  font-weight: 400;
+  margin-top: 40px;
+}
+
+.wallet {
+  color: white;
+  font-size: 35px;
+  margin-right: 20px;
+  margin-top: 50px;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  font-size: 30px;
+  color: rgb(48, 48, 48);
+}
+
+.button:hover {
+  border: 1px solid black;
+  background-color: rgb(230, 222, 231);
+}
+
+.divIcons {
+  display: flex;
+  flex-direction: row;
+  justify-items: end;
+  justify-content: end;
+  margin-right: 20px;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.avatar {
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: Top;
+  margin-top: 30px;
+}

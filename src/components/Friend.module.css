@@ -1,0 +1,83 @@
+.divFriend {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+  width: 90%;
+  border-radius: 20px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.divFriendInner {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  height: 90%;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+  padding-left: 10px;
+}
+
+.imgFriend {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: Top;
+  border-radius: 50px;
+  margin-right: 20px;
+}
+
+.divDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  /* padding-top: 20px; */
+
+  width: 100%;
+  /* padding-left: 10px; */
+}
+
+.pName {
+  font-weight: 500;
+}
+
+.pName,
+.pDetails {
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 0px;
+}
+
+.buttonActionPay,
+.buttonActionNotify {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.buttonActionPay {
+  background-color: rgb(255, 79, 79);
+  color: white;
+}
+
+.buttonActionPay:hover {
+  background-color: rgb(191, 60, 60);
+}
+
+.buttonActionNotify {
+  background-color: rgb(52, 164, 52);
+  color: white;
+}
+
+.buttonActionNotify:hover {
+  background-color: rgb(36, 116, 36);
+  color: white;
+}

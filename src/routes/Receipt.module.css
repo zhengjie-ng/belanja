@@ -1,0 +1,64 @@
+.divMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.divHeader {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.h2Bills {
+  margin-bottom: 20px;
+  color: #5d3891;
+}
+
+.hrLine {
+  background-color: #5d3891;
+  width: 100%;
+  height: 3px;
+  color: #5d3891;
+  margin: 0px;
+  padding: 0px;
+}
+
+.buttonBack {
+  margin-top: 15px;
+  width: 300px;
+  border-radius: 100px;
+  height: 70px;
+  border: 0px solid transparent;
+  background-color: #533281;
+  color: white;
+  font-size: 30px;
+  font-weight: 500;
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+}
+
+.buttonBack:hover {
+  background-color: #7548b6;
+}
+
+.h2BillName {
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.span {
+  color: #5d3891;
+}
+
+.divPaidyeeList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: top;
+  justify-items: center;
+  align-items: center;
+  height: 530px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 10px;
+}

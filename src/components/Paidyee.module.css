@@ -1,0 +1,41 @@
+.divMain {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  /* background-color: red; */
+  width: 90%;
+}
+
+.imgPayee {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: Top;
+  border-radius: 50px;
+  margin-right: 20px;
+}
+
+.divSpace {
+  flex: 2;
+  /* background-color: aquamarine; */
+}
+
+.span {
+  font-weight: 300;
+}
+
+.pThanks {
+  margin: 0px;
+  padding: 0px;
+  align-self: center;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.pFinal {
+  align-self: center;
+  font-size: 18px;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 15px;
+}

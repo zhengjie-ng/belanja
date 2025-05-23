@@ -1,0 +1,67 @@
+.welcome {
+  margin-top: 200px;
+}
+
+.divLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  gap: 5px;
+  justify-content: flex-start;
+  padding-bottom: 200px;
+  width: 100%;
+}
+
+.buttonLong,
+.buttonLongCreate,
+.buttonLongBack {
+  font-size: 15px;
+  width: 90%;
+  border-radius: 100px;
+  border: 1px solid black;
+  height: 50px;
+  font-weight: bolder;
+}
+
+.buttonLongCreate {
+  color: white;
+  background-color: #5d3891;
+}
+
+.buttonLongBack {
+  border: 0px solid black;
+  color: rgb(107, 107, 107);
+}
+
+.buttonLongCreate:hover {
+  background-color: #6a518e;
+}
+
+.buttonLong:hover {
+  background-color: rgb(214, 214, 214);
+}
+
+.buttonLongBack:hover {
+  border: 1px solid black;
+  color: black;
+}
+
+.inputMobile,
+.inputPassword {
+  padding-left: 15px;
+  font-size: 18px;
+  width: 85%;
+  margin: 10px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid rgb(142, 142, 142);
+  margin-top: 0px;
+}
+
+.inputMobile::-webkit-outer-spin-button,
+.inputMobile::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

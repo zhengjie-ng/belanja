@@ -1,0 +1,176 @@
+.divMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.settlement {
+  background-color: #533281;
+  color: white;
+  width: 100%;
+  margin-top: 0px;
+  font-weight: 100;
+}
+
+.divToggle {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
+}
+
+.switch {
+  flex: 1;
+  padding: 0px;
+  margin: 0px;
+}
+
+.divSwitch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  color: white;
+  text-align: left;
+}
+
+.h2BillName {
+  text-transform: capitalize;
+}
+
+.select {
+  width: 99%;
+  /* font-size: 20px; */
+}
+
+.divSelect {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  /* margin: 0px;
+  padding: 0px; */
+  /* height: 40px; */
+}
+
+.imgAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.divPayeeList {
+  width: 100%;
+  height: 480px;
+  /* background-color: blue; */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-content: center;
+  align-items: center;
+  overflow-y: auto;
+  /* gap: 100px; */
+}
+
+.hrLine {
+  background-color: #5d3891;
+  width: 100%;
+  height: 3px;
+  color: #5d3891;
+  margin: 0px;
+  padding: 0px;
+}
+
+.pLeft,
+.total {
+  margin: 0px;
+}
+
+.pLeft {
+  font-size: 20px;
+}
+
+.buttonSubmit {
+  margin-top: 15px;
+  width: 300px;
+  border-radius: 100px;
+  height: 70px;
+  border: 0px solid transparent;
+  background-color: #533281;
+  color: white;
+  font-size: 30px;
+  font-weight: 500;
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+}
+.buttonSubmit:hover {
+  background-color: #7548b6;
+}
+
+.divOptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.buttonOptions {
+  margin-top: 10px;
+  width: 60px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  color: rgb(44, 44, 44);
+  border: 1px solid rgb(148, 148, 148);
+  opacity: 40%;
+}
+
+.buttonOptions:hover,
+.buttonBelanja:hover {
+  opacity: 80%;
+}
+.buttonOptions:focus,
+.buttonOptions:focus:active,
+.buttonBelanja:focus,
+.buttonBelanja:focus:active {
+  opacity: 100%;
+}
+
+.buttonBelanja {
+  margin-top: 10px;
+  width: 120px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  color: white;
+  background-color: #533281;
+  border: 1px solid rgb(148, 148, 148);
+  opacity: 50%;
+}
+
+.buttonBelanjaActive {
+  margin-top: 10px;
+  width: 120px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  color: white;
+  background-color: #533281;
+  border: 1px solid rgb(148, 148, 148);
+}
+
+.buttonOptionsActive {
+  margin-top: 10px;
+  width: 60px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  color: rgb(44, 44, 44);
+  border: 1px solid rgb(148, 148, 148);
+}

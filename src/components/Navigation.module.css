@@ -1,0 +1,78 @@
+.divMain {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 190vh;
+}
+
+.divNavi {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  margin-top: auto;
+  margin-bottom: 8px;
+}
+
+.divNavi .linkNavi {
+  flex: 1;
+  height: 50px;
+  font-size: 15px;
+  border-top: 2px solid transparent;
+  color: black;
+  opacity: 50%;
+  text-align: center;
+  text-decoration: "none";
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+.divNavi .linkNavi:hover {
+  flex: 1;
+  height: 50px;
+  font-size: 15px;
+  border-top: 2px solid #5d3891;
+  opacity: 100%;
+}
+
+.linkNaviActive {
+  flex: 1;
+  height: 50px;
+  font-size: 15px;
+  border-top: 2px solid #5d3891;
+  color: black;
+  text-align: center;
+  text-decoration: "none";
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+/* .linkNaviActive {
+  flex: 1;
+  height: 50px;
+  font-size: 15px;
+  border-top: 2px solid #5d3891;
+  opacity: 100%;
+  color: black;
+  text-align: center;
+  text-decoration: "none";
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+} */
