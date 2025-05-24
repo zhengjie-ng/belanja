@@ -89,9 +89,18 @@ export function productReducer(state, action) {
     }
 
     case "SETTLE_LATER": {
+      let updatedMerchant = {...state.merchant, fullPayeeList: [
+            {
+              id: state.user.id,
+              name: state.user.name,
+              float: "",
+              percentage: "",
+            },
+          ],};
+
       return {
         ...state,
-        bills: [state.merchant, ...state.bills],
+        bills: [updatedMerchant, ...state.bills],
         merchant: defaultProduct.merchant,
         user: {
           ...state.user,
