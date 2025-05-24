@@ -46,6 +46,13 @@ export function productReducer(state, action) {
     }
 
     case "LOGOUT": {
+      const user = { ...state.user, bills: state.bills };
+      for (const key in state.userList) {
+        if (state.userList[key].id === state.user.id) {
+          state.userList[key] = user;
+        }
+      }
+
       return { ...state, isLoggedIn: false, user: null };
     }
 
@@ -89,14 +96,17 @@ export function productReducer(state, action) {
     }
 
     case "SETTLE_LATER": {
-      let updatedMerchant = {...state.merchant, fullPayeeList: [
-            {
-              id: state.user.id,
-              name: state.user.name,
-              float: "",
-              percentage: "",
-            },
-          ],};
+      let updatedMerchant = {
+        ...state.merchant,
+        fullPayeeList: [
+          {
+            id: state.user.id,
+            name: state.user.name,
+            float: "",
+            percentage: "",
+          },
+        ],
+      };
 
       return {
         ...state,
