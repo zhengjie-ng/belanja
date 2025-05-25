@@ -24,8 +24,8 @@ const dataUsers = [
         debt: -40.5,
       },
       {
-        name: "Dove",
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
+        name: "Dove",
         debt: 0,
       },
     ],
@@ -104,11 +104,6 @@ const dataUsers = [
         name: "Cindy",
         debt: 0,
       },
-      {
-        id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
-        name: "Dove",
-        debt: -205,
-      },
     ],
   },
   {
@@ -128,7 +123,12 @@ const dataUsers = [
       {
         id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
         name: "Alan",
-        debt: -250,
+        debt: 40.5,
+      },
+      {
+        id: "e2e66095-2d1e-4810-ba8c-e06493d4ea60",
+        name: "Becky",
+        debt: 0,
       },
       {
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
@@ -154,12 +154,12 @@ const dataUsers = [
       {
         id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
         name: "Alan",
-        debt: 55,
+        debt: 0,
       },
       {
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
         name: "Cindy",
-        debt: 0,
+        debt: -5,
       },
     ],
   },
@@ -180,7 +180,7 @@ const dataUsers = [
       {
         id: "e2e66095-2d1e-4810-ba8c-e06493d4ea60",
         name: "Becky",
-        debt: -200,
+        debt: 0,
       },
       {
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
@@ -190,7 +190,7 @@ const dataUsers = [
       {
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
         name: "Dove",
-        debt: 93,
+        debt: 0,
       },
     ],
   },

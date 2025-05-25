@@ -280,10 +280,65 @@ export function productReducer(state, action) {
         bill.id === newCurrentBill.id ? newCurrentBill : bill
       );
 
+      const locatedPayee = {};
+      Object.values(state.currentBill.fullPayeeList).forEach((payee) => {
+        locatedPayee[payee.id] = payee;
+      });
+
+      //To reflect debt change in current user friends list
+      const updatedFriends = state.user.friends.map((friend) => {
+        if (
+          locatedPayee[friend.id] &&
+          friend.id === locatedPayee[friend.id].id
+        ) {
+          return {
+            ...friend,
+            debt: (
+              Number(friend.debt) + Number(locatedPayee[friend.id].final)
+            ).toFixed(2),
+          };
+        }
+        return friend;
+      });
+
+      //To reflect debt change in overall userlist, so when another user sign in, the chamge will reflect in his/her friendlist
+      const updatedUserlist = state.userList.map((payeeUser) => {
+        if (
+          locatedPayee[payeeUser.id] &&
+          payeeUser.id === locatedPayee[payeeUser.id].id &&
+          locatedPayee[payeeUser.id].id !== state.user.id
+        ) {
+          const updatedFriends = payeeUser.friends.map((payeeUserFriend) => {
+            if (payeeUserFriend.id === state.user.id) {
+              const finalDebt =
+                Number(payeeUserFriend.debt) -
+                Number(locatedPayee[payeeUser.id].final);
+              return {
+                ...payeeUserFriend,
+                debt: finalDebt.toFixed(2),
+              };
+            }
+            return payeeUserFriend;
+          });
+
+          return {
+            ...payeeUser,
+            friends: updatedFriends,
+          };
+        }
+        return payeeUser;
+      });
+      console.log(updatedUserlist);
+
       return {
         ...state,
+        userList: updatedUserlist,
         bills: newBills,
         currentBill: newCurrentBill,
+        user: {
+          ...state.user,
+          friends: updatedFriends,
+        },
       };
     }
 
