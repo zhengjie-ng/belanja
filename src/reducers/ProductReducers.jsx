@@ -296,7 +296,7 @@ export function productReducer(state, action) {
           return {
             ...friend,
             debt: (
-              Number(friend.debt) + Number(locatedPayee[friend.id].final)
+              Number(friend.debt) - Number(locatedPayee[friend.id].final)
             ).toFixed(2),
           };
         }
@@ -313,7 +313,7 @@ export function productReducer(state, action) {
           const updatedFriends = payeeUser.friends.map((payeeUserFriend) => {
             if (payeeUserFriend.id === state.user.id) {
               const finalDebt =
-                Number(payeeUserFriend.debt) -
+                Number(payeeUserFriend.debt) +
                 Number(locatedPayee[payeeUser.id].final);
               return {
                 ...payeeUserFriend,
