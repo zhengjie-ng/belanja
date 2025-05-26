@@ -5,18 +5,36 @@ import styles from "./Notification.module.css";
 
 function Notification({ id }) {
   const ctx = useContext(ProductContext);
-  const currentBill = ctx.bills.find((bill) => bill.id === id);
+  const notification = ctx.user.notifications.list.find(
+    (item) => item.id === id
+  );
+
+  let notificationSender = null;
+  if (notification.mode === "friendPaid") {
+    notificationSender = ctx.userList.find(
+      (user) => user.id === notification.nameId
+    );
+  }
+
   return (
     <div
-      className={currentBill.settle ? styles.divMainSettled : styles.divMain}
+      className={notification.notify ? styles.divMain : styles.divMainInactive}
     >
-      <p>
-        {currentBill.date.d} {currentBill.date.m} {currentBill.date.year}
-      </p>
-      <p>
-        You have unsettled bill from{" "}
-        <span className={styles.span}>{currentBill.name}</span>
-      </p>
+      <img
+        className={styles.img}
+        src={notificationSender.avatar}
+        alt="image of notification sender"
+      />
+      <div className={styles.divName}>
+        <p className={styles.pName}>
+          <span className={styles.span}>{notification.name}</span> has paid you
+          ${notification.amount}
+        </p>
+        <p className={styles.pDate}>
+          {notification.date.d} {notification.date.Month} {notification.date.y}
+        </p>
+      </div>
+      {notification.notify && <p className={styles.dot}>●</p>}
     </div>
   );
 }

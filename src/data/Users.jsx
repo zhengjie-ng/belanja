@@ -10,7 +10,7 @@ const dataUsers = [
     wallet: 545.22,
     notifications: {
       notify: false,
-      list: ["d23ea76e-9b41-4a8a-ae9e-4cea86483c67"],
+      list: [],
     },
     friends: [
       {
@@ -36,7 +36,7 @@ const dataUsers = [
         payment: 143.44,
         mode: "split",
         settle: false,
-        date: { d: 19, m: "May", year: 2025 },
+        date: { d: 19, m: 5, Month: "May", y: 2025 },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -52,7 +52,7 @@ const dataUsers = [
         payment: 98.23,
         mode: "belanja",
         settle: false,
-        date: { d: 3, m: "Apr", year: 2025 },
+        date: { d: 3, m: 4, Month: "Apr", y: 2025 },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -68,7 +68,7 @@ const dataUsers = [
         payment: 77.4,
         mode: "split",
         settle: false,
-        date: { d: 3, m: "Feb", year: 2025 },
+        date: { d: 3, m: 2, Month: "Feb", y: 2025 },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",

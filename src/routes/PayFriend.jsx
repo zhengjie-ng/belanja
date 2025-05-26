@@ -40,7 +40,16 @@ function PayFriend() {
       <div className={styles.divButton}>
         <button
           className={styles.buttonPayment}
-          onClick={() => ctx.handlerPayFriendSubmit(id)}
+          onClick={() =>
+            ctx.handlerPayFriendSubmit(
+              id,
+              "friendPaid",
+              ctx.payFriendInput,
+              ctx.user.name,
+              ctx.user.id,
+              null
+            )
+          }
         >
           Make Payment
         </button>
