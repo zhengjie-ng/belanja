@@ -85,8 +85,16 @@ export function productReducer(state, action) {
       const month = now.toLocaleDateString("en-US", { month: "short" });
       const year = now.getFullYear();
 
+      const updatedWallet = (
+        Number(state.user.wallet) - Number(state.merchant.payment)
+      ).toFixed(2);
+
       return {
         ...state,
+        user: {
+          ...state.user,
+          wallet: updatedWallet,
+        },
         merchant: {
           ...state.merchant,
           id: uuid(),
