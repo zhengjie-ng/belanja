@@ -7,10 +7,10 @@ import Notification from "../components/Notification";
 function Notifications() {
   const ctx = useContext(ProductContext);
 
-  const findIfSettled = (id) => {
-    const bill = ctx.bills.find((bill) => bill.id === id);
-    return bill.settle;
-  };
+  // const findIfSettled = (id) => {
+  //   const bill = ctx.bills.find((bill) => bill.id === id);
+  //   return bill.settle;
+  // };
 
   return (
     <div className={styles.divMain}>
@@ -19,14 +19,13 @@ function Notifications() {
         <hr className={styles.hrLine}></hr>
       </div>
       <div className={styles.divNotifications}>
-        {ctx.user.notifications.list.map((id) => (
+        {ctx.user.notifications.list.map((notification) => (
           <Link
-            key={id}
+            key={notification.id}
             className={styles.link}
-            to={findIfSettled(id) ? `/bill/receipt/${id}` : `/bill/${id}`}
-            onClick={() => ctx.handlerBillClick(id)}
+            onClick={() => ctx.handleNotificationClick(notification.id)}
           >
-            <Notification id={id} />
+            <Notification id={notification.id} />
           </Link>
         ))}
       </div>

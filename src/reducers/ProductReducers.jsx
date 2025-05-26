@@ -83,7 +83,8 @@ export function productReducer(state, action) {
     case "MERCHANT_MAKE_PAYMENT": {
       const now = new Date();
       const day = now.getDate();
-      const month = now.toLocaleDateString("en-US", { month: "short" });
+      const month = now.getMonth() + 1;
+      const Month = now.toLocaleDateString("en-US", { month: "short" });
       const year = now.getFullYear();
 
       const updatedWallet = (
@@ -99,7 +100,7 @@ export function productReducer(state, action) {
         merchant: {
           ...state.merchant,
           id: uuid(),
-          date: { ...state.date, d: day, m: month, year: year },
+          date: { ...state.date, d: day, m: month, Month: Month, year: year },
         },
       };
     }
@@ -121,14 +122,6 @@ export function productReducer(state, action) {
         ...state,
         bills: [updatedMerchant, ...state.bills],
         merchant: defaultProduct.merchant,
-        user: {
-          ...state.user,
-          notifications: {
-            ...state.user.notifications,
-            notify: true,
-            list: [state.merchant.id, ...state.user.notifications.list],
-          },
-        },
       };
     }
 
@@ -419,6 +412,66 @@ export function productReducer(state, action) {
         ...state,
         userList: updatedUserlist,
         user: { ...state.user, wallet: updatedWallet, friends: updatedFriends },
+      };
+    }
+
+    case "SEND_NOTIFICATIONS": {
+      const now = new Date();
+      const day = now.getDate();
+      const month = now.getMonth() + 1;
+      const Month = now.toLocaleDateString("en-US", { month: "short" });
+      const year = now.getFullYear();
+
+      const currentDate = { d: day, m: month, Month: Month, y: year };
+      let newNotification = null;
+      let updatedUserList = null;
+      if (action.mode === "friendPaid") {
+        newNotification = {
+          id: action.id,
+          mode: action.mode,
+          amount: action.amount,
+          name: action.name,
+          nameId: action.nameId,
+          place: action.plate,
+          notify: true,
+          date: currentDate,
+        };
+        updatedUserList = state.userList.map((user) => {
+          if (user.id === action.id) {
+            return {
+              ...user,
+              notifications: {
+                ...user.notifications,
+                list: [...user.notifications.list, newNotification],
+                notify: true,
+              },
+            };
+          }
+          return user;
+        });
+      }
+
+      return { ...state, userList: updatedUserList };
+    }
+
+    case "NOTIFICATION_CLICK": {
+      const updatedNotifications = state.user.notifications.list.map(
+        (notification) => {
+          if (notification.id === action.id) {
+            return { ...notification, notify: false };
+          }
+        }
+      );
+      console.log(updatedNotifications);
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          notifications: {
+            ...state.user.notifications,
+            list: updatedNotifications,
+          },
+        },
       };
     }
 

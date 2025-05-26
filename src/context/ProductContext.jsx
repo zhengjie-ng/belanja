@@ -98,9 +98,22 @@ export function ProductProvider({ children }) {
     dispatch({ type: "PAY_FRIEND", id: id });
   };
 
-  const handlerPayFriendSubmit = (id) => {
+  const handlerPayFriendSubmit = (id, mode, amount, name, nameId, place) => {
+    dispatch({
+      type: "SEND_NOTIFICATIONS",
+      id: id,
+      mode: mode,
+      amount: amount,
+      name: name,
+      nameId: nameId,
+      place: place,
+    });
     dispatch({ type: "PAY_FRIEND_SUBMIT", id: id });
     navigate(`/payfriend/successful/${id}`);
+  };
+
+  const handleNotificationClick = (id) => {
+    dispatch({ type: "NOTIFICATION_CLICK", id: id });
   };
 
   const data = {
@@ -133,6 +146,7 @@ export function ProductProvider({ children }) {
     handlerPayFriend,
     handlerChangePayFriendInput,
     handlerPayFriendSubmit,
+    handleNotificationClick,
   };
 
   return (
