@@ -89,6 +89,20 @@ export function ProductProvider({ children }) {
     dispatch({ type: "CLICK_NOTIFICATIONS" });
     navigate("/notifications");
   };
+
+  const handlerChangePayFriendInput = (e) => {
+    dispatch({ type: "CHANGE_PAY_FRIEND_INPUT", value: e.target.value });
+  };
+
+  const handlerPayFriend = (id) => {
+    dispatch({ type: "PAY_FRIEND", id: id });
+  };
+
+  const handlerPayFriendSubmit = (id) => {
+    dispatch({ type: "PAY_FRIEND_SUBMIT", id: id });
+    navigate(`/payfriend/successful/${id}`);
+  };
+
   const data = {
     userList: state.userList,
     isLoggedIn: state.isLoggedIn,
@@ -98,6 +112,7 @@ export function ProductProvider({ children }) {
     bills: state.bills,
     split_belanja_switch: state.split_belanja_switch,
     currentBill: state.currentBill,
+    payFriendInput: state.payFriendInput,
     handlerLoginClick,
     handlerOnChangeInput,
     handlerLogoutClick,
@@ -115,6 +130,9 @@ export function ProductProvider({ children }) {
     handlerChangeInputPayee,
     handlerBillSubmit,
     handlerClickNotifications,
+    handlerPayFriend,
+    handlerChangePayFriendInput,
+    handlerPayFriendSubmit,
   };
 
   return (

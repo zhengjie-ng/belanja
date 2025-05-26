@@ -20,7 +20,14 @@ function Friend({ id, debt }) {
         </span>
       </div>
     );
-    actionButton = <button className={styles.buttonActionPay}>Pay</button>;
+    actionButton = (
+      <button
+        className={styles.buttonActionPay}
+        onClick={() => ctx.handlerPayFriend(id)}
+      >
+        Pay
+      </button>
+    );
   } else if (debt < 0) {
     debtStatement = (
       <div className={styles.pDetails}>

@@ -18,6 +18,7 @@ export const defaultProduct = {
   bills: [],
   currentBill: null,
   split_belanja_switch: false,
+  payFriendInput: null,
 };
 
 export function productReducer(state, action) {
@@ -360,6 +361,64 @@ export function productReducer(state, action) {
             notify: false,
           },
         },
+      };
+    }
+
+    case "CHANGE_PAY_FRIEND_INPUT": {
+      return {
+        ...state,
+        payFriendInput: action.value,
+      };
+    }
+
+    case "PAY_FRIEND": {
+      const currentFriend = state.user.friends.find(
+        (friend) => friend.id === action.id
+      );
+      return {
+        ...state,
+        payFriendInput: Number(currentFriend.debt).toFixed(2),
+      };
+    }
+
+    case "PAY_FRIEND_SUBMIT": {
+      const updatedWallet = (
+        Number(state.user.wallet) - Number(state.payFriendInput)
+      ).toFixed(2);
+
+      const updatedFriends = state.user.friends.map((friend) => {
+        if (friend.id === action.id) {
+          return { ...friend, debt: friend.debt - state.payFriendInput };
+        }
+        return friend;
+      });
+
+      //update userList for debt change
+      const updatedUserlist = state.userList.map((user) => {
+        if (user.id === action.id) {
+          const updatedTheirFriends = user.friends.map((theirFriend) => {
+            if (theirFriend.id === state.user.id) {
+              return {
+                ...theirFriend,
+                debt: (
+                  Number(theirFriend.debt) + Number(state.payFriendInput)
+                ).toFixed(2),
+              };
+            }
+            return theirFriend;
+          });
+          return {
+            ...user,
+            friends: updatedTheirFriends,
+          };
+        }
+        return user;
+      });
+
+      return {
+        ...state,
+        userList: updatedUserlist,
+        user: { ...state.user, wallet: updatedWallet, friends: updatedFriends },
       };
     }
 

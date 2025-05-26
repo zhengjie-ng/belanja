@@ -85,7 +85,16 @@
   overflow-y: auto;
   overflow-x: hidden;
   justify-content: top;
+  justify-items: center;
   align-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.link {
+  text-decoration: none;
+  width: 100%;
+  color: black;
+  align-self: center;
+  margin-left: 40px;
 }
