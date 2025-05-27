@@ -402,6 +402,9 @@ export function productReducer(state, action) {
           });
           return {
             ...user,
+            wallet: (
+              Number(user.wallet) + Number(state.payFriendInput)
+            ).toFixed(2),
             friends: updatedTheirFriends,
           };
         }
