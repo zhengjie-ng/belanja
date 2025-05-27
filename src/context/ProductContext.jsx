@@ -98,22 +98,58 @@ export function ProductProvider({ children }) {
     dispatch({ type: "PAY_FRIEND", id: id });
   };
 
-  const handlerPayFriendSubmit = (id, mode, amount, name, nameId, place) => {
+  const handlerPayFriendSubmit = ({
+    id,
+    mode,
+    amount,
+    senderName,
+    senderId,
+    place,
+  }) => {
     dispatch({
       type: "SEND_NOTIFICATIONS",
-      id: id,
-      mode: mode,
-      amount: amount,
-      name: name,
-      nameId: nameId,
-      place: place,
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
     });
     dispatch({ type: "PAY_FRIEND_SUBMIT", id: id });
+    dispatch({ type: "CLEAR_MESSAGES" });
     navigate(`/payfriend/successful/${id}`);
   };
 
-  const handleNotificationClick = (id) => {
-    dispatch({ type: "NOTIFICATION_CLICK", id: id });
+  const handleNotificationClick = (uuid) => {
+    dispatch({ type: "NOTIFICATION_CLICK", uuid: uuid });
+  };
+
+  const handleNudgeFriend = ({
+    id,
+    mode,
+    amount,
+    senderName,
+    senderId,
+    place,
+  }) => {
+    dispatch({
+      type: "SEND_NOTIFICATIONS",
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
+    dispatch({ type: "NUDGE_FRIEND", id: id });
+  };
+
+  const handleClearMessages = () => {
+    dispatch({ type: "CLEAR_MESSAGES" });
   };
 
   const data = {
@@ -147,6 +183,8 @@ export function ProductProvider({ children }) {
     handlerChangePayFriendInput,
     handlerPayFriendSubmit,
     handleNotificationClick,
+    handleNudgeFriend,
+    handleClearMessages,
   };
 
   return (

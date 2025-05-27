@@ -416,40 +416,41 @@ export function productReducer(state, action) {
     }
 
     case "SEND_NOTIFICATIONS": {
-      const now = new Date();
-      const day = now.getDate();
-      const month = now.getMonth() + 1;
-      const Month = now.toLocaleDateString("en-US", { month: "short" });
-      const year = now.getFullYear();
+      const { id, mode, amount, senderName, senderId, place } = action.payload;
 
-      const currentDate = { d: day, m: month, Month: Month, y: year };
-      let newNotification = null;
-      let updatedUserList = null;
-      if (action.mode === "friendPaid") {
-        newNotification = {
-          id: action.id,
-          mode: action.mode,
-          amount: action.amount,
-          name: action.name,
-          nameId: action.nameId,
-          place: action.plate,
-          notify: true,
-          date: currentDate,
-        };
-        updatedUserList = state.userList.map((user) => {
-          if (user.id === action.id) {
-            return {
-              ...user,
-              notifications: {
-                ...user.notifications,
-                list: [...user.notifications.list, newNotification],
-                notify: true,
-              },
-            };
-          }
-          return user;
-        });
-      }
+      const now = new Date();
+      const currentDate = {
+        d: now.getDate(),
+        m: now.getMonth() + 1,
+        Month: now.toLocaleDateString("en-US", { month: "short" }),
+        y: now.getFullYear(),
+      };
+
+      const newNotification = {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+        notify: true,
+        date: currentDate,
+        uuid: uuid(),
+      };
+
+      const updatedUserList = state.userList.map((user) => {
+        if (user.id === id) {
+          return {
+            ...user,
+            notifications: {
+              ...user.notifications,
+              list: [...user.notifications.list, newNotification],
+              notify: true,
+            },
+          };
+        }
+        return user;
+      });
 
       return { ...state, userList: updatedUserList };
     }
@@ -457,12 +458,13 @@ export function productReducer(state, action) {
     case "NOTIFICATION_CLICK": {
       const updatedNotifications = state.user.notifications.list.map(
         (notification) => {
-          if (notification.id === action.id) {
+          if (notification.uuid === action.uuid) {
             return { ...notification, notify: false };
           }
+          return notification;
         }
       );
-      console.log(updatedNotifications);
+
       return {
         ...state,
         user: {
@@ -473,6 +475,32 @@ export function productReducer(state, action) {
           },
         },
       };
+    }
+
+    case "NUDGE_FRIEND": {
+      const friend = state.userList.find((user) => user.id === action.id);
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          messages: {
+            msgNudge: `You have Nudged ${friend.name} for payment.`,
+          },
+        },
+      };
+    }
+
+    case "CLEAR_MESSAGES": {
+      if (state.user.messages !== null) {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            messages: null,
+          },
+        };
+      }
+      return { ...state };
     }
 
     default:

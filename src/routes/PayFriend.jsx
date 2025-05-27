@@ -41,14 +41,14 @@ function PayFriend() {
         <button
           className={styles.buttonPayment}
           onClick={() =>
-            ctx.handlerPayFriendSubmit(
-              id,
-              "friendPaid",
-              ctx.payFriendInput,
-              ctx.user.name,
-              ctx.user.id,
-              null
-            )
+            ctx.handlerPayFriendSubmit({
+              id: id,
+              mode: "friendPaid",
+              amount: ctx.payFriendInput,
+              senderName: ctx.user.name,
+              senderId: ctx.user.id,
+              place: null,
+            })
           }
         >
           Make Payment

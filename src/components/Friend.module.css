@@ -69,15 +69,20 @@
 }
 
 .buttonActionPay:hover {
-  background-color: rgb(191, 60, 60);
+  background-color: rgb(255, 109, 109);
 }
 
 .buttonActionNotify {
-  background-color: rgb(52, 164, 52);
+  background-color: rgb(25, 176, 25);
   color: white;
 }
 
 .buttonActionNotify:hover {
-  background-color: rgb(36, 116, 36);
+  background-color: rgb(30, 204, 30);
   color: white;
+}
+
+.buttonActionNotify:active,
+.buttonActionPay:active {
+  transform: translateY(1px);
 }

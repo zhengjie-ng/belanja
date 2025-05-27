@@ -1,11 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
-// import { useContext } from "react";
-// import ProductContext from "../context/ProductContext";
+import { useContext } from "react";
+import ProductContext from "../context/ProductContext";
 
 import styles from "./Navigation.module.css";
 
 function Navigation() {
-  // const ctx = useContext(ProductContext);
+  const ctx = useContext(ProductContext);
   return (
     <div className={styles.divMain}>
       <Outlet />
@@ -23,6 +23,7 @@ function Navigation() {
             isActive ? styles.linkNaviActive : styles.linkNavi
           }
           to="/friends"
+          onClick={() => ctx.handleClearMessages()}
         >
           👥<br></br>Friends
         </NavLink>
