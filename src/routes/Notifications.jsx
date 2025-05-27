@@ -21,11 +21,11 @@ function Notifications() {
       <div className={styles.divNotifications}>
         {ctx.user.notifications.list.map((notification) => (
           <Link
-            key={notification.id}
+            key={notification.uuid}
             className={styles.link}
-            onClick={() => ctx.handleNotificationClick(notification.id)}
+            onClick={() => ctx.handleNotificationClick(notification.uuid)}
           >
-            <Notification id={notification.id} />
+            <Notification uuid={notification.uuid} />
           </Link>
         ))}
       </div>

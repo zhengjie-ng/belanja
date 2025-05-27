@@ -3,19 +3,41 @@ import ProductContext from "../context/ProductContext";
 
 import styles from "./Notification.module.css";
 
-function Notification({ id }) {
+function Notification({ uuid }) {
   const ctx = useContext(ProductContext);
   const notification = ctx.user.notifications.list.find(
-    (item) => item.id === id
+    (item) => item.uuid === uuid
   );
 
   let notificationSender = null;
-  if (notification.mode === "friendPaid") {
+  if (notification.mode === "friendPaid" || notification.mode === "nudge") {
     notificationSender = ctx.userList.find(
-      (user) => user.id === notification.nameId
+      (user) => user.id === notification.senderId
     );
   }
 
+  const Statement = () => {
+    switch (notification.mode) {
+      case "friendPaid":
+        return (
+          <>
+            <span className={styles.span}>{notification.senderName}</span> has
+            <span style={{ color: "green", fontWeight: "500" }}> Paid</span> you
+            ${notification.amount}
+          </>
+        );
+      case "nudge":
+        return (
+          <>
+            <span className={styles.span}>{notification.senderName}</span> has
+            <span style={{ color: "red", fontWeight: "500" }}> Nudged</span> you
+            for payment of ${Number(notification.amount).toFixed(2)}
+          </>
+        );
+      default:
+        return null;
+    }
+  };
   return (
     <div
       className={notification.notify ? styles.divMain : styles.divMainInactive}
@@ -27,8 +49,7 @@ function Notification({ id }) {
       />
       <div className={styles.divName}>
         <p className={styles.pName}>
-          <span className={styles.span}>{notification.name}</span> has paid you
-          ${notification.amount}
+          <Statement />
         </p>
         <p className={styles.pDate}>
           {notification.date.d} {notification.date.Month} {notification.date.y}

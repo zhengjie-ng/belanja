@@ -22,6 +22,11 @@ function FriendsPage() {
           ></input>
           <button className={styles.buttonAdd}>➕</button>
         </div>
+        <div className={styles.divMsg}>
+          <p className={styles.pMsg}>
+            {ctx.user?.messages?.msgNudge ? ctx.user.messages.msgNudge : ""}
+          </p>
+        </div>
         <div className={styles.divFriendListMap}>
           {ctx.user.friends.map((friend) => (
             <Link
