@@ -290,6 +290,15 @@ export function productReducer(state, action) {
       };
     }
 
+    case "TOP_UP":
+     return {
+      ...state,
+      user: {
+      ...state.user,
+      wallet: state.user.wallet + action.value,
+      },
+    };
+
     default:
       throw Error("productReducer - unknown action:", action.type);
   }

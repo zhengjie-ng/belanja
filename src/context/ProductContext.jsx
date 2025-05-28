@@ -115,6 +115,7 @@ export function ProductProvider({ children }) {
     handlerChangeInputPayee,
     handlerBillSubmit,
     handlerClickNotifications,
+    dispatch,
   };
 
   return (
