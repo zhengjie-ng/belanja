@@ -32,7 +32,7 @@ function ItemBill({ id }) {
   return (
     <div className={styles.divItemBill}>
       <div className={styles.divDate}>
-        <p className={styles.pM}>{currentBill.date.m}</p>
+        <p className={styles.pM}>{currentBill.date.Month}</p>
         <p className={styles.pD}>{currentBill.date.d}</p>
       </div>
       <h2 className={styles.billName}>{currentBill.name}</h2>
