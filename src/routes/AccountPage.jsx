@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./AccountPage.module.css";
 
+
 function AccountPage() {
   const ctx = useContext(ProductContext);
+  const navigate = useNavigate();
   return (
     <div className={styles.divMain}>
       <div className={styles.divCard}>
@@ -15,10 +18,12 @@ function AccountPage() {
           alt="User Photo"
         ></img>
         <h2 className={styles.walletText}>Balenja Wallet</h2>
-        <h2 className={styles.wallet}>{`$${ctx.user.wallet}`}</h2>
+        <h2 className={styles.wallet}>{`$${Number(ctx.user.wallet).toFixed(2)}`}</h2>
       </div>
       <div className={styles.divButtons}>
-        <button className={styles.buttonTopup}>💷 Top up</button>
+        <button className={styles.buttonTopup} onClick={() => navigate("/topup")}>
+          💷 Top up
+        </button>
         <button
           className={styles.buttonLogout}
           onClick={ctx.handlerLogoutClick}

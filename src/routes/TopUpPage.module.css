@@ -1,0 +1,80 @@
+.topupContainer {
+  padding: 20px;
+  text-align: center;
+}
+
+.inputWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.dollarSign {
+  position: absolute;
+  top:23%;
+  left: 27px;
+  font-size: 40px;
+}
+
+.amountInput {
+  margin: 10px;
+  padding: 30px 30px 30px 50px; 
+  width: 95%;
+  font-size: 40px;
+  border: 3px solid #bbb7b7;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+
+.walletDisplay {
+  font-size: 24px;
+  margin: 20px;
+  font-weight: bold;
+}
+
+.presetButtons button {
+  margin: 8px;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.confirmButton {
+  margin-top: 20px;
+  padding: 15px 30px;        
+  font-size: 25px;            
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 100%;                
+  box-sizing: border-box;
+}
+
+.inputLabel {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-align: left;       
+  display: block;          
+}
+
+.paymentMethods {
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+.paymentLabel {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.paymentOptions label {
+    margin-right: 40px;
+    font-size: 22px; 
+    cursor: pointer;
+}

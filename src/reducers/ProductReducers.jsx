@@ -355,6 +355,15 @@ export function productReducer(state, action) {
       };
     }
 
+    case "TOP_UP":
+     return {
+      ...state,
+      user: {
+      ...state.user,
+      wallet: state.user.wallet + action.value,
+      },
+    };
+
     case "CHANGE_PAY_FRIEND_INPUT": {
       return {
         ...state,
@@ -541,6 +550,7 @@ export function productReducer(state, action) {
       }
       return { ...state };
     }
+
 
     default:
       throw Error("productReducer - unknown action:", action.type);

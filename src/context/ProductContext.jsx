@@ -197,6 +197,7 @@ export function ProductProvider({ children }) {
     handlerChangeInputPayee,
     handlerBillSubmit,
     handlerClickNotifications,
+    dispatch,
     handlerPayFriend,
     handlerChangePayFriendInput,
     handlerPayFriendSubmit,
