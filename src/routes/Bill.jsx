@@ -142,7 +142,17 @@ function Bill() {
         </>
       )}
 
-      <button className={styles.buttonSubmit} onClick={ctx.handlerBillSubmit}>
+      <button
+        className={styles.buttonSubmit}
+        onClick={() =>
+          ctx.handlerBillSubmit({
+            mode: "bill",
+            senderName: ctx.user.name,
+            senderId: ctx.user.id,
+            place: ctx.currentBill.name,
+          })
+        }
+      >
         Submit
       </button>
     </div>

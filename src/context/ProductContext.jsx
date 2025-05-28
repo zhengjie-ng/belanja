@@ -80,8 +80,26 @@ export function ProductProvider({ children }) {
     });
   };
 
-  const handlerBillSubmit = () => {
+  const handlerBillSubmit = ({
+    id,
+    mode,
+    amount,
+    senderName,
+    senderId,
+    place,
+  }) => {
     dispatch({ type: "BILL_SUBMIT" });
+    dispatch({
+      type: "SEND_NOTIFICATIONS",
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
     navigate("/bills");
   };
 

@@ -9,12 +9,12 @@ function Notification({ uuid }) {
     (item) => item.uuid === uuid
   );
 
-  let notificationSender = null;
-  if (notification.mode === "friendPaid" || notification.mode === "nudge") {
-    notificationSender = ctx.userList.find(
-      (user) => user.id === notification.senderId
-    );
-  }
+  // let notificationSender = null;
+  // if (notification.mode === "friendPaid" || notification.mode === "nudge") {
+  const notificationSender = ctx.userList.find(
+    (user) => user.id === notification.senderId
+  );
+  // }
 
   const Statement = () => {
     switch (notification.mode) {
@@ -32,6 +32,50 @@ function Notification({ uuid }) {
             <span className={styles.span}>{notification.senderName}</span> has
             <span style={{ color: "red", fontWeight: "500" }}> Nudged</span> you
             for payment of ${Number(notification.amount).toFixed(2)}
+          </>
+        );
+      case "=":
+        return (
+          <>
+            <span className={styles.span}>{notification.senderName} </span>
+            split the bill equally from{" "}
+            <span className={styles.span}>{notification.place}</span>, please
+            pay{" "}
+            <span className={styles.amount}>
+              ${Number(notification.amount).toFixed(2)}
+            </span>
+          </>
+        );
+      case "split":
+        return (
+          <>
+            <span className={styles.span}>{notification.senderName} </span>
+            split the bill from{" "}
+            <span className={styles.span}>{notification.place}</span>, please
+            pay{" "}
+            <span className={styles.amount}>
+              ${Number(notification.amount).toFixed(2)}
+            </span>
+          </>
+        );
+      case "%":
+        return (
+          <>
+            <span className={styles.span}>{notification.senderName} </span>
+            split the bill from{" "}
+            <span className={styles.span}>{notification.place}</span>, please
+            pay{" "}
+            <span className={styles.amount}>
+              ${Number(notification.amount).toFixed(2)}
+            </span>
+          </>
+        );
+      case "belanja":
+        return (
+          <>
+            <span className={styles.span}>{notification.senderName} </span>
+            <span className={styles.belanja}>BELANJA-ED</span> you{" "}
+            <span className={styles.span}>{notification.place}</span>, Horray!
           </>
         );
       default:

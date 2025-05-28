@@ -241,9 +241,6 @@ export function productReducer(state, action) {
         );
       }
 
-      // console.log(Number(state.currentBill.payment), "payment");
-      // console.log(Object.keys(newFullPayeeList).length, "length");
-
       const newEqual = (
         Number(state.currentBill.payment) / Object.keys(newFullPayeeList).length
       ).toFixed(2);
@@ -330,7 +327,7 @@ export function productReducer(state, action) {
         }
         return payeeUser;
       });
-      console.log(updatedUserlist);
+      // console.log(updatedUserlist);
 
       return {
         ...state,
@@ -420,7 +417,6 @@ export function productReducer(state, action) {
 
     case "SEND_NOTIFICATIONS": {
       const { id, mode, amount, senderName, senderId, place } = action.payload;
-
       const now = new Date();
       const currentDate = {
         d: now.getDate(),
@@ -429,33 +425,72 @@ export function productReducer(state, action) {
         y: now.getFullYear(),
       };
 
-      const newNotification = {
-        id,
-        mode,
-        amount,
-        senderName,
-        senderId,
-        place,
-        notify: true,
-        date: currentDate,
-        uuid: uuid(),
-      };
+      if (mode === "friendPaid" || mode === "nudge") {
+        const newNotification = {
+          id,
+          mode,
+          amount,
+          senderName,
+          senderId,
+          place,
+          notify: true,
+          date: currentDate,
+          uuid: uuid(),
+        };
 
-      const updatedUserList = state.userList.map((user) => {
-        if (user.id === id) {
-          return {
-            ...user,
-            notifications: {
-              ...user.notifications,
-              list: [...user.notifications.list, newNotification],
+        const updatedUserList = state.userList.map((user) => {
+          if (user.id === id) {
+            return {
+              ...user,
+              notifications: {
+                ...user.notifications,
+                list: [...user.notifications.list, newNotification],
+                notify: true,
+              },
+            };
+          }
+          return user;
+        });
+
+        return { ...state, userList: updatedUserList };
+      } else if (mode === "bill") {
+        const locatedPayee = {};
+        Object.values(state.currentBill.fullPayeeList).forEach((payee) => {
+          locatedPayee[payee.id] = payee;
+        });
+
+        const updatedUserlist = state.userList.map((payeeUser) => {
+          if (
+            locatedPayee[payeeUser.id] &&
+            payeeUser.id === locatedPayee[payeeUser.id].id &&
+            locatedPayee[payeeUser.id].id !== state.user.id
+          ) {
+            const newNotification = {
+              id: payeeUser.id,
+              mode: state.currentBill.mode,
+              amount: locatedPayee[payeeUser.id].final,
+              senderName,
+              senderId,
+              place,
               notify: true,
-            },
-          };
-        }
-        return user;
-      });
+              date: currentDate,
+              uuid: uuid(),
+            };
+            return {
+              ...payeeUser,
+              notifications: {
+                ...payeeUser.notifications,
+                notify: true,
+                list: [...payeeUser.notifications.list, newNotification],
+              },
+            };
+          }
+          return payeeUser;
+        });
 
-      return { ...state, userList: updatedUserList };
+        return { ...state, userList: updatedUserlist };
+      }
+      return state;
     }
 
     case "NOTIFICATION_CLICK": {
