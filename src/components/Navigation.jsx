@@ -6,6 +6,11 @@ import styles from "./Navigation.module.css";
 
 function Navigation() {
   const ctx = useContext(ProductContext);
+
+  const unsettledBill = ctx.user.bills?.filter((bill) => bill.settle === false);
+  const unsettledBillNumber =
+    unsettledBill && unsettledBill.length > 0 ? unsettledBill.length : "";
+
   return (
     <div className={styles.divMain}>
       <Outlet />
@@ -41,7 +46,9 @@ function Navigation() {
           }
           to="bills"
         >
-          📝<br></br>Bills
+          <div></div>
+          📝<span className={styles.billNotify}>{unsettledBillNumber}</span>
+          <br></br>Bills
         </NavLink>
         <NavLink
           className={({ isActive }) =>

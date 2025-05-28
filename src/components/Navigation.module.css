@@ -59,6 +59,12 @@
   }
 }
 
+.billNotify {
+  z-index: 1000;
+  color: red;
+  font-weight: 500;
+}
+
 /* .linkNaviActive {
   flex: 1;
   height: 50px;

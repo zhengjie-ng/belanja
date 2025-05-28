@@ -336,6 +336,7 @@ export function productReducer(state, action) {
         currentBill: newCurrentBill,
         user: {
           ...state.user,
+          bills: newBills,
           friends: updatedFriends,
         },
       };
