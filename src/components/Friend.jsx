@@ -16,20 +16,42 @@ function Friend({ id, debt }) {
     debtStatement = (
       <div className={styles.pDetails}>
         <span style={{ color: "red" }}>
-          You owe {friend.name} ${debt}.
+          {`You owe ${friend.name} ${Number(debt).toFixed(2)}`}.
         </span>
       </div>
     );
-    actionButton = <button className={styles.buttonActionPay}>Pay</button>;
+    actionButton = (
+      <button
+        className={styles.buttonActionPay}
+        onClick={() => ctx.handlerPayFriend(id)}
+      >
+        Pay
+      </button>
+    );
   } else if (debt < 0) {
     debtStatement = (
       <div className={styles.pDetails}>
-        <span style={{ color: "green" }}>
-          {friend.name} owes you ${Math.abs(debt)}.
+        <span style={{ color: "rgb(25, 176, 25)" }}>
+          {friend.name} owes you ${Math.abs(debt).toFixed(2)}.
         </span>
       </div>
     );
-    actionButton = <button className={styles.buttonActionNotify}>Nudge</button>;
+    actionButton = (
+      <button
+        className={styles.buttonActionNotify}
+        onClick={() =>
+          ctx.handleNudgeFriend({
+            id: id,
+            mode: "nudge",
+            amount: Math.abs(debt),
+            senderName: ctx.user.name,
+            senderId: ctx.user.id,
+          })
+        }
+      >
+        Nudge
+      </button>
+    );
   }
 
   return (
