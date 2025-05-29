@@ -37,6 +37,9 @@ function PayFriend() {
         <p>Belanja Wallet</p>
         <p>{`💷 $${ctx.user.wallet}`}</p>
       </div>
+      <p className={styles.coins}>
+        You will earn 🪙 {Math.round(ctx.payFriendInput)}
+      </p>
       <div className={styles.divButton}>
         <button
           className={styles.buttonPayment}

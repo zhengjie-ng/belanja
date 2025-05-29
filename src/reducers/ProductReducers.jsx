@@ -327,7 +327,11 @@ export function productReducer(state, action) {
         }
         return payeeUser;
       });
-      // console.log(updatedUserlist);
+
+      const updatedCoins =
+        newCurrentBill.mode === "belanja"
+          ? state.user.coins + Math.round(locatedPayee[state.user.id].final * 2)
+          : state.user.coins + Math.round(locatedPayee[state.user.id].final);
 
       return {
         ...state,
@@ -336,6 +340,7 @@ export function productReducer(state, action) {
         currentBill: newCurrentBill,
         user: {
           ...state.user,
+          coins: updatedCoins,
           bills: newBills,
           friends: updatedFriends,
         },
@@ -356,13 +361,13 @@ export function productReducer(state, action) {
     }
 
     case "TOP_UP":
-     return {
-      ...state,
-      user: {
-      ...state.user,
-      wallet: state.user.wallet + action.value,
-      },
-    };
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          wallet: state.user.wallet + action.value,
+        },
+      };
 
     case "CHANGE_PAY_FRIEND_INPUT": {
       return {
@@ -418,10 +423,18 @@ export function productReducer(state, action) {
         return user;
       });
 
+      const updatedCoins =
+        state.user.coins + Math.round(Number(state.payFriendInput));
+
       return {
         ...state,
         userList: updatedUserlist,
-        user: { ...state.user, wallet: updatedWallet, friends: updatedFriends },
+        user: {
+          ...state.user,
+          wallet: updatedWallet,
+          coins: updatedCoins,
+          friends: updatedFriends,
+        },
       };
     }
 
@@ -550,7 +563,6 @@ export function productReducer(state, action) {
       }
       return { ...state };
     }
-
 
     default:
       throw Error("productReducer - unknown action:", action.type);

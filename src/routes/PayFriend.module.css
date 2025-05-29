@@ -83,7 +83,7 @@
 }
 
 .divWallet {
-  margin-top: 260px;
+  margin-top: 200px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -120,4 +120,12 @@
   margin-bottom: 50px;
   text-transform: capitalize;
   font-size: 30px;
+}
+
+.coins {
+  margin: 0px;
+  font-style: italic;
+  font-weight: 700;
+  color: #533281;
+  margin-top: 20px;
 }
