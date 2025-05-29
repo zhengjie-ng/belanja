@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import ProductContext from "../context/ProductContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./PayNowPage.module.css";
 import paynowImage from "../assets/paynow-image.png";
@@ -5,6 +7,7 @@ import paynowImage from "../assets/paynow-image.png";
 function PayNowPage() {
     const location = useLocation();
     const navigate = useNavigate();
+    const ctx = useContext(ProductContext);
     const amount = location.state && location.state.amount ? location.state.amount : 0;
 
     return (
@@ -22,7 +25,14 @@ function PayNowPage() {
                 alt="PayNow Info"
                 className={styles.customImage}
             />
-            <button onClick={() => navigate("/account")} className={styles.doneButton}>
+            <button
+                onClick={() => {
+                    const fixedAmount = Number(amount.toFixed(2));
+                    ctx.dispatch({ type: "TOP_UP", value: fixedAmount, method: "Paynow" });
+                    navigate("/account");
+                }}
+                className={styles.doneButton}
+            >
                 Done
             </button>
         </div>
