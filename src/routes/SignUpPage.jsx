@@ -54,6 +54,8 @@ function SignUpPage() {
         <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
         <button type="submit">Sign Up</button>
       </form>
+      <br />
+      <button onClick={() => navigate('/')}>Back to Home</button>
     </div>
   );
 }
