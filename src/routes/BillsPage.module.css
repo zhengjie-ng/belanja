@@ -36,10 +36,17 @@
   color: black;
 }
 
-.billFormContainer {
-  position: relative; /* Keeps it within the normal flow */
-  margin-bottom: 20px; /* Adds space below */
+.billFormWrapper {
+  position: relative; /* Keeps form inside the layout */
   width: 100%;
+}
+
+.billFormContainer {
+  position: absolute; /* Prevents pushing content below */
+  top: 5px;
+  left: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 /* .billFormContainer {
