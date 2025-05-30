@@ -15,6 +15,7 @@ import Bill from "./routes/Bill";
 import Receipt from "./routes/Receipt";
 import Notifications from "./routes/Notifications";
 import PageNotFound from "./routes/PageNotFound";
+import SignUpPage from "./routes/SignUpPage";
 
 import styles from "./App.module.css";
 
@@ -36,6 +37,7 @@ function App() {
               <Route path="bill/:id" element={<Bill />} />
               <Route path="bill/receipt/:id" element={<Receipt />} />
             </Route>
+            <Route path="SignUpPage" element={<SignUpPage />} />
             <Route path="paymentMerchant" element={<PaymentPage />} />
             <Route path="scan" element={<ScanPage />} />
             <Route path="settle" element={<SettlePage />} />

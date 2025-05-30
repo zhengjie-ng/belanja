@@ -1,0 +1,125 @@
+.welcome {
+  margin-top: 200px;
+}
+
+.divLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  gap: 5px;
+  justify-content: flex-start;
+  padding-bottom: 200px;
+  width: 100%;
+}
+
+.buttonLong,
+.buttonLongCreate,
+.buttonLongBack {
+  font-size: 15px;
+  width: 90%;
+  border-radius: 100px;
+  border: 1px solid black;
+  height: 50px;
+  font-weight: bolder;
+}
+
+.buttonLongCreate {
+  color: white;
+  background-color: #5d3891;
+}
+
+.buttonLongBack {
+  border: 0px solid black;
+  color: rgb(107, 107, 107);
+}
+
+.buttonLongCreate:hover {
+  background-color: #6a518e;
+}
+
+.buttonLong:hover {
+  background-color: rgb(214, 214, 214);
+}
+
+.buttonLongBack:hover {
+  border: 1px solid black;
+  color: black;
+}
+
+.inputMobile,
+.inputPassword {
+  padding-left: 15px;
+  font-size: 18px;
+  width: 85%;
+  margin: 10px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid rgb(142, 142, 142);
+  margin-top: 0px;
+}
+
+.inputMobile::-webkit-outer-spin-button,
+.inputMobile::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.signUpContainer {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f8f9fa; /* Light gray background */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signUpContainer h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.signUpContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.signUpContainer input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.signUpContainer input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.signUpContainer button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.signUpContainer button:hover {
+  background-color: #0056b3;
+}
+
+.errorMessage {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
