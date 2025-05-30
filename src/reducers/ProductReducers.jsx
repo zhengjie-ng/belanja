@@ -18,6 +18,7 @@ export const defaultProduct = {
   bills: [],
   currentBill: null,
   split_belanja_switch: false,
+  payFriendInput: null,
 };
 
 export function productReducer(state, action) {
@@ -46,6 +47,13 @@ export function productReducer(state, action) {
     }
 
     case "LOGOUT": {
+      const user = { ...state.user, bills: state.bills };
+      for (const key in state.userList) {
+        if (state.userList[key].id === state.user.id) {
+          state.userList[key] = user;
+        }
+      }
+
       return { ...state, isLoggedIn: false, user: null };
     }
 
@@ -75,41 +83,45 @@ export function productReducer(state, action) {
     case "MERCHANT_MAKE_PAYMENT": {
       const now = new Date();
       const day = now.getDate();
-      const month = now.toLocaleDateString("en-US", { month: "short" });
+      const month = now.getMonth() + 1;
+      const Month = now.toLocaleDateString("en-US", { month: "short" });
       const year = now.getFullYear();
+
+      const updatedWallet = (
+        Number(state.user.wallet) - Number(state.merchant.payment)
+      ).toFixed(2);
 
       return {
         ...state,
+        user: {
+          ...state.user,
+          wallet: updatedWallet,
+        },
         merchant: {
           ...state.merchant,
           id: uuid(),
-          date: { ...state.date, d: day, m: month, year: year },
+          date: { ...state.date, d: day, m: month, Month: Month, year: year },
         },
       };
     }
 
     case "SETTLE_LATER": {
-      let updatedMerchant = {...state.merchant, fullPayeeList: [
-            {
-              id: state.user.id,
-              name: state.user.name,
-              float: "",
-              percentage: "",
-            },
-          ],};
+      let updatedMerchant = {
+        ...state.merchant,
+        fullPayeeList: [
+          {
+            id: state.user.id,
+            name: state.user.name,
+            float: "",
+            percentage: "",
+          },
+        ],
+      };
 
       return {
         ...state,
         bills: [updatedMerchant, ...state.bills],
         merchant: defaultProduct.merchant,
-        user: {
-          ...state.user,
-          notifications: {
-            ...state.user.notifications,
-            notify: true,
-            list: [state.merchant.id, ...state.user.notifications.list],
-          },
-        },
       };
     }
 
@@ -229,9 +241,6 @@ export function productReducer(state, action) {
         );
       }
 
-      // console.log(Number(state.currentBill.payment), "payment");
-      // console.log(Object.keys(newFullPayeeList).length, "length");
-
       const newEqual = (
         Number(state.currentBill.payment) / Object.keys(newFullPayeeList).length
       ).toFixed(2);
@@ -270,10 +279,71 @@ export function productReducer(state, action) {
         bill.id === newCurrentBill.id ? newCurrentBill : bill
       );
 
+      const locatedPayee = {};
+      Object.values(state.currentBill.fullPayeeList).forEach((payee) => {
+        locatedPayee[payee.id] = payee;
+      });
+
+      //To reflect debt change in current user friends list
+      const updatedFriends = state.user.friends.map((friend) => {
+        if (
+          locatedPayee[friend.id] &&
+          friend.id === locatedPayee[friend.id].id
+        ) {
+          return {
+            ...friend,
+            debt: (
+              Number(friend.debt) - Number(locatedPayee[friend.id].final)
+            ).toFixed(2),
+          };
+        }
+        return friend;
+      });
+
+      //To reflect debt change in overall userlist, so when another user sign in, the chamge will reflect in his/her friendlist
+      const updatedUserlist = state.userList.map((payeeUser) => {
+        if (
+          locatedPayee[payeeUser.id] &&
+          payeeUser.id === locatedPayee[payeeUser.id].id &&
+          locatedPayee[payeeUser.id].id !== state.user.id
+        ) {
+          const updatedFriends = payeeUser.friends.map((payeeUserFriend) => {
+            if (payeeUserFriend.id === state.user.id) {
+              const finalDebt =
+                Number(payeeUserFriend.debt) +
+                Number(locatedPayee[payeeUser.id].final);
+              return {
+                ...payeeUserFriend,
+                debt: finalDebt.toFixed(2),
+              };
+            }
+            return payeeUserFriend;
+          });
+
+          return {
+            ...payeeUser,
+            friends: updatedFriends,
+          };
+        }
+        return payeeUser;
+      });
+
+      const updatedCoins =
+        newCurrentBill.mode === "belanja"
+          ? state.user.coins + Math.round(locatedPayee[state.user.id].final * 2)
+          : state.user.coins + Math.round(locatedPayee[state.user.id].final);
+
       return {
         ...state,
+        userList: updatedUserlist,
         bills: newBills,
         currentBill: newCurrentBill,
+        user: {
+          ...state.user,
+          coins: updatedCoins,
+          bills: newBills,
+          friends: updatedFriends,
+        },
       };
     }
 
@@ -289,6 +359,7 @@ export function productReducer(state, action) {
         },
       };
     }
+
 
     case "ADD_FRIEND": {
       console.log("Adding new friend:", action.payload);
@@ -344,6 +415,210 @@ case "SIGN_UP": {
     isLoggedIn: true,
   };
 }
+    case "TOP_UP":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          wallet: state.user.wallet + action.value,
+        },
+      };
+
+    case "CHANGE_PAY_FRIEND_INPUT": {
+      return {
+        ...state,
+        payFriendInput: action.value,
+      };
+    }
+
+    case "PAY_FRIEND": {
+      const currentFriend = state.user.friends.find(
+        (friend) => friend.id === action.id
+      );
+      return {
+        ...state,
+        payFriendInput: Number(currentFriend.debt).toFixed(2),
+      };
+    }
+
+    case "PAY_FRIEND_SUBMIT": {
+      const updatedWallet = (
+        Number(state.user.wallet) - Number(state.payFriendInput)
+      ).toFixed(2);
+
+      const updatedFriends = state.user.friends.map((friend) => {
+        if (friend.id === action.id) {
+          return { ...friend, debt: friend.debt - state.payFriendInput };
+        }
+        return friend;
+      });
+
+      //update userList for debt change
+      const updatedUserlist = state.userList.map((user) => {
+        if (user.id === action.id) {
+          const updatedTheirFriends = user.friends.map((theirFriend) => {
+            if (theirFriend.id === state.user.id) {
+              return {
+                ...theirFriend,
+                debt: (
+                  Number(theirFriend.debt) + Number(state.payFriendInput)
+                ).toFixed(2),
+              };
+            }
+            return theirFriend;
+          });
+          return {
+            ...user,
+            wallet: (
+              Number(user.wallet) + Number(state.payFriendInput)
+            ).toFixed(2),
+            friends: updatedTheirFriends,
+          };
+        }
+        return user;
+      });
+
+      const updatedCoins =
+        state.user.coins + Math.round(Number(state.payFriendInput));
+
+      return {
+        ...state,
+        userList: updatedUserlist,
+        user: {
+          ...state.user,
+          wallet: updatedWallet,
+          coins: updatedCoins,
+          friends: updatedFriends,
+        },
+      };
+    }
+
+    case "SEND_NOTIFICATIONS": {
+      const { id, mode, amount, senderName, senderId, place } = action.payload;
+      const now = new Date();
+      const currentDate = {
+        d: now.getDate(),
+        m: now.getMonth() + 1,
+        Month: now.toLocaleDateString("en-US", { month: "short" }),
+        y: now.getFullYear(),
+      };
+
+      if (mode === "friendPaid" || mode === "nudge") {
+        const newNotification = {
+          id,
+          mode,
+          amount,
+          senderName,
+          senderId,
+          place,
+          notify: true,
+          date: currentDate,
+          uuid: uuid(),
+        };
+
+        const updatedUserList = state.userList.map((user) => {
+          if (user.id === id) {
+            return {
+              ...user,
+              notifications: {
+                ...user.notifications,
+                list: [...user.notifications.list, newNotification],
+                notify: true,
+              },
+            };
+          }
+          return user;
+        });
+
+        return { ...state, userList: updatedUserList };
+      } else if (mode === "bill") {
+        const locatedPayee = {};
+        Object.values(state.currentBill.fullPayeeList).forEach((payee) => {
+          locatedPayee[payee.id] = payee;
+        });
+
+        const updatedUserlist = state.userList.map((payeeUser) => {
+          if (
+            locatedPayee[payeeUser.id] &&
+            payeeUser.id === locatedPayee[payeeUser.id].id &&
+            locatedPayee[payeeUser.id].id !== state.user.id
+          ) {
+            const newNotification = {
+              id: payeeUser.id,
+              mode: state.currentBill.mode,
+              amount: locatedPayee[payeeUser.id].final,
+              senderName,
+              senderId,
+              place,
+              notify: true,
+              date: currentDate,
+              uuid: uuid(),
+            };
+            return {
+              ...payeeUser,
+              notifications: {
+                ...payeeUser.notifications,
+                notify: true,
+                list: [...payeeUser.notifications.list, newNotification],
+              },
+            };
+          }
+          return payeeUser;
+        });
+
+        return { ...state, userList: updatedUserlist };
+      }
+      return state;
+    }
+
+    case "NOTIFICATION_CLICK": {
+      const updatedNotifications = state.user.notifications.list.map(
+        (notification) => {
+          if (notification.uuid === action.uuid) {
+            return { ...notification, notify: false };
+          }
+          return notification;
+        }
+      );
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          notifications: {
+            ...state.user.notifications,
+            list: updatedNotifications,
+          },
+        },
+      };
+    }
+
+    case "NUDGE_FRIEND": {
+      const friend = state.userList.find((user) => user.id === action.id);
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          messages: {
+            msgNudge: `You have Nudged ${friend.name} for payment.`,
+          },
+        },
+      };
+    }
+
+    case "CLEAR_MESSAGES": {
+      if (state.user.messages !== null) {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            messages: null,
+          },
+        };
+      }
+      return { ...state };
+    }
+
     default:
       throw Error("productReducer - unknown action:", action.type);
   }

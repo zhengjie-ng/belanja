@@ -81,8 +81,26 @@ export function ProductProvider({ children }) {
     });
   };
 
-  const handlerBillSubmit = () => {
+  const handlerBillSubmit = ({
+    id,
+    mode,
+    amount,
+    senderName,
+    senderId,
+    place,
+  }) => {
     dispatch({ type: "BILL_SUBMIT" });
+    dispatch({
+      type: "SEND_NOTIFICATIONS",
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
     navigate("/bills");
   };
 
@@ -175,6 +193,68 @@ const handlerAddMerchantBill = (newBillData) => {
   });
 };
 
+  const handlerChangePayFriendInput = (e) => {
+    dispatch({ type: "CHANGE_PAY_FRIEND_INPUT", value: e.target.value });
+  };
+
+  const handlerPayFriend = (id) => {
+    dispatch({ type: "PAY_FRIEND", id: id });
+  };
+
+  const handlerPayFriendSubmit = ({
+    id,
+    mode,
+    amount,
+    senderName,
+    senderId,
+    place,
+  }) => {
+    dispatch({
+      type: "SEND_NOTIFICATIONS",
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
+    dispatch({ type: "PAY_FRIEND_SUBMIT", id: id });
+    dispatch({ type: "CLEAR_MESSAGES" });
+    navigate(`/payfriend/successful/${id}`);
+  };
+
+  const handleNotificationClick = (uuid) => {
+    dispatch({ type: "NOTIFICATION_CLICK", uuid: uuid });
+  };
+
+  const handleNudgeFriend = ({
+    id,
+    mode,
+    amount,
+    senderName,
+    senderId,
+    place,
+  }) => {
+    dispatch({
+      type: "SEND_NOTIFICATIONS",
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
+    dispatch({ type: "NUDGE_FRIEND", id: id });
+  };
+
+  const handleClearMessages = () => {
+    dispatch({ type: "CLEAR_MESSAGES" });
+  };
+
   const data = {
     userList: state.userList,
     isLoggedIn: state.isLoggedIn,
@@ -187,6 +267,7 @@ const handlerAddMerchantBill = (newBillData) => {
     handlerAddMerchantBill, //NEW
     handlerSignUp, //NEW
     handlerAddFriend, //NEW
+    payFriendInput: state.payFriendInput,
     handlerLoginClick,
     handlerOnChangeInput,
     handlerLogoutClick,
@@ -204,6 +285,13 @@ const handlerAddMerchantBill = (newBillData) => {
     handlerChangeInputPayee,
     handlerBillSubmit,
     handlerClickNotifications,
+    dispatch,
+    handlerPayFriend,
+    handlerChangePayFriendInput,
+    handlerPayFriendSubmit,
+    handleNotificationClick,
+    handleNudgeFriend,
+    handleClearMessages,
   };
 
   return (

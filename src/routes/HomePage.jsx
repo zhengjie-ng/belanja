@@ -27,7 +27,10 @@ function HomePage() {
             ⩍
           </button>
         </div>
-        <h3 className={styles.wallet}>${ctx.user.wallet}</h3>
+        <div className={styles.divWallet}>
+          <h3 className={styles.wallet}>${ctx.user.wallet}</h3>
+          <p className={styles.coins}>🪙 {ctx.user.coins.toLocaleString()}</p>
+        </div>
       </div>
     </div>
   );

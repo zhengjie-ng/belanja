@@ -6,11 +6,11 @@ const dataUsers = [
     mobile: 90909090,
     password: 11111111,
     avatar: "https://i.pravatar.cc/100?u=alan@belanja.com",
-    lifeTimeSpending: 655.43,
     wallet: 545.22,
+    coins: 22355,
     notifications: {
       notify: false,
-      list: ["d23ea76e-9b41-4a8a-ae9e-4cea86483c67"],
+      list: [],
     },
     friends: [
       {
@@ -24,8 +24,8 @@ const dataUsers = [
         debt: -40.5,
       },
       {
-        name: "Dove",
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
+        name: "Dove",
         debt: 0,
       },
     ],
@@ -36,7 +36,7 @@ const dataUsers = [
         payment: 143.44,
         mode: "split",
         settle: false,
-        date: { d: 19, m: "May", year: 2025 },
+        date: { d: 19, m: 5, Month: "May", y: 2025 },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -52,7 +52,7 @@ const dataUsers = [
         payment: 98.23,
         mode: "belanja",
         settle: false,
-        date: { d: 3, m: "Apr", year: 2025 },
+        date: { d: 3, m: 4, Month: "Apr", y: 2025 },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -68,7 +68,7 @@ const dataUsers = [
         payment: 77.4,
         mode: "split",
         settle: false,
-        date: { d: 3, m: "Feb", year: 2025 },
+        date: { d: 3, m: 2, Month: "Feb", y: 2025 },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -87,8 +87,8 @@ const dataUsers = [
     mobile: 80808080,
     password: 11111111,
     avatar: "https://i.pravatar.cc/100?u=e2e66095-2d1e-4810-ba8c-e06493d4ea60",
-    lifeTimeSpending: 54.27,
     wallet: 30.45,
+    coins: 1344,
     notifications: {
       notify: false,
       list: [],
@@ -104,11 +104,6 @@ const dataUsers = [
         name: "Cindy",
         debt: 0,
       },
-      {
-        id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
-        name: "Dove",
-        debt: -205,
-      },
     ],
   },
   {
@@ -118,8 +113,8 @@ const dataUsers = [
     mobile: 70707070,
     password: 11111111,
     avatar: "https://i.pravatar.cc/100?u=f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
-    lifeTimeSpending: 157.27,
     wallet: 330.45,
+    coins: 7615,
     notifications: {
       notify: false,
       list: [],
@@ -128,7 +123,12 @@ const dataUsers = [
       {
         id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
         name: "Alan",
-        debt: -250,
+        debt: 40.5,
+      },
+      {
+        id: "e2e66095-2d1e-4810-ba8c-e06493d4ea60",
+        name: "Becky",
+        debt: 0,
       },
       {
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
@@ -144,8 +144,8 @@ const dataUsers = [
     mobile: 60606060,
     password: 11111111,
     avatar: "https://i.pravatar.cc/100?u=aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
-    lifeTimeSpending: 9.4,
     wallet: 5.45,
+    coins: 536,
     notifications: {
       notify: false,
       list: [],
@@ -154,12 +154,12 @@ const dataUsers = [
       {
         id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
         name: "Alan",
-        debt: 55,
+        debt: 0,
       },
       {
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
         name: "Cindy",
-        debt: 0,
+        debt: -5,
       },
     ],
   },
@@ -170,8 +170,8 @@ const dataUsers = [
     mobile: 50505050,
     password: 11111111,
     avatar: "https://i.pravatar.cc/100?u=171320a7-f1ac-4f06-802e-82aba2ac345c",
-    lifeTimeSpending: 1210.4,
     wallet: 655.1,
+    coins: 11455,
     notifications: {
       notify: false,
       list: [],
@@ -180,7 +180,7 @@ const dataUsers = [
       {
         id: "e2e66095-2d1e-4810-ba8c-e06493d4ea60",
         name: "Becky",
-        debt: -200,
+        debt: 0,
       },
       {
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
@@ -190,7 +190,7 @@ const dataUsers = [
       {
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
         name: "Dove",
-        debt: 93,
+        debt: 0,
       },
     ],
   },

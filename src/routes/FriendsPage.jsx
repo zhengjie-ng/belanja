@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import Friend from "../components/Friend";
 import styles from "./FriendsPage.module.css";
+import { Link } from "react-router-dom";
 
 function FriendsPage() {
   const ctx = useContext(ProductContext);
@@ -36,9 +37,20 @@ function FriendsPage() {
             ➕
           </button>
         </div>
+        <div className={styles.divMsg}>
+          <p className={styles.pMsg}>
+            {ctx.user?.messages?.msgNudge ? ctx.user.messages.msgNudge : ""}
+          </p>
+        </div>
         <div className={styles.divFriendListMap}>
           {ctx.user.friends.map((friend) => (
-            <Friend key={friend.id} id={friend.id} debt={friend.debt} />
+            <Link
+              key={friend.id}
+              to={friend.debt > 0 ? `/payfriend/${friend.id}` : `/friends`}
+              className={styles.link}
+            >
+              <Friend key={friend.id} id={friend.id} debt={friend.debt} />
+            </Link>
           ))}
         </div>
       </div>

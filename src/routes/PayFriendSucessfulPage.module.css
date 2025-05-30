@@ -1,0 +1,70 @@
+.h2BelanjaPay {
+  margin-top: 80px;
+  /* font-size: 20px;
+  font-weight: 500; */
+  color: #5d3891;
+}
+
+.h2MerchantName {
+  margin-top: 100px;
+  text-transform: capitalize;
+}
+
+.divMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.pTick {
+  padding: 0px;
+  margin: 0px;
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 30px;
+  border-radius: 35px;
+  color: white;
+  background-color: green;
+}
+
+.pAmountPaid {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 80%;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.pAmount {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.pHow {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.buttonOk {
+  margin-top: 410px;
+  background-color: #5d3891;
+  font-weight: 600;
+  color: white;
+  width: 90%;
+  font-size: 20px;
+  font-weight: 500;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+}
+
+.buttonOk:hover {
+  background-color: #673ea1;
+}

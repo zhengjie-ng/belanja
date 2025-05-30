@@ -1,33 +1,78 @@
 .divMain {
-  background-color: rgb(255, 255, 255);
-  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
-  /* width: 90%; */
-  border-radius: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   align-content: center;
-  justify-content: center;
+  justify-content: left;
   justify-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  height: 100px;
+  border-bottom: 2px solid rgb(194, 194, 194);
+  width: 100%;
 }
 
-.divMainSettled {
-  background-color: rgb(255, 255, 255);
-  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
-  /* width: 90%; */
-  border-radius: 20px;
+.divMainInactive {
   display: flex;
   flex-direction: row;
   align-items: center;
   align-content: center;
-  justify-content: center;
+  justify-content: left;
   justify-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  height: 100px;
+  border-bottom: 2px solid rgb(194, 194, 194);
+  width: 100%;
   opacity: 50%;
 }
 
 .span {
   text-transform: capitalize;
   font-weight: 600;
+}
+.img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: Top;
+  border-radius: 50px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+.pName,
+.pDate {
+  text-align: left;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+.pDate {
+  opacity: 60%;
+  font-size: 12px;
+}
+
+.divName {
+  /* background-color: aquamarine; */
+  width: 260px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-items: center;
+  justify-content: center;
+}
+
+.dot {
+  color: rgb(213, 29, 29);
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.belanja {
+  color: #5d3891;
+  font-weight: 700;
+}
+
+.amount {
+  font-weight: 500;
+  color: red;
 }

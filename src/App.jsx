@@ -14,10 +14,15 @@ import SettlePage from "./routes/SettlePage";
 import Bill from "./routes/Bill";
 import Receipt from "./routes/Receipt";
 import Notifications from "./routes/Notifications";
+import PayFriend from "./routes/PayFriend";
 import PageNotFound from "./routes/PageNotFound";
 import SignUpPage from "./routes/SignUpPage";
+import TopUpPage from "./routes/TopUpPage";
+import PayNowPage from "./routes/PayNowPage";
+
 
 import styles from "./App.module.css";
+import PayFriendSucessfulPage from "./routes/PayFriendSucessfulPage";
 
 function App() {
   return (
@@ -36,12 +41,19 @@ function App() {
               <Route path="notifications" element={<Notifications />} />
               <Route path="bill/:id" element={<Bill />} />
               <Route path="bill/receipt/:id" element={<Receipt />} />
+              <Route path="topup" element={<TopUpPage />} />
             </Route>
             <Route path="SignUpPage" element={<SignUpPage />} />
+            <Route path="payfriend/:id" element={<PayFriend />} />
+            <Route
+              path="payfriend/successful/:id"
+              element={<PayFriendSucessfulPage />}
+            />
             <Route path="paymentMerchant" element={<PaymentPage />} />
             <Route path="scan" element={<ScanPage />} />
             <Route path="settle" element={<SettlePage />} />
             <Route path="/*" element={<PageNotFound />} />
+            <Route path="/paynow" element={<PayNowPage />} />
           </Routes>
         </ProductProvider>
       </BrowserRouter>

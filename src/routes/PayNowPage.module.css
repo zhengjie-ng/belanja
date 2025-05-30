@@ -1,0 +1,41 @@
+.paynowContainer {
+    text-align: center;
+    padding: 36px;
+    position: relative;
+    padding-top: 140px;
+}
+
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 19px;
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.doneButton {
+  margin-top: 20px;
+  padding: 15px;       
+  font-size: 23px;            
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 100%;                
+}
+
+.customImage {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+.instructionText {
+  font-size: 20px; 
+}
