@@ -1,0 +1,124 @@
+.divItemBill {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+  /* width: 90%; */
+  border-radius: 20px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+
+.divDate {
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+  width: 70px;
+  height: 80px;
+  justify-content: center;
+  align-self: left;
+  justify-self: left;
+}
+
+.pM,
+.pD {
+  margin: 0px;
+  padding: 0px;
+  color: rgb(118, 118, 118);
+}
+
+.pM {
+  text-transform: uppercase;
+}
+
+.pD {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.billName {
+  text-transform: capitalize;
+  font-size: 20px;
+  /* background-color: rgb(144, 144, 255); */
+  width: 160px;
+  margin: 0px;
+  text-align: left;
+}
+
+.divTotal {
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+  width: 100px;
+  justify-content: center;
+
+  /* align-self: left;
+  justify-self: left; */
+  margin-right: 10px;
+}
+
+.pTotal,
+.pPayment {
+  margin: 0px;
+  padding: 0px;
+  text-align: right;
+  margin-right: 10px;
+  color: rgb(43, 43, 43);
+}
+
+.pPayment {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.divUnsettled {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 99, 99);
+  width: 47px;
+  height: 100%;
+  justify-content: center;
+  margin: 0px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.divSettled {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(99, 255, 159);
+  width: 47px;
+  height: 100%;
+  justify-content: center;
+  margin: 0px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.divBelanja {
+  display: flex;
+  flex-direction: column;
+  background-color: #5d3891;
+  width: 47px;
+  height: 100%;
+  justify-content: center;
+  margin: 0px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.pSettled {
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
+  transform: rotate(-90deg);
+}
+
+.pBelanja {
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
+  color: white;
+  transform: rotate(-90deg);
+}

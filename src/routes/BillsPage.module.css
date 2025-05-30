@@ -35,3 +35,12 @@
   width: 90%;
   color: black;
 }
+
+.billFormContainer {
+  position: absolute; /* Keeps it from pushing other elements */
+  top: 10px; /* Adjust as needed */
+  width: 100%;
+  z-index: 100; /* Ensures it stays above other elements */
+}
+
+

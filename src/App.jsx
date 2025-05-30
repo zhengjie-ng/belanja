@@ -16,8 +16,10 @@ import Receipt from "./routes/Receipt";
 import Notifications from "./routes/Notifications";
 import PayFriend from "./routes/PayFriend";
 import PageNotFound from "./routes/PageNotFound";
+import SignUpPage from "./routes/SignUpPage";
 import TopUpPage from "./routes/TopUpPage";
 import PayNowPage from "./routes/PayNowPage";
+
 
 import styles from "./App.module.css";
 import PayFriendSucessfulPage from "./routes/PayFriendSucessfulPage";
@@ -41,6 +43,7 @@ function App() {
               <Route path="bill/receipt/:id" element={<Receipt />} />
               <Route path="topup" element={<TopUpPage />} />
             </Route>
+            <Route path="SignUpPage" element={<SignUpPage />} />
             <Route path="payfriend/:id" element={<PayFriend />} />
             <Route
               path="payfriend/successful/:id"

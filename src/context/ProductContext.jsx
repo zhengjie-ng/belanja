@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 import { productReducer, defaultProduct } from "../reducers/ProductReducers";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 const ProductContext = createContext();
 
@@ -108,6 +109,90 @@ export function ProductProvider({ children }) {
     navigate("/notifications");
   };
 
+  const handlerAddFriend = (name) => {
+  // Search for an existing user in userList
+  const existingUser = state.userList.find(
+    (user) => user.name.toLowerCase() === name.toLowerCase()
+  );
+
+  if (existingUser) {
+    console.log(`Found existing user: ${existingUser.name}`);
+    dispatch({
+      type: "ADD_FRIEND",
+      payload: {
+        id: existingUser.id,
+        name: existingUser.name,
+        email: existingUser.email,
+        mobile: existingUser.mobile,
+        avatar: existingUser.avatar,
+        lifeTimeSpending: existingUser.lifeTimeSpending,
+        wallet: existingUser.wallet,
+        notifications: existingUser.notifications,
+        friends: existingUser.friends,
+        bills: existingUser.bills,
+      },
+    });
+  } else {
+    console.log(`Creating new friend: ${name}`);
+    const newFriend = {
+      id: uuid(),
+      name: name,
+      email: `${name.toLowerCase()}@belanja.com`, // Placeholder email
+      mobile: "", // Default blank mobile
+      avatar: `https://i.pravatar.cc/100?u=${uuid()}`,
+      lifeTimeSpending: 0,
+      wallet: 0,
+      notifications: { notify: false, list: [] },
+      friends: [],
+      bills: [],
+    };
+
+    dispatch({
+      type: "ADD_FRIEND",
+      payload: newFriend,
+    });
+  }
+};
+
+const handlerSignUp = (name, email, mobile, password) => {
+  const existingUser = state.userList.find(
+    (user) =>
+      user.email === email || user.mobile.toString() === mobile
+  );
+
+  if (existingUser) {
+    console.warn("User already exists:", existingUser);
+    return { error: "User with this email or mobile number already exists." }; // Return error message
+  }
+
+  dispatch({
+    type: "SIGN_UP",
+    payload: { name, email, mobile, password },
+  });
+  return { success: "User created successfully!" };
+};
+
+const handlerAddMerchantBill = (newBillData) => {
+  const newBill = {
+    id: uuid(), // Generate unique UUID
+    name: newBillData.name,
+    payment: parseFloat(newBillData.payment),
+    mode: newBillData.mode,
+    settle: false,
+    date: {
+      d: new Date().getDate(),
+      m: new Date().toLocaleString("default", { month: "short" }),
+      year: new Date().getFullYear(),
+    },
+    fullPayeeList: [],
+  };
+
+  dispatch({
+    type: "ADD_MERCHANT_BILL",
+    payload: { newBill },
+  });
+};
+
   const handlerChangePayFriendInput = (e) => {
     dispatch({ type: "CHANGE_PAY_FRIEND_INPUT", value: e.target.value });
   };
@@ -179,6 +264,9 @@ export function ProductProvider({ children }) {
     bills: state.bills,
     split_belanja_switch: state.split_belanja_switch,
     currentBill: state.currentBill,
+    handlerAddMerchantBill, //NEW
+    handlerSignUp, //NEW
+    handlerAddFriend, //NEW
     payFriendInput: state.payFriendInput,
     handlerLoginClick,
     handlerOnChangeInput,
