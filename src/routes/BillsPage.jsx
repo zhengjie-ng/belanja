@@ -21,7 +21,10 @@ function BillsPage() {
       </div>
 
       {/* Merchant Bill Entry Form */}
-      <MerchantBillForm />
+      <div className={styles.billFormContainer}>
+          <MerchantBillForm />
+      </div>
+
 
       <div className={styles.divBillList}>
         {ctx.bills &&

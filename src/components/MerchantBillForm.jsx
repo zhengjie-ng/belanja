@@ -20,16 +20,14 @@ function MerchantBillForm() {
     }
 
     ctx.handlerAddMerchantBill({ name: billName, payment });
-    alert("Bill added successfully!");
+    // alert("Bill added successfully!");
     setBillName("");
     setPayment("");
   };
 
   return (
     <div className={styles.billFormContainer}>
-      <button onClick={toggleForm} className={styles.showFormButton}>
-        {showForm ? "Close" : "Merchant Bill"}
-      </button>
+      
 
       {showForm && (
         <div className={styles.billForm}>
@@ -48,6 +46,9 @@ function MerchantBillForm() {
           <button onClick={handleSubmitBill}>Add Bill</button>
         </div>
       )}
+      <button onClick={toggleForm} className={styles.showFormButton}>
+        {showForm ? "Close" : "Merchant Bills"}
+      </button>
     </div>
   );
 }
