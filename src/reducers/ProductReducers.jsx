@@ -6,7 +6,9 @@ import { v4 as uuid } from "uuid";
 export const defaultProduct = {
   userList: dataUsers,
   isLoggedIn: false,
-  loginNameInput: "alan@belanja.com",
+  loginNameInput: "",
+  loginPasswordInput: "",
+  loginError: "",
   user: null,
   merchant: {
     id: null,
@@ -19,30 +21,77 @@ export const defaultProduct = {
   currentBill: null,
   split_belanja_switch: false,
   payFriendInput: null,
+  wallet: 0,
+  lifeTimeSpending: 0,
+  friends: [],
+  notifications: {
+    notify: false,
+    list: [],
+  },
 };
 
 export function productReducer(state, action) {
   switch (action.type) {
-    case "LOGIN_NAME_INPUT": {
-      return { ...state, loginNameInput: action.value };
-    }
+
+    case "LOGIN_NAME_INPUT":
+      return { ...state, loginNameInput: action.value, loginError: "" };
+
+    case "LOGIN_PASSWORD_INPUT":
+      return { ...state, loginPasswordInput: action.value, loginError: "" };
+
+    case "LOGIN_ERROR":
+      return { ...state, loginError: action.value };
+
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        isLoggedIn: true,
+        user: action.payload,
+        loginError: "",
+        loginNameInput: "",
+        loginPasswordInput: "",
+        bills: Array.isArray(action.payload.bills) ? action.payload.bills : [],
+        wallet: action.payload.wallet ?? 0,
+        lifeTimeSpending: action.payload.lifeTimeSpending ?? 0,
+        friends: Array.isArray(action.payload.friends) ? action.payload.friends : [],
+        notifications: action.payload.notifications ?? { notify: false, list: [] },
+      };
 
     case "LOGIN": {
-      let newUser = null;
+      let foundUser = null;
+
       if (validator.isEmail(state.loginNameInput)) {
-        newUser = state.userList.find(
+        foundUser = state.userList.find(
           (user) => user.email === state.loginNameInput
         );
       } else if (validator.isMobilePhone(state.loginNameInput)) {
-        newUser = state.userList.find(
-          (user) => user.mobile.toString() === state.loginNameInput
-        );
+          foundUser = state.userList.find(
+            (user) => user.mobile.toString() === state.loginNameInput
+          );
       }
+
+      if (!foundUser) {
+        return {
+          ...state,
+          loginError: "User not found. Please check your email or mobile number.",
+        };
+      }
+
+      if (foundUser.password !== state.loginPasswordInput) {
+        return {
+          ...state,
+          loginError: "Incorrect password. Please try again.",
+        };
+      }
+
       return {
         ...state,
-        isLoggedIn: !!newUser,
-        user: newUser,
-        bills: Array.isArray(newUser?.bills) ? newUser.bills : [],
+        isLoggedIn: true,
+        user: foundUser,
+        loginError: "",
+        loginNameInput: "",
+        loginPasswordInput: "",
+        bills: Array.isArray(foundUser.bills) ? foundUser.bills : [],
       };
     }
 

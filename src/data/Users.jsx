@@ -4,7 +4,7 @@ const dataUsers = [
     name: "Alan",
     email: "alan@belanja.com",
     mobile: 90909090,
-    password: 11111111,
+    password: 80604914,
     avatar: "https://i.pravatar.cc/100?u=alan@belanja.com",
     lifeTimeSpending: 655.43,
     wallet: 545.22,

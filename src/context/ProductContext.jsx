@@ -1,19 +1,53 @@
 import { createContext, useReducer } from "react";
 import { productReducer, defaultProduct } from "../reducers/ProductReducers";
 import { useNavigate } from "react-router-dom";
+import dataUsers from "../data/Users";
 
 const ProductContext = createContext();
 
+const initialState = {
+  loginNameInput: "",
+  loginPasswordInput: "",
+  loginError: "",
+  user: null,
+  // ... other state slices you use like merchant, bills etc.
+};
+
 export function ProductProvider({ children }) {
-  const [state, dispatch] = useReducer(productReducer, defaultProduct);
+  const [state, dispatch] = useReducer(productReducer, initialState);
   const navigate = useNavigate();
 
   const handlerOnChangeInput = (e) => {
     dispatch({ type: "LOGIN_NAME_INPUT", value: e.target.value });
   };
+
   const handlerLoginClick = () => {
-    dispatch({ type: "LOGIN" });
-    navigate("/home");
+  const loginInput = state.loginNameInput.trim();
+  const passwordInput = state.loginPasswordInput;
+
+  // Try to find user by email or mobile
+  const matchedUser = dataUsers.find(
+    (user) =>
+      user.email === loginInput || String(user.mobile) === loginInput
+  );
+
+  if (!matchedUser) {
+    dispatch({ type: "LOGIN_ERROR", value: "User not found" });
+    return;
+  }
+
+  if (String(matchedUser.password) !== passwordInput) {
+    dispatch({ type: "LOGIN_ERROR", value: "Incorrect password" });
+    return;
+  }
+
+  // Successful login
+  dispatch({ type: "LOGIN_SUCCESS", payload: matchedUser });
+  navigate("/home");
+};
+
+  const handlerOnChangePasswordInput = (e) => {
+    dispatch({ type: "LOGIN_PASSWORD_INPUT", value: e.target.value });
   };
 
   const handlerLogoutClick = () => {
@@ -73,6 +107,7 @@ export function ProductProvider({ children }) {
   const handlerOnChangePayeePecentageInput = (e, id) => {
     dispatch({ type: "PAYEE_PERCENTAGE_INPUT", value: e.target.value, id: id });
   };
+
   const handlerChangeInputPayee = (selectedOption, actionMeta) => {
     dispatch({
       type: "CHANGE_INPUT_PAYEE",
@@ -180,6 +215,7 @@ export function ProductProvider({ children }) {
     split_belanja_switch: state.split_belanja_switch,
     currentBill: state.currentBill,
     payFriendInput: state.payFriendInput,
+    loginError: state.loginError,
     handlerLoginClick,
     handlerOnChangeInput,
     handlerLogoutClick,
@@ -204,6 +240,7 @@ export function ProductProvider({ children }) {
     handleNotificationClick,
     handleNudgeFriend,
     handleClearMessages,
+    handlerOnChangePasswordInput,
   };
 
   return (
