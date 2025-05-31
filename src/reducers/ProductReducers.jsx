@@ -46,6 +46,7 @@ export function productReducer(state, action) {
       return {
         ...state,
         isLoggedIn: true,
+        userList: dataUsers,
         user: action.payload,
         loginError: "",
         loginNameInput: "",
@@ -56,44 +57,6 @@ export function productReducer(state, action) {
         friends: Array.isArray(action.payload.friends) ? action.payload.friends : [],
         notifications: action.payload.notifications ?? { notify: false, list: [] },
       };
-
-    case "LOGIN": {
-      let foundUser = null;
-
-      if (validator.isEmail(state.loginNameInput)) {
-        foundUser = state.userList.find(
-          (user) => user.email === state.loginNameInput
-        );
-      } else if (validator.isMobilePhone(state.loginNameInput)) {
-          foundUser = state.userList.find(
-            (user) => user.mobile.toString() === state.loginNameInput
-          );
-      }
-
-      if (!foundUser) {
-        return {
-          ...state,
-          loginError: "User not found. Please check your email or mobile number.",
-        };
-      }
-
-      if (foundUser.password !== state.loginPasswordInput) {
-        return {
-          ...state,
-          loginError: "Incorrect password. Please try again.",
-        };
-      }
-
-      return {
-        ...state,
-        isLoggedIn: true,
-        user: foundUser,
-        loginError: "",
-        loginNameInput: "",
-        loginPasswordInput: "",
-        bills: Array.isArray(foundUser.bills) ? foundUser.bills : [],
-      };
-    }
 
     case "LOGOUT": {
       const user = { ...state.user, bills: state.bills };
