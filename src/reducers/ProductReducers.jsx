@@ -1,4 +1,3 @@
-import validator from "validator";
 import dataUsers from "../data/Users";
 import getRandom from "food-random-module";
 import { v4 as uuid } from "uuid";
@@ -6,8 +5,8 @@ import { v4 as uuid } from "uuid";
 export const defaultProduct = {
   userList: dataUsers,
   isLoggedIn: false,
-  loginNameInput: "",
-  loginPasswordInput: "",
+  loginNameInput: "alan@belanja.com",
+  loginPasswordInput: "80604914",
   loginError: "",
   user: null,
   merchant: {
@@ -60,13 +59,19 @@ export function productReducer(state, action) {
 
     case "LOGOUT": {
       const user = { ...state.user, bills: state.bills };
-      for (const key in state.userList) {
-        if (state.userList[key].id === state.user.id) {
-          state.userList[key] = user;
-        }
-      }
+      const updatedUserList = state.userList.map((u) =>
+        u.id === state.user.id ? user : u
+      );
 
-      return { ...state, isLoggedIn: false, user: null };
+      return {
+        ...state,
+        userList: updatedUserList,
+        isLoggedIn: false,
+        user: null,
+        loginNameInput: defaultProduct.loginNameInput,
+        loginPasswordInput: defaultProduct.loginPasswordInput,
+        loginError: "",
+      };
     }
 
     case "SCAN": {

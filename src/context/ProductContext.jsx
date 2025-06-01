@@ -1,17 +1,17 @@
 import { createContext, useReducer } from "react";
-import { productReducer, defaultProduct } from "../reducers/ProductReducers";
+import { productReducer } from "../reducers/ProductReducers";
 import { useNavigate } from "react-router-dom";
 import dataUsers from "../data/Users";
 
 const ProductContext = createContext();
 
 const initialState = {
-  loginNameInput: "",
-  loginPasswordInput: "",
+  loginNameInput: "alan@belanja.com",
+  loginPasswordInput: "80604914",
   loginError: "",
   user: null,
-  // ... other state slices you use like merchant, bills etc.
 };
+
 
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, initialState);
@@ -22,29 +22,26 @@ export function ProductProvider({ children }) {
   };
 
   const handlerLoginClick = () => {
-  const loginInput = state.loginNameInput.trim();
-  const passwordInput = state.loginPasswordInput;
+    const loginInput = state.loginNameInput.trim();
+    const passwordInput = state.loginPasswordInput;
 
-  // Try to find user by email or mobile
-  const matchedUser = dataUsers.find(
-    (user) =>
-      user.email === loginInput || String(user.mobile) === loginInput
-  );
+    const matchedUser = dataUsers.find(
+      (user) => user.email === loginInput || String(user.mobile) === loginInput
+    );
 
-  if (!matchedUser) {
-    dispatch({ type: "LOGIN_ERROR", value: "User not found" });
-    return;
-  }
+    if (!matchedUser) {
+      dispatch({ type: "LOGIN_ERROR", value: "User not found" });
+      return;
+    }
 
-  if (String(matchedUser.password) !== passwordInput) {
-    dispatch({ type: "LOGIN_ERROR", value: "Incorrect password" });
-    return;
-  }
+    if (String(matchedUser.password) !== passwordInput) {
+      dispatch({ type: "LOGIN_ERROR", value: "Incorrect password" });
+      return;
+    }
 
-  // Successful login
-  dispatch({ type: "LOGIN_SUCCESS", payload: matchedUser });
-  navigate("/home");
-};
+    dispatch({ type: "LOGIN_SUCCESS", payload: matchedUser });
+    navigate("/home");
+  };
 
   const handlerOnChangePasswordInput = (e) => {
     dispatch({ type: "LOGIN_PASSWORD_INPUT", value: e.target.value });
@@ -207,8 +204,8 @@ export function ProductProvider({ children }) {
 
   const data = {
     userList: state.userList,
-    isLoggedIn: state.isLoggedIn,
     loginNameInput: state.loginNameInput,
+    loginPasswordInput: state.loginPasswordInput,
     user: state.user,
     merchant: state.merchant,
     bills: state.bills,
