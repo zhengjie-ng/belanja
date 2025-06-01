@@ -19,7 +19,7 @@ function Paidyee({ id }) {
       </h4>
       <div className={styles.divSpace}></div>
       {payee.final !== 0 ? (
-        <p className={styles.pFinal}>{`$${payee.final}`}</p>
+        <p className={styles.pFinal}>{`$${Number(payee.final).toFixed(2)}`}</p>
       ) : (
         <p className={styles.pThanks}>Thanks for the treat!</p>
       )}
