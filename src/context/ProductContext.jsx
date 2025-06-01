@@ -255,6 +255,10 @@ const handlerAddMerchantBill = (newBillData) => {
     dispatch({ type: "CLEAR_MESSAGES" });
   };
 
+  const handleNaviScan = () => {
+    dispatch({ type: "GET_LOCATION" });
+  };
+
   const data = {
     userList: state.userList,
     isLoggedIn: state.isLoggedIn,
@@ -268,6 +272,8 @@ const handlerAddMerchantBill = (newBillData) => {
     handlerSignUp, //NEW
     handlerAddFriend, //NEW
     payFriendInput: state.payFriendInput,
+    oneMap: state.oneMap,
+    location: state.location,
     handlerLoginClick,
     handlerOnChangeInput,
     handlerLogoutClick,
@@ -292,6 +298,7 @@ const handlerAddMerchantBill = (newBillData) => {
     handleNotificationClick,
     handleNudgeFriend,
     handleClearMessages,
+    handleNaviScan,
   };
 
   return (

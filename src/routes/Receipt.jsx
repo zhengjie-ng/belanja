@@ -14,7 +14,6 @@ function Receipt() {
   const user = currentBill.fullPayeeList.find(
     (payee) => payee.id === ctx.user.id
   );
-  console.log(currentBill.mode);
   return (
     <div className={styles.divMain}>
       <div className={styles.divHeader}>
@@ -22,6 +21,10 @@ function Receipt() {
         <hr className={styles.hrLine}></hr>
       </div>
       <h2 className={styles.h2BillName}>{currentBill.name}</h2>
+      <p className={styles.address}>
+        {ctx.currentBill.location?.address &&
+          "📍" + ctx.currentBill.location.address}
+      </p>
       <div className={styles.divPaidyeeList}>
         {currentBill.fullPayeeList.map((payee) => (
           <Paidyee key={payee.id} id={payee.id} />
@@ -32,12 +35,12 @@ function Receipt() {
       {currentBill.mode === "belanja" ? (
         <h2 className={styles.h2Belanja}>
           You have <span className={styles.span}>BELANJA-ED</span> $
-          {currentBill.payment}!
+          {Number(currentBill.payment).toFixed(2)}!
         </h2>
       ) : (
-        <h2
-          className={styles.total}
-        >{`You have paid $${user.final} of $${currentBill.payment} `}</h2>
+        <h2 className={styles.total}>{`You have paid $${
+          user.final
+        } of $${Number(currentBill.payment).toFixed(2)} `}</h2>
       )}
 
       <button className={styles.buttonBack} onClick={() => navigate("/bills")}>

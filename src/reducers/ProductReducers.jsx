@@ -19,6 +19,16 @@ export const defaultProduct = {
   currentBill: null,
   split_belanja_switch: false,
   payFriendInput: null,
+  oneMap: {
+    access_token: null,
+    expiry_timestamp: null,
+  },
+  location: {
+    latitude: null,
+    longitude: null,
+    accuracy: null,
+    address: null,
+  },
 };
 
 export function productReducer(state, action) {
@@ -101,6 +111,8 @@ export function productReducer(state, action) {
           ...state.merchant,
           id: uuid(),
           date: { ...state.date, d: day, m: month, Month: Month, year: year },
+          location: state.location,
+          settle: false,
         },
       };
     }
@@ -117,22 +129,27 @@ export function productReducer(state, action) {
           },
         ],
       };
-
+      const newBills = [updatedMerchant, ...state.bills];
       return {
         ...state,
-        bills: [updatedMerchant, ...state.bills],
+        bills: newBills,
+        user: {
+          ...state.user,
+          bills: newBills,
+        },
         merchant: defaultProduct.merchant,
       };
     }
 
     case "SPLIT": {
+      const newBills = [state.merchant, ...state.bills];
       return {
         ...state,
         merchant: {
           ...state.merchant,
           mode: action.value,
         },
-        bills: [state.merchant, ...state.bills],
+        bills: newBills,
         currentBill: {
           ...state.merchant,
           mode: action.value,
@@ -146,6 +163,10 @@ export function productReducer(state, action) {
               percentage: "",
             },
           ],
+        },
+        user: {
+          ...state.user,
+          bills: newBills,
         },
         split_belanja_switch: false,
       };
@@ -617,6 +638,32 @@ case "SIGN_UP": {
         };
       }
       return { ...state };
+    }
+
+    case "UPDATE_LOCATION": {
+      return {
+        ...state,
+        location: {
+          latlong: action.latlong,
+        },
+      };
+    }
+
+    case "UPDATE_LOCATION_ADDRESS": {
+      return {
+        ...state,
+        location: { ...state.location, address: action.address },
+      };
+    }
+
+    case "SET_TOKEN": {
+      return {
+        ...state,
+        oneMap: {
+          access_token: action.access_token,
+          expiry_timestamp: action.expiry_timestamp,
+        },
+      };
     }
 
     default:

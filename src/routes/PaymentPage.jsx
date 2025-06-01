@@ -1,9 +1,54 @@
 import styles from "./PaymentPage.module.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
+import oneMapAPI from "../api/oneMapAPI";
 
 function PaymentPage() {
   const ctx = useContext(ProductContext);
+
+  async function getReverseGeocode() {
+    try {
+      const response = await oneMapAPI(ctx.oneMap.access_token).get(
+        "/revgeocode",
+        {
+          params: {
+            location: ctx.location.latlong,
+            buffer: 100,
+            addressType: "All",
+            otherFeatures: "N",
+          },
+        }
+      );
+
+      const { BUILDINGNAME, BLOCK, ROAD, POSTALCODE } =
+        response.data.GeocodeInfo[0];
+
+      if (BUILDINGNAME === "NIL") {
+        BUILDINGNAME === "";
+      }
+
+      if (BLOCK === "NIL") {
+        BLOCK === "";
+      }
+
+      const address =
+        `${BUILDINGNAME}, ${BLOCK} ${ROAD}, Singapore ${POSTALCODE}`.toLowerCase();
+
+      ctx.dispatch({
+        type: "UPDATE_LOCATION_ADDRESS",
+        address,
+      });
+
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getReverseGeocode();
+  }, []);
+
   return (
     <div>
       <button className={styles.buttonBack} onClick={ctx.handlerClickBack}>
@@ -11,13 +56,15 @@ function PaymentPage() {
       </button>
       <h2 className={styles.h2BelanjaPay}>Belanja Pay</h2>
       <h2 className={styles.h2MerchantName}>{ctx.merchant.name}</h2>
+      <p className={styles.address}>
+        {ctx.location.address && `📍${ctx.location.address}`}
+      </p>
       <div className={styles.divPayField}>
         <p>Total amount to pay</p>
         <input
           className={styles.inputPayField}
           placeholder="$0.00"
           type="number"
-          // value={ctx.merchant.payment}
           onChange={ctx.handlerMerchantPaymentChange}
         ></input>
       </div>
