@@ -215,7 +215,14 @@ export function ProductProvider({ children }) {
         Month: new Date().toLocaleString("default", { month: "short" }),
         year: new Date().getFullYear(),
       },
-      fullPayeeList: [],
+      fullPayeeList: [{
+        id: state.user.id, // ✅ Adds logged-in user as a payee
+        name: state.user.name,
+        float: "",
+        percentage: "",
+        final: 0,
+      },
+    ],
     };
 
     dispatch({
