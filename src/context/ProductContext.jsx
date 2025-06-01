@@ -1,9 +1,17 @@
 import { createContext, useReducer } from "react";
 import { productReducer, defaultProduct } from "../reducers/ProductReducers";
 import { useNavigate } from "react-router-dom";
+import dataUsers from "../data/Users";
 import { v4 as uuid } from "uuid";
 
 const ProductContext = createContext();
+
+// const initialState = {
+//   loginNameInput: "alan@belanja.com",
+//   loginPasswordInput: "80604914",
+//   loginError: "",
+//   user: null,
+// };
 
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, defaultProduct);
@@ -12,9 +20,31 @@ export function ProductProvider({ children }) {
   const handlerOnChangeInput = (e) => {
     dispatch({ type: "LOGIN_NAME_INPUT", value: e.target.value });
   };
+
   const handlerLoginClick = () => {
-    dispatch({ type: "LOGIN" });
+    const loginInput = state.loginNameInput.trim();
+    const passwordInput = state.loginPasswordInput;
+
+    const matchedUser = dataUsers.find(
+      (user) => user.email === loginInput || String(user.mobile) === loginInput
+    );
+
+    if (!matchedUser) {
+      dispatch({ type: "LOGIN_ERROR", value: "User not found" });
+      return;
+    }
+
+    if (String(matchedUser.password) !== passwordInput) {
+      dispatch({ type: "LOGIN_ERROR", value: "Incorrect password" });
+      return;
+    }
+
+    dispatch({ type: "LOGIN_SUCCESS", payload: matchedUser });
     navigate("/home");
+  };
+
+  const handlerOnChangePasswordInput = (e) => {
+    dispatch({ type: "LOGIN_PASSWORD_INPUT", value: e.target.value });
   };
 
   const handlerLogoutClick = () => {
@@ -74,6 +104,7 @@ export function ProductProvider({ children }) {
   const handlerOnChangePayeePecentageInput = (e, id) => {
     dispatch({ type: "PAYEE_PERCENTAGE_INPUT", value: e.target.value, id: id });
   };
+
   const handlerChangeInputPayee = (selectedOption, actionMeta) => {
     dispatch({
       type: "CHANGE_INPUT_PAYEE",
@@ -142,6 +173,7 @@ export function ProductProvider({ children }) {
         avatar: `https://i.pravatar.cc/100?u=${uuid()}`,
         lifeTimeSpending: 0,
         wallet: 0,
+        coins: 22355,
         notifications: { notify: false, list: [] },
         friends: [],
         bills: [],
@@ -260,8 +292,8 @@ export function ProductProvider({ children }) {
 
   const data = {
     userList: state.userList,
-    isLoggedIn: state.isLoggedIn,
     loginNameInput: state.loginNameInput,
+    loginPasswordInput: state.loginPasswordInput,
     user: state.user,
     merchant: state.merchant,
     bills: state.bills,
@@ -271,6 +303,7 @@ export function ProductProvider({ children }) {
     handlerSignUp, //NEW
     handlerAddFriend, //NEW
     payFriendInput: state.payFriendInput,
+    loginError: state.loginError,
     oneMap: state.oneMap,
     location: state.location,
     handlerLoginClick,
@@ -297,6 +330,7 @@ export function ProductProvider({ children }) {
     handleNotificationClick,
     handleNudgeFriend,
     handleClearMessages,
+    handlerOnChangePasswordInput,
     handleNaviScan,
   };
 

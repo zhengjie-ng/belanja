@@ -33,7 +33,7 @@ function Welcome() {
   async function renewToken() {
     const currentTimestamp = Math.floor(Date.now() / 1000);
 
-    if (currentTimestamp >= ctx.oneMap.expiry_timestamp) {
+    if (currentTimestamp >= ctx.oneMap?.expiry_timestamp) {
       console.log("Token Expired");
       try {
         const new_response = await fetchToken().post("/", oneMapCreds);
@@ -56,7 +56,7 @@ function Welcome() {
 
   useEffect(() => {
     renewToken();
-  }, [ctx.oneMap.expiry_timestamp]);
+  }, [ctx.oneMap?.expiry_timestamp]);
 
   return (
     <div className={styles.divWelcome}>
@@ -76,8 +76,13 @@ function Welcome() {
         required
       />
 
-      <button className={styles.buttonLongCreate} onClick={() => navigate("/SignUpPage")}>Create New Account</button>
-      
+      <button
+        className={styles.buttonLongCreate}
+        onClick={() => navigate("/SignUpPage")}
+      >
+        Create New Account
+      </button>
+
       <p>Have a referral or reward code?</p>
       <button className={styles.buttonLong} onClick={handleLogin}>
         Login

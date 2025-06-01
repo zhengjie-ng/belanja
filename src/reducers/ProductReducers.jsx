@@ -1,4 +1,3 @@
-import validator from "validator";
 import dataUsers from "../data/Users";
 import getRandom from "food-random-module";
 import { v4 as uuid } from "uuid";
@@ -7,6 +6,8 @@ export const defaultProduct = {
   userList: dataUsers,
   isLoggedIn: false,
   loginNameInput: "alan@belanja.com",
+  loginPasswordInput: "80604914",
+  loginError: "",
   user: null,
   merchant: {
     id: null,
@@ -19,6 +20,13 @@ export const defaultProduct = {
   currentBill: null,
   split_belanja_switch: false,
   payFriendInput: null,
+  wallet: 0,
+  lifeTimeSpending: 0,
+  friends: [],
+  notifications: {
+    notify: false,
+    list: [],
+  },
   oneMap: {
     access_token: null,
     expiry_timestamp: null,
@@ -33,38 +41,51 @@ export const defaultProduct = {
 
 export function productReducer(state, action) {
   switch (action.type) {
-    case "LOGIN_NAME_INPUT": {
-      return { ...state, loginNameInput: action.value };
-    }
+    case "LOGIN_NAME_INPUT":
+      return { ...state, loginNameInput: action.value, loginError: "" };
 
-    case "LOGIN": {
-      let newUser = null;
-      if (validator.isEmail(state.loginNameInput)) {
-        newUser = state.userList.find(
-          (user) => user.email === state.loginNameInput
-        );
-      } else if (validator.isMobilePhone(state.loginNameInput)) {
-        newUser = state.userList.find(
-          (user) => user.mobile.toString() === state.loginNameInput
-        );
-      }
+    case "LOGIN_PASSWORD_INPUT":
+      return { ...state, loginPasswordInput: action.value, loginError: "" };
+
+    case "LOGIN_ERROR":
+      return { ...state, loginError: action.value };
+
+    case "LOGIN_SUCCESS":
       return {
         ...state,
-        isLoggedIn: !!newUser,
-        user: newUser,
-        bills: Array.isArray(newUser?.bills) ? newUser.bills : [],
+        isLoggedIn: true,
+        userList: dataUsers,
+        user: action.payload,
+        loginError: "",
+        loginNameInput: "",
+        loginPasswordInput: "",
+        bills: Array.isArray(action.payload.bills) ? action.payload.bills : [],
+        wallet: action.payload.wallet ?? 0,
+        lifeTimeSpending: action.payload.lifeTimeSpending ?? 0,
+        friends: Array.isArray(action.payload.friends)
+          ? action.payload.friends
+          : [],
+        notifications: action.payload.notifications ?? {
+          notify: false,
+          list: [],
+        },
       };
-    }
 
     case "LOGOUT": {
       const user = { ...state.user, bills: state.bills };
-      for (const key in state.userList) {
-        if (state.userList[key].id === state.user.id) {
-          state.userList[key] = user;
-        }
-      }
+      const updatedUserList = state.userList.map((u) =>
+        u.id === state.user.id ? user : u
+      );
 
-      return { ...state, isLoggedIn: false, user: null };
+      return {
+        ...state,
+        userList: updatedUserList,
+        isLoggedIn: false,
+        user: null,
+        loginNameInput: defaultProduct.loginNameInput,
+        loginPasswordInput: defaultProduct.loginPasswordInput,
+        loginError: "",
+      };
     }
 
     case "SCAN": {
@@ -381,61 +402,62 @@ export function productReducer(state, action) {
       };
     }
 
-
     case "ADD_FRIEND": {
       console.log("Adding new friend:", action.payload);
-  return {
-    ...state,
-    userList: [...state.userList, action.payload],
-    user: {
-      ...state.user,
-      friends: [...state.user.friends, action.payload],
-    },
-  };
-}
+      return {
+        ...state,
+        userList: [...state.userList, action.payload],
+        user: {
+          ...state.user,
+          friends: [...state.user.friends, action.payload],
+        },
+      };
+    }
 
-case "ADD_MERCHANT_BILL":
-  return {
-    ...state,
-    bills: [...state.bills, action.payload.newBill], //Append new bill
-  };
+    case "ADD_MERCHANT_BILL":
+      return {
+        ...state,
+        bills: [...state.bills, action.payload.newBill], //Append new bill
+      };
 
-case "SIGN_UP": {
-  // Check if the user already exists
-  const existingUser = state.userList.find(
-    (user) =>
-      user.email === action.payload.email || user.mobile === action.payload.mobile
-  );
+    case "SIGN_UP": {
+      // Check if the user already exists
+      const existingUser = state.userList.find(
+        (user) =>
+          user.email === action.payload.email ||
+          user.mobile === action.payload.mobile
+      );
 
-  if (existingUser) {
-    console.warn("User already exists:", existingUser);
-    return state; // ✅ Prevent duplicate sign-ups
-  }
+      if (existingUser) {
+        console.warn("User already exists:", existingUser);
+        return state; // ✅ Prevent duplicate sign-ups
+      }
 
-  // Create new user object
-  const newUser = {
-    id: uuid(),
-    name: action.payload.name,
-    email: action.payload.email,
-    mobile: action.payload.mobile,
-    password: action.payload.password,
-    avatar: `https://i.pravatar.cc/100?u=${uuid()}`, // Random avatar
-    lifeTimeSpending: 0,
-    wallet: 0,
-    notifications: { notify: false, list: [] },
-    friends: [],
-    bills: [],
-  };
+      // Create new user object
+      const newUser = {
+        id: uuid(),
+        name: action.payload.name,
+        email: action.payload.email,
+        mobile: action.payload.mobile,
+        password: action.payload.password,
+        avatar: `https://i.pravatar.cc/100?u=${uuid()}`, // Random avatar
+        lifeTimeSpending: 0,
+        wallet: 0,
+        coins: 22355,
+        notifications: { notify: false, list: [] },
+        friends: [],
+        bills: [],
+      };
 
-  console.log("New user signed up:", newUser);
+      console.log("New user signed up:", newUser);
 
-  return {
-    ...state,
-    userList: [...state.userList, newUser], // ✅ Add new user globally
-    user: newUser, // ✅ Log the user in immediately
-    isLoggedIn: true,
-  };
-}
+      return {
+        ...state,
+        userList: [...state.userList, newUser], // ✅ Add new user globally
+        user: newUser, // ✅ Log the user in immediately
+        isLoggedIn: true,
+      };
+    }
     case "TOP_UP":
       return {
         ...state,
