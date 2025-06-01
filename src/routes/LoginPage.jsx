@@ -33,7 +33,7 @@ function LoginPage() {
 
       <input
         className={styles.inputPassword}
-        name="password"
+        name="username"
         placeholder="Enter your password"
         value={ctx.loginPasswordInput}
         type="password"
