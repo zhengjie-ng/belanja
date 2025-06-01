@@ -11,6 +11,46 @@ function Bill() {
   const ctx = useContext(ProductContext);
   const currentBill = ctx.bills.find((bill) => bill.id === id);
 
+  const isValidAmount = () => {
+    if (
+      ctx.currentBill.mode === "split" &&
+      ctx.currentBill.floatTotal !== ctx.currentBill.payment
+    ) {
+      return false;
+    }
+    if (
+      ctx.currentBill.mode === "%" &&
+      ctx.currentBill.percentageTotal !== 100
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  const ValidateValue = () => {
+    const isValid = isValidAmount();
+
+    if (!isValid) {
+      if (ctx.currentBill.mode === "split") {
+        return (
+          <p className={styles.message}>
+            Total value needs to add up to $
+            {Number(ctx.currentBill.payment).toFixed(2)}
+          </p>
+        );
+      }
+      if (ctx.currentBill.mode === "%") {
+        return (
+          <p className={styles.message}>
+            Total percentage needs to add up to 100%
+          </p>
+        );
+      }
+    }
+
+    return <p className={styles.messageInactive}></p>;
+  };
+
   const findUserAvatar = (userId) => {
     const user = ctx.userList.find((user) => user.id === userId);
     return user ? user.avatar : "https://i.pravatar.cc/100?u=unknown";
@@ -25,6 +65,7 @@ function Bill() {
   return (
     <div className={styles.divMain}>
       <h2 className={styles.settlement}>Bill settlement options</h2>
+      <ValidateValue />
 
       <h2 className={styles.h2BillName}>{currentBill.name}</h2>
       <p className={styles.address}>
@@ -191,6 +232,7 @@ function Bill() {
       )}
       <button
         className={styles.buttonSubmit}
+        disabled={isValidAmount() ? false : true}
         onClick={() =>
           ctx.handlerBillSubmit({
             mode: "bill",

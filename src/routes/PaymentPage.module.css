@@ -5,6 +5,12 @@
   color: #5d3891;
 }
 
+.message {
+  height: 25px;
+  font-style: italic;
+  color: rgb(227, 26, 26);
+}
+
 .h2MerchantName {
   text-transform: capitalize;
 }
@@ -66,7 +72,7 @@
 }
 
 .divWallet {
-  margin-top: 370px;
+  margin-top: 330px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -102,6 +108,10 @@
 
 .buttonPayment:hover {
   background-color: #6f42ae;
+}
+
+.buttonPayment:disabled {
+  background-color: #7e7e7e;
 }
 
 .pTotal,
