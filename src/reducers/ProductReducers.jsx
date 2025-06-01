@@ -26,6 +26,7 @@ export const defaultProduct = {
   notifications: {
     notify: false,
     list: [],
+  },
   oneMap: {
     access_token: null,
     expiry_timestamp: null,
