@@ -27,6 +27,10 @@ function Bill() {
       <h2 className={styles.settlement}>Bill settlement options</h2>
 
       <h2 className={styles.h2BillName}>{currentBill.name}</h2>
+      <p className={styles.address}>
+        {ctx.currentBill.location?.address &&
+          "📍" + ctx.currentBill.location.address}
+      </p>
       <Select
         className={styles.select}
         options={friendOptions}
@@ -142,6 +146,49 @@ function Bill() {
         </>
       )}
 
+      {ctx.currentBill.mode === "=" && (
+        <>
+          <p className={styles.coins}>{`You will earn 🪙${Math.round(
+            ctx.currentBill.equal
+              ? ctx.currentBill.equal
+              : ctx.currentBill.payment
+          )}`}</p>
+        </>
+      )}
+
+      {ctx.currentBill.mode === "split" && (
+        <>
+          <p className={styles.coins}>{`You will earn 🪙${Math.round(
+            ctx.currentBill.floatTotal ? ctx.currentBill.floatTotal : 0
+          )}`}</p>
+        </>
+      )}
+
+      {ctx.currentBill.mode === "%" && (
+        <>
+          <p className={styles.coins}>{`You will earn 🪙${
+            ctx.currentBill.percentageTotal
+              ? Math.round(
+                  (ctx.currentBill.percentageTotal * ctx.currentBill.payment) /
+                    100
+                )
+              : "0"
+          }`}</p>
+        </>
+      )}
+
+      {ctx.currentBill.mode === "belanja" && (
+        <>
+          <p className={styles.coins}>
+            {`You will earn 2x coins of 🪙${Math.round(
+              ctx.currentBill.payment * 2
+            )} `}
+            <span className={styles.coinsStrikeOut}>
+              {Math.round(ctx.currentBill.payment)}
+            </span>
+          </p>
+        </>
+      )}
       <button
         className={styles.buttonSubmit}
         onClick={() =>

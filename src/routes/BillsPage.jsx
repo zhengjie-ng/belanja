@@ -3,6 +3,7 @@ import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import ItemBill from "../components/ItemBill";
 import { Link } from "react-router-dom";
+import MerchantBillForm from "../components/MerchantBillForm";
 
 function BillsPage() {
   const ctx = useContext(ProductContext);
@@ -14,6 +15,13 @@ function BillsPage() {
 
   return (
     <>
+      {/* Merchant Bill Entry Form */}
+    <div className={styles.billFormWrapper}>
+      <div className={styles.billFormContainer}>
+        <MerchantBillForm />
+      </div>
+    </div>
+
       <div className={styles.divHeader}>
         <h2 className={styles.h2Bills}>Bills</h2>
         <hr className={styles.hrLine}></hr>

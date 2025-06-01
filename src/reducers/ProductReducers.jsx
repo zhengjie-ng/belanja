@@ -26,6 +26,15 @@ export const defaultProduct = {
   notifications: {
     notify: false,
     list: [],
+  oneMap: {
+    access_token: null,
+    expiry_timestamp: null,
+  },
+  location: {
+    latitude: null,
+    longitude: null,
+    accuracy: null,
+    address: null,
   },
 };
 
@@ -118,6 +127,8 @@ export function productReducer(state, action) {
           ...state.merchant,
           id: uuid(),
           date: { ...state.date, d: day, m: month, Month: Month, year: year },
+          location: state.location,
+          settle: false,
         },
       };
     }
@@ -134,22 +145,27 @@ export function productReducer(state, action) {
           },
         ],
       };
-
+      const newBills = [updatedMerchant, ...state.bills];
       return {
         ...state,
-        bills: [updatedMerchant, ...state.bills],
+        bills: newBills,
+        user: {
+          ...state.user,
+          bills: newBills,
+        },
         merchant: defaultProduct.merchant,
       };
     }
 
     case "SPLIT": {
+      const newBills = [state.merchant, ...state.bills];
       return {
         ...state,
         merchant: {
           ...state.merchant,
           mode: action.value,
         },
-        bills: [state.merchant, ...state.bills],
+        bills: newBills,
         currentBill: {
           ...state.merchant,
           mode: action.value,
@@ -163,6 +179,10 @@ export function productReducer(state, action) {
               percentage: "",
             },
           ],
+        },
+        user: {
+          ...state.user,
+          bills: newBills,
         },
         split_belanja_switch: false,
       };
@@ -344,7 +364,11 @@ export function productReducer(state, action) {
         }
         return payeeUser;
       });
-      // console.log(updatedUserlist);
+
+      const updatedCoins =
+        newCurrentBill.mode === "belanja"
+          ? state.user.coins + Math.round(locatedPayee[state.user.id].final * 2)
+          : state.user.coins + Math.round(locatedPayee[state.user.id].final);
 
       return {
         ...state,
@@ -353,6 +377,7 @@ export function productReducer(state, action) {
         currentBill: newCurrentBill,
         user: {
           ...state.user,
+          coins: updatedCoins,
           bills: newBills,
           friends: updatedFriends,
         },
@@ -372,14 +397,69 @@ export function productReducer(state, action) {
       };
     }
 
-    case "TOP_UP":
-     return {
-      ...state,
-      user: {
+
+    case "ADD_FRIEND": {
+      console.log("Adding new friend:", action.payload);
+  return {
+    ...state,
+    userList: [...state.userList, action.payload],
+    user: {
       ...state.user,
-      wallet: state.user.wallet + action.value,
-      },
-    };
+      friends: [...state.user.friends, action.payload],
+    },
+  };
+}
+
+case "ADD_MERCHANT_BILL":
+  return {
+    ...state,
+    bills: [...state.bills, action.payload.newBill], //Append new bill
+  };
+
+case "SIGN_UP": {
+  // Check if the user already exists
+  const existingUser = state.userList.find(
+    (user) =>
+      user.email === action.payload.email || user.mobile === action.payload.mobile
+  );
+
+  if (existingUser) {
+    console.warn("User already exists:", existingUser);
+    return state; // ✅ Prevent duplicate sign-ups
+  }
+
+  // Create new user object
+  const newUser = {
+    id: uuid(),
+    name: action.payload.name,
+    email: action.payload.email,
+    mobile: action.payload.mobile,
+    password: action.payload.password,
+    avatar: `https://i.pravatar.cc/100?u=${uuid()}`, // Random avatar
+    lifeTimeSpending: 0,
+    wallet: 0,
+    notifications: { notify: false, list: [] },
+    friends: [],
+    bills: [],
+  };
+
+  console.log("New user signed up:", newUser);
+
+  return {
+    ...state,
+    userList: [...state.userList, newUser], // ✅ Add new user globally
+    user: newUser, // ✅ Log the user in immediately
+    isLoggedIn: true,
+  };
+}
+    case "TOP_UP":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          wallet: state.user.wallet + action.value,
+        },
+      };
 
     case "CHANGE_PAY_FRIEND_INPUT": {
       return {
@@ -435,10 +515,18 @@ export function productReducer(state, action) {
         return user;
       });
 
+      const updatedCoins =
+        state.user.coins + Math.round(Number(state.payFriendInput));
+
       return {
         ...state,
         userList: updatedUserlist,
-        user: { ...state.user, wallet: updatedWallet, friends: updatedFriends },
+        user: {
+          ...state.user,
+          wallet: updatedWallet,
+          coins: updatedCoins,
+          friends: updatedFriends,
+        },
       };
     }
 
@@ -568,6 +656,31 @@ export function productReducer(state, action) {
       return { ...state };
     }
 
+    case "UPDATE_LOCATION": {
+      return {
+        ...state,
+        location: {
+          latlong: action.latlong,
+        },
+      };
+    }
+
+    case "UPDATE_LOCATION_ADDRESS": {
+      return {
+        ...state,
+        location: { ...state.location, address: action.address },
+      };
+    }
+
+    case "SET_TOKEN": {
+      return {
+        ...state,
+        oneMap: {
+          access_token: action.access_token,
+          expiry_timestamp: action.expiry_timestamp,
+        },
+      };
+    }
 
     default:
       throw Error("productReducer - unknown action:", action.type);

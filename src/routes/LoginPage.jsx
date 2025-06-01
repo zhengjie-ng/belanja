@@ -51,8 +51,7 @@ function LoginPage() {
       >
         Login
       </button>
-
-      <button className={styles.buttonLong}>Sign Up</button>
+      <button className={styles.buttonLong} onClick={() => navigate("/SignUpPage")}>Sign Up</button>
       <button className={styles.buttonLongBack} onClick={handlerBack}>
         Back
       </button>

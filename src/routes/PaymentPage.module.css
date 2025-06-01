@@ -9,6 +9,17 @@
   text-transform: capitalize;
 }
 
+.address {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 12px;
+  /* font-style: italic; */
+  padding-left: 60px;
+  padding-right: 70px;
+  opacity: 90%;
+  height: 40px;
+}
+
 .divPayField {
   display: flex;
   flex-direction: column;
@@ -55,7 +66,7 @@
 }
 
 .divWallet {
-  margin-top: 450px;
+  margin-top: 370px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -65,6 +76,7 @@
 .divTotalPrice {
   display: flex;
   flex-direction: column;
+  padding-left: 10px;
 }
 
 .divPaymentWrapped {
@@ -73,6 +85,7 @@
   border-top: 2px solid #5d3891;
   justify-content: space-between;
   padding: 10px;
+  padding-top: 27px;
 }
 
 .buttonPayment {

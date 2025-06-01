@@ -8,6 +8,7 @@ const dataUsers = [
     avatar: "https://i.pravatar.cc/100?u=alan@belanja.com",
     lifeTimeSpending: 655.43,
     wallet: 545.22,
+    coins: 22355,
     notifications: {
       notify: false,
       list: [],
@@ -36,6 +37,9 @@ const dataUsers = [
         payment: 143.44,
         mode: "split",
         settle: false,
+        location: {
+          address: "500 Clemenceau Avenue North, Singapore 229495",
+        },
         date: { d: 19, m: 5, Month: "May", y: 2025 },
         fullPayeeList: [
           {
@@ -53,6 +57,10 @@ const dataUsers = [
         mode: "belanja",
         settle: false,
         date: { d: 3, m: 4, Month: "Apr", y: 2025 },
+        location: {
+          address:
+            "73A Ayer Rajah Crescent, JTC LaunchPad @ one-north, Singapore 139957",
+        },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -69,6 +77,9 @@ const dataUsers = [
         mode: "split",
         settle: false,
         date: { d: 3, m: 2, Month: "Feb", y: 2025 },
+        location: {
+          address: "Bedok Mall, 311 New Upper Changi Road, Singapore 467360",
+        },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -89,6 +100,7 @@ const dataUsers = [
     avatar: "https://i.pravatar.cc/100?u=e2e66095-2d1e-4810-ba8c-e06493d4ea60",
     lifeTimeSpending: 54.27,
     wallet: 30.45,
+    coins: 1344,
     notifications: {
       notify: false,
       list: [],
@@ -115,6 +127,7 @@ const dataUsers = [
     avatar: "https://i.pravatar.cc/100?u=f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
     lifeTimeSpending: 157.27,
     wallet: 330.45,
+    coins: 7615,
     notifications: {
       notify: false,
       list: [],
@@ -146,6 +159,7 @@ const dataUsers = [
     avatar: "https://i.pravatar.cc/100?u=aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
     lifeTimeSpending: 9.4,
     wallet: 5.45,
+    coins: 536,
     notifications: {
       notify: false,
       list: [],
@@ -172,6 +186,7 @@ const dataUsers = [
     avatar: "https://i.pravatar.cc/100?u=171320a7-f1ac-4f06-802e-82aba2ac345c",
     lifeTimeSpending: 1210.4,
     wallet: 655.1,
+    coins: 11455,
     notifications: {
       notify: false,
       list: [],

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import Friend from "../components/Friend";
 import styles from "./FriendsPage.module.css";
@@ -6,6 +6,17 @@ import { Link } from "react-router-dom";
 
 function FriendsPage() {
   const ctx = useContext(ProductContext);
+  const [newFriendName, setNewFriendName] = useState("");
+
+  const handleAddFriend = () => {
+    if (newFriendName.trim()) {
+      ctx.handlerAddFriend(newFriendName);
+      setNewFriendName("");
+    }
+  };
+
+  console.log("Friends List in Context:", ctx.user.friends);
+
   return (
     <>
       <div className={styles.divHeader}>
@@ -18,9 +29,13 @@ function FriendsPage() {
           <input
             className={styles.inputFriends}
             type="text"
+            value={newFriendName}
+            onChange={(e) => setNewFriendName(e.target.value)}
             placeholder="🔍"
           ></input>
-          <button className={styles.buttonAdd}>➕</button>
+          <button className={styles.buttonAdd} onClick={handleAddFriend}>
+            ➕
+          </button>
         </div>
         <div className={styles.divMsg}>
           <p className={styles.pMsg}>
