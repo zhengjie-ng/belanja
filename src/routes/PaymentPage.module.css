@@ -5,6 +5,11 @@
   color: #5d3891;
 }
 
+.message {
+  height: 25px;
+  color: rgb(238, 31, 31);
+}
+
 .h2MerchantName {
   text-transform: capitalize;
 }
@@ -66,7 +71,7 @@
 }
 
 .divWallet {
-  margin-top: 370px;
+  margin-top: 330px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

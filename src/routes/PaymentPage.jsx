@@ -49,11 +49,20 @@ function PaymentPage() {
     getReverseGeocode();
   }, []);
 
+  const ValidateValue = () => {
+    if (!ctx.merchant.payment || ctx.merchant.payment <= 0) {
+      return <p className={styles.message}>Please enter a positive value</p>;
+    } else {
+      return <p className={styles.message}></p>;
+    }
+  };
+
   return (
     <div>
       <button className={styles.buttonBack} onClick={ctx.handlerClickBack}>
         󠀩󠁽≫
       </button>
+
       <h2 className={styles.h2BelanjaPay}>Belanja Pay</h2>
       <h2 className={styles.h2MerchantName}>{ctx.merchant.name}</h2>
       <p className={styles.address}>
@@ -68,6 +77,7 @@ function PaymentPage() {
           onChange={ctx.handlerMerchantPaymentChange}
         ></input>
       </div>
+      <ValidateValue />
       <div className={styles.divWallet}>
         <p>Belanja Wallet</p>
         <p>{`💷 $${ctx.user.wallet}`}</p>
