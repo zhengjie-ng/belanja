@@ -67,11 +67,11 @@ export function ProductProvider({ children }) {
   };
 
   const handlerClickMerchantMakePayment = () => {
-    if (state.merchant.payment) {
+    if (!state.merchant.payment || state.merchant.payment <= 0) {
+      return;
+    } else {
       dispatch({ type: "MERCHANT_MAKE_PAYMENT" });
       navigate("/settle");
-    } else {
-      alert("Please enter amount to pay.");
     }
   };
 
