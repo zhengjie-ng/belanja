@@ -1,4 +1,3 @@
-import validator from "validator";
 import dataUsers from "../data/Users";
 import getRandom from "food-random-module";
 import { v4 as uuid } from "uuid";
@@ -7,6 +6,8 @@ export const defaultProduct = {
   userList: dataUsers,
   isLoggedIn: false,
   loginNameInput: "alan@belanja.com",
+  loginPasswordInput: "80604914",
+  loginError: "",
   user: null,
   merchant: {
     id: null,
@@ -19,6 +20,12 @@ export const defaultProduct = {
   currentBill: null,
   split_belanja_switch: false,
   payFriendInput: null,
+  wallet: 0,
+  lifeTimeSpending: 0,
+  friends: [],
+  notifications: {
+    notify: false,
+    list: [],
   oneMap: {
     access_token: null,
     expiry_timestamp: null,
@@ -33,38 +40,47 @@ export const defaultProduct = {
 
 export function productReducer(state, action) {
   switch (action.type) {
-    case "LOGIN_NAME_INPUT": {
-      return { ...state, loginNameInput: action.value };
-    }
 
-    case "LOGIN": {
-      let newUser = null;
-      if (validator.isEmail(state.loginNameInput)) {
-        newUser = state.userList.find(
-          (user) => user.email === state.loginNameInput
-        );
-      } else if (validator.isMobilePhone(state.loginNameInput)) {
-        newUser = state.userList.find(
-          (user) => user.mobile.toString() === state.loginNameInput
-        );
-      }
+    case "LOGIN_NAME_INPUT":
+      return { ...state, loginNameInput: action.value, loginError: "" };
+
+    case "LOGIN_PASSWORD_INPUT":
+      return { ...state, loginPasswordInput: action.value, loginError: "" };
+
+    case "LOGIN_ERROR":
+      return { ...state, loginError: action.value };
+
+    case "LOGIN_SUCCESS":
       return {
         ...state,
-        isLoggedIn: !!newUser,
-        user: newUser,
-        bills: Array.isArray(newUser?.bills) ? newUser.bills : [],
+        isLoggedIn: true,
+        userList: dataUsers,
+        user: action.payload,
+        loginError: "",
+        loginNameInput: "",
+        loginPasswordInput: "",
+        bills: Array.isArray(action.payload.bills) ? action.payload.bills : [],
+        wallet: action.payload.wallet ?? 0,
+        lifeTimeSpending: action.payload.lifeTimeSpending ?? 0,
+        friends: Array.isArray(action.payload.friends) ? action.payload.friends : [],
+        notifications: action.payload.notifications ?? { notify: false, list: [] },
       };
-    }
 
     case "LOGOUT": {
       const user = { ...state.user, bills: state.bills };
-      for (const key in state.userList) {
-        if (state.userList[key].id === state.user.id) {
-          state.userList[key] = user;
-        }
-      }
+      const updatedUserList = state.userList.map((u) =>
+        u.id === state.user.id ? user : u
+      );
 
-      return { ...state, isLoggedIn: false, user: null };
+      return {
+        ...state,
+        userList: updatedUserList,
+        isLoggedIn: false,
+        user: null,
+        loginNameInput: defaultProduct.loginNameInput,
+        loginPasswordInput: defaultProduct.loginPasswordInput,
+        loginError: "",
+      };
     }
 
     case "SCAN": {
