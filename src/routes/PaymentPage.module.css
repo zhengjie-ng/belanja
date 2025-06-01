@@ -7,7 +7,8 @@
 
 .message {
   height: 25px;
-  color: rgb(238, 31, 31);
+  font-style: italic;
+  color: rgb(227, 26, 26);
 }
 
 .h2MerchantName {
@@ -107,6 +108,10 @@
 
 .buttonPayment:hover {
   background-color: #6f42ae;
+}
+
+.buttonPayment:disabled {
+  background-color: #7e7e7e;
 }
 
 .pTotal,

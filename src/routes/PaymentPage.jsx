@@ -91,6 +91,7 @@ function PaymentPage() {
         </div>
         <button
           className={styles.buttonPayment}
+          disabled={ctx.merchant.payment <= 0 ? true : false}
           onClick={ctx.handlerClickMerchantMakePayment}
         >
           Make Payment
