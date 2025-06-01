@@ -26,6 +26,23 @@
   padding-bottom: 5px;
 }
 
+.message {
+  background-color: rgb(255, 82, 82);
+  color: white;
+  width: 100%;
+  margin-top: 0px;
+  height: 25px;
+}
+
+.messageInactive {
+  background-color: rgb(255, 82, 82);
+  color: white;
+  width: 100%;
+  margin-top: 0px;
+  height: 25px;
+  opacity: 0%;
+}
+
 .settlement {
   background-color: #533281;
   color: white;
@@ -83,7 +100,7 @@
 }
 
 .divWallet {
-  margin-top: 200px;
+  margin-top: 175px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -103,6 +120,10 @@
   box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.buttonPayment:disabled {
+  background-color: #7e7e7e;
 }
 
 .buttonPayment:hover {

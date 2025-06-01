@@ -7,6 +7,21 @@ function PayFriend() {
   const { id } = useParams();
   const ctx = useContext(ProductContext);
   const friend = ctx.user.friends.find((friend) => friend.id === id);
+
+  const isValidAmount =
+    ctx.payFriendInput >= 0.01 && ctx.payFriendInput <= friend.debt;
+
+  const ValidateValue = () => {
+    if (!isValidAmount) {
+      return (
+        <p className={styles.message}>
+          Please enter a value between 0.01 to {Number(friend.debt).toFixed(2)}
+        </p>
+      );
+    } else {
+      return <p className={styles.messageInactive}></p>;
+    }
+  };
   return (
     <div className={styles.divMain}>
       <div className={styles.divHeader}>
@@ -15,6 +30,7 @@ function PayFriend() {
         </button>
         <h2 className={styles.settlement}>Pay Friend</h2>
       </div>
+      <ValidateValue />
 
       <h2 className={styles.h2FriendName}>{friend.name}</h2>
       <div className={styles.divPayField}>
@@ -43,6 +59,7 @@ function PayFriend() {
       <div className={styles.divButton}>
         <button
           className={styles.buttonPayment}
+          disabled={isValidAmount ? false : true}
           onClick={() =>
             ctx.handlerPayFriendSubmit({
               id: id,
