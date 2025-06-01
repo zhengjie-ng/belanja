@@ -76,8 +76,13 @@ function Welcome() {
         required
       />
 
-      <button className={styles.buttonLongCreate} onClick={() => navigate("/SignUpPage")}>Create New Account</button>
-      
+      <button
+        className={styles.buttonLongCreate}
+        onClick={() => navigate("/SignUpPage")}
+      >
+        Create New Account
+      </button>
+
       <p>Have a referral or reward code?</p>
       <button className={styles.buttonLong} onClick={handleLogin}>
         Login

@@ -41,7 +41,6 @@ export const defaultProduct = {
 
 export function productReducer(state, action) {
   switch (action.type) {
-
     case "LOGIN_NAME_INPUT":
       return { ...state, loginNameInput: action.value, loginError: "" };
 
@@ -63,8 +62,13 @@ export function productReducer(state, action) {
         bills: Array.isArray(action.payload.bills) ? action.payload.bills : [],
         wallet: action.payload.wallet ?? 0,
         lifeTimeSpending: action.payload.lifeTimeSpending ?? 0,
-        friends: Array.isArray(action.payload.friends) ? action.payload.friends : [],
-        notifications: action.payload.notifications ?? { notify: false, list: [] },
+        friends: Array.isArray(action.payload.friends)
+          ? action.payload.friends
+          : [],
+        notifications: action.payload.notifications ?? {
+          notify: false,
+          list: [],
+        },
       };
 
     case "LOGOUT": {
@@ -398,61 +402,61 @@ export function productReducer(state, action) {
       };
     }
 
-
     case "ADD_FRIEND": {
       console.log("Adding new friend:", action.payload);
-  return {
-    ...state,
-    userList: [...state.userList, action.payload],
-    user: {
-      ...state.user,
-      friends: [...state.user.friends, action.payload],
-    },
-  };
-}
+      return {
+        ...state,
+        userList: [...state.userList, action.payload],
+        user: {
+          ...state.user,
+          friends: [...state.user.friends, action.payload],
+        },
+      };
+    }
 
-case "ADD_MERCHANT_BILL":
-  return {
-    ...state,
-    bills: [...state.bills, action.payload.newBill], //Append new bill
-  };
+    case "ADD_MERCHANT_BILL":
+      return {
+        ...state,
+        bills: [...state.bills, action.payload.newBill], //Append new bill
+      };
 
-case "SIGN_UP": {
-  // Check if the user already exists
-  const existingUser = state.userList.find(
-    (user) =>
-      user.email === action.payload.email || user.mobile === action.payload.mobile
-  );
+    case "SIGN_UP": {
+      // Check if the user already exists
+      const existingUser = state.userList.find(
+        (user) =>
+          user.email === action.payload.email ||
+          user.mobile === action.payload.mobile
+      );
 
-  if (existingUser) {
-    console.warn("User already exists:", existingUser);
-    return state; // ✅ Prevent duplicate sign-ups
-  }
+      if (existingUser) {
+        console.warn("User already exists:", existingUser);
+        return state; // ✅ Prevent duplicate sign-ups
+      }
 
-  // Create new user object
-  const newUser = {
-    id: uuid(),
-    name: action.payload.name,
-    email: action.payload.email,
-    mobile: action.payload.mobile,
-    password: action.payload.password,
-    avatar: `https://i.pravatar.cc/100?u=${uuid()}`, // Random avatar
-    lifeTimeSpending: 0,
-    wallet: 0,
-    notifications: { notify: false, list: [] },
-    friends: [],
-    bills: [],
-  };
+      // Create new user object
+      const newUser = {
+        id: uuid(),
+        name: action.payload.name,
+        email: action.payload.email,
+        mobile: action.payload.mobile,
+        password: action.payload.password,
+        avatar: `https://i.pravatar.cc/100?u=${uuid()}`, // Random avatar
+        lifeTimeSpending: 0,
+        wallet: 0,
+        notifications: { notify: false, list: [] },
+        friends: [],
+        bills: [],
+      };
 
-  console.log("New user signed up:", newUser);
+      console.log("New user signed up:", newUser);
 
-  return {
-    ...state,
-    userList: [...state.userList, newUser], // ✅ Add new user globally
-    user: newUser, // ✅ Log the user in immediately
-    isLoggedIn: true,
-  };
-}
+      return {
+        ...state,
+        userList: [...state.userList, newUser], // ✅ Add new user globally
+        user: newUser, // ✅ Log the user in immediately
+        isLoggedIn: true,
+      };
+    }
     case "TOP_UP":
       return {
         ...state,
