@@ -1,15 +1,19 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect, useMemo } from "react";
 import ProductContext from "../context/ProductContext";
 
 import styles from "./Navigation.module.css";
 
 function Navigation() {
   const ctx = useContext(ProductContext);
+  const [unsettledBillNumber, setUnsettledBillNumber] = useState("");
 
-  const unsettledBill = ctx.user.bills?.filter((bill) => bill.settle === false);
-  const unsettledBillNumber =
-    unsettledBill && unsettledBill.length > 0 ? unsettledBill.length : "";
+  const bills = useMemo(() => ctx.user?.bills || [], [ctx.user?.bills]);
+
+  useEffect(() => {
+    const unsettled = bills.filter((bill) => bill.settle === false);
+    setUnsettledBillNumber(unsettled.length > 0 ? unsettled.length : "");
+  }, [bills]);
 
   return (
     <div className={styles.divMain}>

@@ -1,9 +1,30 @@
 import styles from "./ScanPage.module.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
 
 function ScanPage() {
   const ctx = useContext(ProductContext);
+
+  async function updateLocation() {
+    try {
+      if (!navigator.geolocation) {
+        console.log("Location is not supported by your browser");
+        return;
+      }
+      navigator.geolocation.getCurrentPosition((position) => {
+        ctx.dispatch({
+          type: "UPDATE_LOCATION",
+          latlong: position.coords.latitude + "," + position.coords.longitude,
+        });
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    updateLocation();
+  }, []);
 
   return (
     <div className={styles.divMainWrapped}>

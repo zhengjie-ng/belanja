@@ -170,6 +170,10 @@ export function ProductProvider({ children }) {
     dispatch({ type: "CLEAR_MESSAGES" });
   };
 
+  const handleNaviScan = () => {
+    dispatch({ type: "GET_LOCATION" });
+  };
+
   const data = {
     userList: state.userList,
     isLoggedIn: state.isLoggedIn,
@@ -180,6 +184,8 @@ export function ProductProvider({ children }) {
     split_belanja_switch: state.split_belanja_switch,
     currentBill: state.currentBill,
     payFriendInput: state.payFriendInput,
+    oneMap: state.oneMap,
+    location: state.location,
     handlerLoginClick,
     handlerOnChangeInput,
     handlerLogoutClick,
@@ -204,6 +210,7 @@ export function ProductProvider({ children }) {
     handleNotificationClick,
     handleNudgeFriend,
     handleClearMessages,
+    handleNaviScan,
   };
 
   return (

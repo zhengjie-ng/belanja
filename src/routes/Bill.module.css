@@ -38,7 +38,21 @@
 }
 
 .h2BillName {
+  margin-top: 20px;
   text-transform: capitalize;
+  margin-bottom: 0px;
+}
+
+.address {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 12px;
+  /* font-style: italic; */
+  padding-left: 60px;
+  padding-right: 70px;
+  opacity: 90%;
+  height: 40px;
+  margin-top: 0px;
 }
 
 .select {
@@ -63,7 +77,7 @@
 
 .divPayeeList {
   width: 100%;
-  height: 450px;
+  height: 400px;
   /* background-color: blue; */
   margin-top: 10px;
   display: flex;

@@ -11,7 +11,7 @@
 }
 
 .h2Bills {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   color: #5d3891;
 }
 
@@ -42,8 +42,21 @@
 }
 
 .h2BillName {
+  margin-top: 25px;
   text-transform: capitalize;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+}
+
+.address {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 12px;
+  /* font-style: italic; */
+  padding-left: 60px;
+  padding-right: 70px;
+  opacity: 90%;
+  height: 40px;
+  margin-top: 0px;
 }
 
 .span {
@@ -57,7 +70,7 @@
   justify-content: top;
   justify-items: center;
   align-items: center;
-  height: 530px;
+  height: 480px;
   overflow-y: auto;
   overflow-x: hidden;
   gap: 10px;

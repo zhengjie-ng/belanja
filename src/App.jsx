@@ -18,9 +18,9 @@ import PayFriend from "./routes/PayFriend";
 import PageNotFound from "./routes/PageNotFound";
 import TopUpPage from "./routes/TopUpPage";
 import PayNowPage from "./routes/PayNowPage";
+import PayFriendSucessfulPage from "./routes/PayFriendSucessfulPage";
 
 import styles from "./App.module.css";
-import PayFriendSucessfulPage from "./routes/PayFriendSucessfulPage";
 
 function App() {
   return (

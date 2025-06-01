@@ -27,6 +27,10 @@ function Bill() {
       <h2 className={styles.settlement}>Bill settlement options</h2>
 
       <h2 className={styles.h2BillName}>{currentBill.name}</h2>
+      <p className={styles.address}>
+        {ctx.currentBill.location?.address &&
+          "📍" + ctx.currentBill.location.address}
+      </p>
       <Select
         className={styles.select}
         options={friendOptions}

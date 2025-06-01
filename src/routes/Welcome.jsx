@@ -1,11 +1,63 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Welcome.module.css";
+import { useEffect, useContext } from "react";
+import ProductContext from "../context/ProductContext";
+import mockAPI from "../api/mockAPI";
+import fetchToken from "../api/fetchToken";
+import oneMapCreds from "../api/oneMapCreds";
 
 function Welcome() {
   const navigate = useNavigate();
+  const ctx = useContext(ProductContext);
+
   const handleLogin = () => {
     navigate("/login");
   };
+
+  //one map token
+  async function getToken() {
+    try {
+      const response = await mockAPI.get("/belanja/1");
+      ctx.dispatch({
+        type: "SET_TOKEN",
+        access_token: response.data.access_token,
+        expiry_timestamp: response.data.expiry_timestamp,
+      });
+      return response.data; // Return the data for chaining
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
+  async function renewToken() {
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+
+    if (currentTimestamp >= ctx.oneMap.expiry_timestamp) {
+      console.log("Token Expired");
+      try {
+        const new_response = await fetchToken().post("/", oneMapCreds);
+        ctx.dispatch({
+          type: "SET_TOKEN",
+          access_token: new_response.data.access_token,
+          expiry_timestamp: new_response.data.expiry_timestamp,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      console.log("Token Still Valid");
+    }
+  }
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  useEffect(() => {
+    renewToken();
+  }, [ctx.oneMap.expiry_timestamp]);
+
   return (
     <div className={styles.divWelcome}>
       <div className={styles.divTitle}>
