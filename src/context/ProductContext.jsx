@@ -1,9 +1,17 @@
 import { createContext, useReducer } from "react";
 import { productReducer, defaultProduct } from "../reducers/ProductReducers";
 import { useNavigate } from "react-router-dom";
+import dataUsers from "../data/Users";
 import { v4 as uuid } from "uuid";
 
 const ProductContext = createContext();
+
+// const initialState = {
+//   loginNameInput: "alan@belanja.com",
+//   loginPasswordInput: "80604914",
+//   loginError: "",
+//   user: null,
+// };
 
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, defaultProduct);
@@ -12,9 +20,31 @@ export function ProductProvider({ children }) {
   const handlerOnChangeInput = (e) => {
     dispatch({ type: "LOGIN_NAME_INPUT", value: e.target.value });
   };
+
   const handlerLoginClick = () => {
-    dispatch({ type: "LOGIN" });
+    const loginInput = state.loginNameInput.trim();
+    const passwordInput = state.loginPasswordInput;
+
+    const matchedUser = dataUsers.find(
+      (user) => user.email === loginInput || String(user.mobile) === loginInput
+    );
+
+    if (!matchedUser) {
+      dispatch({ type: "LOGIN_ERROR", value: "User not found" });
+      return;
+    }
+
+    if (String(matchedUser.password) !== passwordInput) {
+      dispatch({ type: "LOGIN_ERROR", value: "Incorrect password" });
+      return;
+    }
+
+    dispatch({ type: "LOGIN_SUCCESS", payload: matchedUser });
     navigate("/home");
+  };
+
+  const handlerOnChangePasswordInput = (e) => {
+    dispatch({ type: "LOGIN_PASSWORD_INPUT", value: e.target.value });
   };
 
   const handlerLogoutClick = () => {
@@ -74,6 +104,7 @@ export function ProductProvider({ children }) {
   const handlerOnChangePayeePecentageInput = (e, id) => {
     dispatch({ type: "PAYEE_PERCENTAGE_INPUT", value: e.target.value, id: id });
   };
+
   const handlerChangeInputPayee = (selectedOption, actionMeta) => {
     dispatch({
       type: "CHANGE_INPUT_PAYEE",
@@ -110,88 +141,87 @@ export function ProductProvider({ children }) {
   };
 
   const handlerAddFriend = (name) => {
-  // Search for an existing user in userList
-  const existingUser = state.userList.find(
-    (user) => user.name.toLowerCase() === name.toLowerCase()
-  );
+    // Search for an existing user in userList
+    const existingUser = state.userList.find(
+      (user) => user.name.toLowerCase() === name.toLowerCase()
+    );
 
-  if (existingUser) {
-    console.log(`Found existing user: ${existingUser.name}`);
+    if (existingUser) {
+      console.log(`Found existing user: ${existingUser.name}`);
+      dispatch({
+        type: "ADD_FRIEND",
+        payload: {
+          id: existingUser.id,
+          name: existingUser.name,
+          email: existingUser.email,
+          mobile: existingUser.mobile,
+          avatar: existingUser.avatar,
+          lifeTimeSpending: existingUser.lifeTimeSpending,
+          wallet: existingUser.wallet,
+          notifications: existingUser.notifications,
+          friends: existingUser.friends,
+          bills: existingUser.bills,
+        },
+      });
+    } else {
+      console.log(`Creating new friend: ${name}`);
+      const newFriend = {
+        id: uuid(),
+        name: name,
+        email: `${name.toLowerCase()}@belanja.com`, // Placeholder email
+        mobile: "", // Default blank mobile
+        avatar: `https://i.pravatar.cc/100?u=${uuid()}`,
+        lifeTimeSpending: 0,
+        wallet: 0,
+        notifications: { notify: false, list: [] },
+        friends: [],
+        bills: [],
+      };
+
+      dispatch({
+        type: "ADD_FRIEND",
+        payload: newFriend,
+      });
+    }
+  };
+
+  const handlerSignUp = (name, email, mobile, password) => {
+    const existingUser = state.userList.find(
+      (user) => user.email === email || user.mobile.toString() === mobile
+    );
+
+    if (existingUser) {
+      console.warn("User already exists:", existingUser);
+      return { error: "User with this email or mobile number already exists." }; // Return error message
+    }
+
     dispatch({
-      type: "ADD_FRIEND",
-      payload: {
-        id: existingUser.id,
-        name: existingUser.name,
-        email: existingUser.email,
-        mobile: existingUser.mobile,
-        avatar: existingUser.avatar,
-        lifeTimeSpending: existingUser.lifeTimeSpending,
-        wallet: existingUser.wallet,
-        notifications: existingUser.notifications,
-        friends: existingUser.friends,
-        bills: existingUser.bills,
-      },
+      type: "SIGN_UP",
+      payload: { name, email, mobile, password },
     });
-  } else {
-    console.log(`Creating new friend: ${name}`);
-    const newFriend = {
-      id: uuid(),
-      name: name,
-      email: `${name.toLowerCase()}@belanja.com`, // Placeholder email
-      mobile: "", // Default blank mobile
-      avatar: `https://i.pravatar.cc/100?u=${uuid()}`,
-      lifeTimeSpending: 0,
-      wallet: 0,
-      notifications: { notify: false, list: [] },
-      friends: [],
-      bills: [],
+    return { success: "User created successfully!" };
+  };
+
+  const handlerAddMerchantBill = (newBillData) => {
+    const newBill = {
+      id: uuid(), // Generate unique UUID
+      name: newBillData.name,
+      payment: parseFloat(newBillData.payment),
+      mode: newBillData.mode,
+      settle: false,
+      date: {
+        d: new Date().getDate(),
+        Month: new Date().toLocaleString("default", { month: "short" }),
+        year: new Date().getFullYear(),
+      },
+      fullPayeeList: [],
     };
 
     dispatch({
-      type: "ADD_FRIEND",
-      payload: newFriend,
+      type: "ADD_MERCHANT_BILL",
+      payload: { newBill },
     });
-  }
-};
-
-const handlerSignUp = (name, email, mobile, password) => {
-  const existingUser = state.userList.find(
-    (user) =>
-      user.email === email || user.mobile.toString() === mobile
-  );
-
-  if (existingUser) {
-    console.warn("User already exists:", existingUser);
-    return { error: "User with this email or mobile number already exists." }; // Return error message
-  }
-
-  dispatch({
-    type: "SIGN_UP",
-    payload: { name, email, mobile, password },
-  });
-  return { success: "User created successfully!" };
-};
-
-const handlerAddMerchantBill = (newBillData) => {
-  const newBill = {
-    id: uuid(), // Generate unique UUID
-    name: newBillData.name,
-    payment: parseFloat(newBillData.payment),
-    mode: newBillData.mode,
-    settle: false,
-    date: {
-      d: new Date().getDate(),
-      Month: new Date().toLocaleString("default", { month: "short" }),
-      year: new Date().getFullYear(),
-    },
-    fullPayeeList: [],
   };
-
-  dispatch({
-    type: "ADD_MERCHANT_BILL",
-    payload: { newBill },
-  });
-};
 
   const handlerChangePayFriendInput = (e) => {
     dispatch({ type: "CHANGE_PAY_FRIEND_INPUT", value: e.target.value });
@@ -261,8 +291,8 @@ const handlerAddMerchantBill = (newBillData) => {
 
   const data = {
     userList: state.userList,
-    isLoggedIn: state.isLoggedIn,
     loginNameInput: state.loginNameInput,
+    loginPasswordInput: state.loginPasswordInput,
     user: state.user,
     merchant: state.merchant,
     bills: state.bills,
@@ -272,6 +302,7 @@ const handlerAddMerchantBill = (newBillData) => {
     handlerSignUp, //NEW
     handlerAddFriend, //NEW
     payFriendInput: state.payFriendInput,
+    loginError: state.loginError,
     oneMap: state.oneMap,
     location: state.location,
     handlerLoginClick,
@@ -298,6 +329,7 @@ const handlerAddMerchantBill = (newBillData) => {
     handleNotificationClick,
     handleNudgeFriend,
     handleClearMessages,
+    handlerOnChangePasswordInput,
     handleNaviScan,
   };
 
