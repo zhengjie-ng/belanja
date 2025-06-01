@@ -7,7 +7,7 @@ function MerchantBillForm() {
   const [showForm, setShowForm] = useState(false); // Controls input visibility
   const [billName, setBillName] = useState("");
   const [payment, setPayment] = useState("");
-  // const [mode, setMode] = useState("split");
+  const [mode, setMode] = useState("split");
 
   const toggleForm = () => {
     setShowForm((prevState) => !prevState); // Toggle visibility
@@ -19,7 +19,7 @@ function MerchantBillForm() {
       return;
     }
 
-    ctx.handlerAddMerchantBill({ name: billName, payment });
+    ctx.handlerAddMerchantBill({ name: billName, payment, mode });
     // alert("Bill added successfully!");
     setBillName("");
     setPayment("");
@@ -43,6 +43,11 @@ function MerchantBillForm() {
             value={payment}
             onChange={(e) => setPayment(e.target.value)}
           />
+          <select value={mode} onChange={(e) => setMode(e.target.value)}>
+            <option value="split">Split</option>
+            <option value="belanja">Belanja</option>
+          </select>
+
           <button onClick={handleSubmitBill}>Add Bill</button>
         </div>
       )}

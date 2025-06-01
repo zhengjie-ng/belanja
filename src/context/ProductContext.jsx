@@ -173,6 +173,7 @@ export function ProductProvider({ children }) {
         avatar: `https://i.pravatar.cc/100?u=${uuid()}`,
         lifeTimeSpending: 0,
         wallet: 0,
+        coins: 22355,
         notifications: { notify: false, list: [] },
         friends: [],
         bills: [],
