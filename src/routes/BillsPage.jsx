@@ -15,16 +15,17 @@ function BillsPage() {
 
   return (
     <>
+      {/* Merchant Bill Entry Form */}
+    <div className={styles.billFormWrapper}>
+      <div className={styles.billFormContainer}>
+        <MerchantBillForm />
+      </div>
+    </div>
+
       <div className={styles.divHeader}>
         <h2 className={styles.h2Bills}>Bills</h2>
         <hr className={styles.hrLine}></hr>
       </div>
-
-      {/* Merchant Bill Entry Form */}
-      <div className={styles.billFormContainer}>
-          <MerchantBillForm />
-      </div>
-
 
       <div className={styles.divBillList}>
         {ctx.bills &&

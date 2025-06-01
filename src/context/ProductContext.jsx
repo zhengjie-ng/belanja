@@ -181,7 +181,7 @@ const handlerAddMerchantBill = (newBillData) => {
     settle: false,
     date: {
       d: new Date().getDate(),
-      m: new Date().toLocaleString("default", { month: "short" }),
+      Month: new Date().toLocaleString("default", { month: "short" }),
       year: new Date().getFullYear(),
     },
     fullPayeeList: [],

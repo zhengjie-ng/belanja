@@ -47,7 +47,7 @@ function MerchantBillForm() {
         </div>
       )}
       <button onClick={toggleForm} className={styles.showFormButton}>
-        {showForm ? "Close" : "Merchant Bills"}
+        {showForm ? "Close" : "Add Bill"}
       </button>
     </div>
   );
