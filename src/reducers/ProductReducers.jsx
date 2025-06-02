@@ -30,6 +30,7 @@ export const defaultProduct = {
   oneMap: {
     access_token: null,
     expiry_timestamp: null,
+    renew: false,
   },
   location: {
     latitude: null,
@@ -682,6 +683,7 @@ export function productReducer(state, action) {
       return {
         ...state,
         oneMap: {
+          renew: action.renew,
           access_token: action.access_token,
           expiry_timestamp: action.expiry_timestamp,
         },
