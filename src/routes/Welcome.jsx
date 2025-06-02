@@ -40,7 +40,7 @@ function Welcome() {
     ) {
       console.log("Token Expired");
       try {
-        const new_response = await fetchToken().post("/", oneMapCreds);
+        const new_response = await fetchToken().post("", oneMapCreds);
         ctx.dispatch({
           type: "SET_TOKEN",
           access_token: new_response.data.access_token,
