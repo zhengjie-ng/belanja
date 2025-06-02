@@ -22,7 +22,7 @@ import PayNowPage from "./routes/PayNowPage";
 import PayFriendSucessfulPage from "./routes/PayFriendSucessfulPage";
 import RewardsPage from "./routes/RewardsPage";
 import RewardDetail from "./routes/RewardDetail";
-import MyRewardsPage from "./routes/myRewardsPage";
+import MyRewardsPage from "./routes/MyRewardsPage";
 import UseRewards from "./routes/useRewards";
 import CoinsHistory from "./routes/CoinsHistory";
 
