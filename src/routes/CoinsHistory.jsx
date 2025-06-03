@@ -1,7 +1,7 @@
 import styles from "./CoinsHistory.module.css";
 import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
-import ItemCoinsHistory from "../components/itemCoinsHistory";
+import ItemCoinsHistory from "../components/ItemCoinsHistory";
 
 function CoinsHistory() {
   const ctx = useContext(ProductContext);
