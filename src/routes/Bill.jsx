@@ -239,6 +239,7 @@ function Bill() {
             senderName: ctx.user.name,
             senderId: ctx.user.id,
             place: ctx.currentBill.name,
+            coins: Math.round(ctx.currentBill.payment),
           })
         }
       >

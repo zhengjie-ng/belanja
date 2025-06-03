@@ -712,7 +712,7 @@ export function productReducer(state, action) {
         user: {
           ...state.user,
           coins: updatedCoins,
-          myRewards: [...(state.user.myRewards || []), newReward],
+          myRewards: [newReward, ...(state.user.myRewards || [])],
         },
       };
     }
@@ -730,6 +730,33 @@ export function productReducer(state, action) {
         user: {
           ...state.user,
           myRewards: updatedMyRewards,
+        },
+      };
+    }
+
+    case "COINS_HISTORY": {
+      const { name, coins, rewardId, mode } = action.payload;
+      const now = new Date();
+      const currentDate = {
+        d: now.getDate(),
+        m: now.getMonth() + 1,
+        Month: now.toLocaleDateString("en-US", { month: "short" }),
+        y: now.getFullYear(),
+      };
+      const newCoinsHistory = {
+        uuid: uuid(),
+        rewardId,
+        name,
+        coins,
+        mode,
+        date: currentDate,
+      };
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          CoinsHistory: [newCoinsHistory, ...(state.user.CoinsHistory || [])],
         },
       };
     }
