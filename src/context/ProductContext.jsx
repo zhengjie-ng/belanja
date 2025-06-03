@@ -119,6 +119,7 @@ export function ProductProvider({ children }) {
     senderName,
     senderId,
     place,
+    coins,
   }) => {
     dispatch({ type: "BILL_SUBMIT" });
     dispatch({
@@ -130,6 +131,14 @@ export function ProductProvider({ children }) {
         senderName,
         senderId,
         place,
+      },
+    });
+    dispatch({
+      type: "COINS_HISTORY",
+      payload: {
+        mode,
+        coins,
+        name: place,
       },
     });
     navigate("/bills");
@@ -246,7 +255,9 @@ export function ProductProvider({ children }) {
     amount,
     senderName,
     senderId,
+    coins,
     place,
+    name,
   }) => {
     dispatch({
       type: "SEND_NOTIFICATIONS",
@@ -260,6 +271,14 @@ export function ProductProvider({ children }) {
       },
     });
     dispatch({ type: "PAY_FRIEND_SUBMIT", id: id });
+    dispatch({
+      type: "COINS_HISTORY",
+      payload: {
+        mode,
+        coins,
+        name,
+      },
+    });
     dispatch({ type: "CLEAR_MESSAGES" });
     navigate(`/payfriend/successful/${id}`);
   };
@@ -298,8 +317,12 @@ export function ProductProvider({ children }) {
     dispatch({ type: "GET_LOCATION" });
   };
 
-  const handleRedeemReward = ({ name, coins, rewardId }) => {
+  const handleRedeemReward = ({ name, coins, rewardId, mode }) => {
     dispatch({ type: "REDEEM_REWARD", payload: { name, coins, rewardId } });
+    dispatch({
+      type: "COINS_HISTORY",
+      payload: { name, coins, rewardId, mode },
+    });
     navigate("/myRewards/");
   };
 
