@@ -33,6 +33,11 @@
   flex-direction: column;
   margin: 0px;
   padding: 0px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  margin-right: 20px;
 }
 
 .h2,
@@ -59,7 +64,7 @@
 .wallet {
   color: white;
   font-size: 35px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   margin-top: 50px;
   margin-bottom: 0px;
 }

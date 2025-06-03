@@ -264,6 +264,7 @@ export function productReducer(state, action) {
       // console.log(action.actionMeta);
       let newFullPayeeList = state.currentBill.fullPayeeList;
       let newFloatTotal = state.currentBill.floatTotal;
+      let newPercentageTotal = state.currentBill.percentageTotal;
       if (action.actionMeta.action === "select-option") {
         const payee = state.userList.find(
           (payee) => payee.id === action.actionMeta.option.value
@@ -288,6 +289,23 @@ export function productReducer(state, action) {
           (sum, payee) => Number(sum) + Number(payee.float),
           0
         );
+
+        newPercentageTotal = newFullPayeeList.reduce(
+          (sum, payee) => Number(sum) + Number(payee.percentage),
+          0
+        );
+      } else if (action.actionMeta.action === "clear") {
+        newFullPayeeList = state.currentBill.fullPayeeList.filter(
+          (payee) => payee.id === state.user.id
+        );
+        newFloatTotal = newFullPayeeList.reduce(
+          (sum, payee) => Number(sum) + Number(payee.float),
+          0
+        );
+        newPercentageTotal = newFullPayeeList.reduce(
+          (sum, payee) => Number(sum) + Number(payee.percentage),
+          0
+        );
       }
 
       const newEqual = (
@@ -300,6 +318,7 @@ export function productReducer(state, action) {
           ...state.currentBill,
           fullPayeeList: newFullPayeeList,
           floatTotal: newFloatTotal,
+          percentageTotal: newPercentageTotal,
           equal: newEqual,
         },
       };

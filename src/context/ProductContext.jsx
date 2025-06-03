@@ -323,7 +323,7 @@ export function ProductProvider({ children }) {
       type: "COINS_HISTORY",
       payload: { name, coins, rewardId, mode },
     });
-    navigate("/myRewards/");
+    navigate("/rewards/");
   };
 
   const handleUseReward = (uuid) => {
