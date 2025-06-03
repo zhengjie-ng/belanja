@@ -331,6 +331,14 @@ export function ProductProvider({ children }) {
     navigate("/myRewards/");
   };
 
+  const handlerClickHomepageMerchantMakePayment = (merchantId) => {
+    if (!state.merchant.payment || state.merchant.payment <= 0) {
+      return;
+    } else {
+      dispatch({ type: "HOMEPAGE_MERCHANT_MAKE_PAYMENT", merchantId });
+      navigate("/settle");
+    }
+  };
   const data = {
     userList: state.userList,
     loginNameInput: state.loginNameInput,
@@ -375,6 +383,7 @@ export function ProductProvider({ children }) {
     handleNaviScan,
     handleRedeemReward,
     handleUseReward,
+    handlerClickHomepageMerchantMakePayment,
   };
 
   return (
