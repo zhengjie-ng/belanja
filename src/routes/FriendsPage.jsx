@@ -15,7 +15,7 @@ function FriendsPage() {
     }
   };
 
-  console.log("Friends List in Context:", ctx.user.friends);
+  // console.log("Friends List in Context:", ctx.user.friends);
 
   return (
     <>
