@@ -1,3 +1,4 @@
+import validator from "validator";
 import dataUsers from "../data/Users";
 import merchantData from "../data/Merchants";
 import getRandom from "food-random-module";
@@ -52,26 +53,43 @@ export function productReducer(state, action) {
     case "LOGIN_ERROR":
       return { ...state, loginError: action.value };
 
-    case "LOGIN_SUCCESS":
+    case "LOGIN_SUCCESS": {
+      let newUser = null;
+      if (validator.isEmail(state.loginNameInput)) {
+        newUser = state.userList.find(
+          (user) => user.email === state.loginNameInput
+        );
+      } else if (validator.isMobilePhone(state.loginNameInput)) {
+        newUser = state.userList.find(
+          (user) => user.mobile.toString() === state.loginNameInput
+        );
+      }
       return {
         ...state,
-        isLoggedIn: true,
-        userList: dataUsers,
-        user: action.payload,
-        loginError: "",
-        loginNameInput: "",
-        loginPasswordInput: "",
-        bills: Array.isArray(action.payload.bills) ? action.payload.bills : [],
-        wallet: action.payload.wallet ?? 0,
-        lifeTimeSpending: action.payload.lifeTimeSpending ?? 0,
-        friends: Array.isArray(action.payload.friends)
-          ? action.payload.friends
-          : [],
-        notifications: action.payload.notifications ?? {
-          notify: false,
-          list: [],
-        },
+        isLoggedIn: !!newUser,
+        user: newUser,
+        bills: Array.isArray(newUser?.bills) ? newUser.bills : [],
       };
+    }
+    // return {
+    //   ...state,
+    //   isLoggedIn: true,
+    //   userList: dataUsers,
+    //   user: action.payload,
+    //   loginError: "",
+    //   loginNameInput: "",
+    //   loginPasswordInput: "",
+    //   bills: Array.isArray(action.payload.bills) ? action.payload.bills : [],
+    //   wallet: action.payload.wallet ?? 0,
+    //   lifeTimeSpending: action.payload.lifeTimeSpending ?? 0,
+    //   friends: Array.isArray(action.payload.friends)
+    //     ? action.payload.friends
+    //     : [],
+    //   notifications: action.payload.notifications ?? {
+    //     notify: false,
+    //     list: [],
+    //   },
+    // };
 
     case "LOGOUT": {
       const user = { ...state.user, bills: state.bills };
@@ -484,14 +502,17 @@ export function productReducer(state, action) {
         isLoggedIn: true,
       };
     }
-    case "TOP_UP":
+    case "TOP_UP": {
+      const updatedWallet = Number(state.user.wallet) + Number(action.value);
       return {
         ...state,
         user: {
           ...state.user,
-          wallet: state.user.wallet + action.value,
+          wallet: updatedWallet,
+          // wallet: state.user.wallet + action.value,
         },
       };
+    }
 
     case "CHANGE_PAY_FRIEND_INPUT": {
       return {
@@ -591,7 +612,7 @@ export function productReducer(state, action) {
               ...user,
               notifications: {
                 ...user.notifications,
-                list: [...user.notifications.list, newNotification],
+                list: [newNotification, ...user.notifications.list],
                 notify: true,
               },
             };
@@ -628,7 +649,7 @@ export function productReducer(state, action) {
               notifications: {
                 ...payeeUser.notifications,
                 notify: true,
-                list: [...payeeUser.notifications.list, newNotification],
+                list: [newNotification, ...payeeUser.notifications.list],
               },
             };
           }
