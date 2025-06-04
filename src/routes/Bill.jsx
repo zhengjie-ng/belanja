@@ -11,6 +11,10 @@ function Bill() {
   const ctx = useContext(ProductContext);
   const currentBill = ctx.bills.find((bill) => bill.id === id);
   const navigate = useNavigate();
+  const currentPayee = ctx.currentBill.fullPayeeList.find(
+    (payee) => payee.id === ctx.user.id
+  );
+
   const isValidAmount = () => {
     if (
       ctx.currentBill.mode === "split" &&
@@ -26,6 +30,21 @@ function Bill() {
     }
     return true;
   };
+
+  let coinsEarned = null;
+  if (ctx.currentBill.mode === "=") {
+    coinsEarned = Math.round(
+      ctx.currentBill.equal ? ctx.currentBill.equal : ctx.currentBill.payment
+    );
+  } else if (ctx.currentBill.mode === "split") {
+    coinsEarned = Math.round(currentPayee.float ? currentPayee.float : 0);
+  } else if (ctx.currentBill.mode === "%") {
+    coinsEarned = ctx.currentBill.percentageTotal
+      ? Math.round((currentPayee.percentage * ctx.currentBill.payment) / 100)
+      : "0";
+  } else if (ctx.currentBill.mode === "belanja") {
+    coinsEarned = Math.round(ctx.currentBill.payment * 2);
+  }
 
   const ValidateValue = () => {
     const isValid = isValidAmount();
@@ -200,41 +219,26 @@ function Bill() {
 
       {ctx.currentBill.mode === "=" && (
         <>
-          <p className={styles.coins}>{`You will earn 🪙${Math.round(
-            ctx.currentBill.equal
-              ? ctx.currentBill.equal
-              : ctx.currentBill.payment
-          )}`}</p>
+          <p className={styles.coins}>{`You will earn 🪙${coinsEarned}`}</p>
         </>
       )}
 
       {ctx.currentBill.mode === "split" && (
         <>
-          <p className={styles.coins}>{`You will earn 🪙${Math.round(
-            ctx.currentBill.floatTotal ? ctx.currentBill.floatTotal : 0
-          )}`}</p>
+          <p className={styles.coins}>{`You will earn 🪙${coinsEarned}`}</p>
         </>
       )}
 
       {ctx.currentBill.mode === "%" && (
         <>
-          <p className={styles.coins}>{`You will earn 🪙${
-            ctx.currentBill.percentageTotal
-              ? Math.round(
-                  (ctx.currentBill.percentageTotal * ctx.currentBill.payment) /
-                    100
-                )
-              : "0"
-          }`}</p>
+          <p className={styles.coins}>{`You will earn 🪙${coinsEarned}`}</p>
         </>
       )}
 
       {ctx.currentBill.mode === "belanja" && (
         <>
           <p className={styles.coins}>
-            {`You will earn 2x coins of 🪙${Math.round(
-              ctx.currentBill.payment * 2
-            )} `}
+            {`You will earn 2x coins of 🪙${coinsEarned} `}
             <span className={styles.coinsStrikeOut}>
               {Math.round(ctx.currentBill.payment)}
             </span>
@@ -250,7 +254,7 @@ function Bill() {
             senderName: ctx.user.name,
             senderId: ctx.user.id,
             place: ctx.currentBill.name,
-            coins: Math.round(ctx.currentBill.payment),
+            coins: coinsEarned,
           })
         }
       >

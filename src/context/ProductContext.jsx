@@ -121,7 +121,7 @@ export function ProductProvider({ children }) {
     place,
     coins,
   }) => {
-    dispatch({ type: "BILL_SUBMIT" });
+    dispatch({ type: "BILL_SUBMIT", coins });
     dispatch({
       type: "SEND_NOTIFICATIONS",
       payload: {
