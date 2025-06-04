@@ -414,10 +414,7 @@ export function productReducer(state, action) {
         return payeeUser;
       });
 
-      const updatedCoins =
-        newCurrentBill.mode === "belanja"
-          ? state.user.coins + Math.round(locatedPayee[state.user.id].final * 2)
-          : state.user.coins + Math.round(locatedPayee[state.user.id].final);
+      const updatedCoins = Number(state.user.coins) + Number(action.coins);
 
       return {
         ...state,
