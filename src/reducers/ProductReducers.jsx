@@ -188,7 +188,18 @@ export function productReducer(state, action) {
     }
 
     case "SPLIT": {
-      const newBills = [state.merchant, ...state.bills];
+      const updatedMerchant = {
+        ...state.merchant,
+        fullPayeeList: [
+          {
+            id: state.user.id,
+            name: state.user.name,
+            float: "",
+            percentage: "",
+          },
+        ],
+      };
+      const newBills = [updatedMerchant, ...state.bills];
       return {
         ...state,
         merchant: {
