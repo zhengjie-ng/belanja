@@ -16,7 +16,7 @@ function DebtLog() {
         </button>
         <h2 className={styles.header}>Debt Log</h2>
       </div>
-      <p className={styles.debt}>{friend.debt}</p>
+      <p className={styles.debt}>{Number(friend.debt).toFixed(2)}</p>
       <div>
         {friend.debtLog?.map((debt) => (
           <ItemDebtLog

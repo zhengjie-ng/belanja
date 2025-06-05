@@ -55,13 +55,13 @@ function ItemDebtLog({ date, senderId, senderName, newDebt, place, mode }) {
     } else if (mode === "friendPaid" && senderId === ctx.user.id) {
       return (
         <div>
-          <p className={styles.addDebt}>+{newDebt}</p>
+          <p className={styles.minusDebt}>-{newDebt}</p>
         </div>
       );
     } else if (mode === "friendPaid" && senderId !== ctx.user.id) {
       return (
         <div>
-          <p className={styles.minusDebt}>-{newDebt}</p>
+          <p className={styles.addDebt}>+{newDebt}</p>
         </div>
       );
     }
