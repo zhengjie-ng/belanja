@@ -18,7 +18,7 @@ function Bill() {
   const isValidAmount = () => {
     if (
       ctx.currentBill.mode === "split" &&
-      ctx.currentBill.floatTotal !== ctx.currentBill.payment
+      ctx.currentBill.floatTotal !== Number(ctx.currentBill.payment)
     ) {
       return false;
     }
