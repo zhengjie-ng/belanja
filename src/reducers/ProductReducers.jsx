@@ -591,6 +591,120 @@ export function productReducer(state, action) {
       };
     }
 
+    case "ADD_DEBT_LOG": {
+      const { billId, id, mode, amount, senderName, senderId, place } =
+        action.payload;
+      const now = new Date();
+      const currentDate = {
+        d: now.getDate(),
+        m: now.getMonth() + 1,
+        Month: now.toLocaleDateString("en-US", { month: "short" }),
+        y: now.getFullYear(),
+      };
+
+      let updatedFriends = state.user.friends;
+      let updatedUserList = state.userList;
+
+      if (mode === "bill") {
+        const bill = state.user.bills.find((bill) => bill.id === billId);
+        const locatedPayee = {};
+        Object.values(bill.fullPayeeList).forEach((payee) => {
+          locatedPayee[payee.id] = payee;
+        });
+
+        updatedFriends = state.user.friends.map((friend) => {
+          if (
+            locatedPayee[friend.id] &&
+            friend.id === locatedPayee[friend.id].id
+          ) {
+            const newDebt = {
+              debtId: uuid(),
+              date: currentDate,
+              senderId,
+              senderName,
+              mode,
+              newDebt: locatedPayee[friend.id].final,
+              place,
+            };
+            return { ...friend, debtLog: [newDebt, ...(friend.debtLog || [])] };
+          }
+          return friend;
+        });
+
+        updatedUserList = state.userList.map((user) => {
+          if (locatedPayee[user.id] && user.id !== state.user.id) {
+            const updatedFriends = user.friends.map((friend) => {
+              if (friend.id === state.user.id) {
+                const newDebt = {
+                  debtId: uuid(),
+                  date: currentDate,
+                  senderId: state.user.id,
+                  senderName: state.user.name,
+                  mode,
+                  newDebt: locatedPayee[user.id].final,
+                  place,
+                };
+                return {
+                  ...friend,
+                  debtLog: [newDebt, ...(friend.debtLog || [])],
+                };
+              }
+              return friend;
+            });
+            return { ...user, friends: updatedFriends };
+          }
+          return user;
+        });
+      } else if (mode === "friendPaid") {
+        updatedFriends = state.user.friends.map((friend) => {
+          if (friend.id === id) {
+            const newDebt = {
+              debtId: uuid(),
+              date: currentDate,
+              senderId,
+              senderName,
+              mode,
+              newDebt: amount,
+              place,
+            };
+            return { ...friend, debtLog: [newDebt, ...(friend.debtLog || [])] };
+          }
+          return friend;
+        });
+
+        updatedUserList = state.userList.map((user) => {
+          if (user.id === id) {
+            const updatedFriends = user.friends.map((friend) => {
+              if (friend.id === state.user.id) {
+                const newDebt = {
+                  debtId: uuid(),
+                  date: currentDate,
+                  senderId: state.user.id,
+                  senderName: state.user.name,
+                  mode,
+                  newDebt: amount,
+                  place,
+                };
+                return {
+                  ...friend,
+                  debtLog: [newDebt, ...(friend.debtLog || [])],
+                };
+              }
+              return friend;
+            });
+            return { ...user, friends: updatedFriends };
+          }
+          return user;
+        });
+      }
+
+      return {
+        ...state,
+        userList: updatedUserList,
+        user: { ...state.user, friends: updatedFriends },
+      };
+    }
+
     case "SEND_NOTIFICATIONS": {
       const { id, mode, amount, senderName, senderId, place } = action.payload;
       const now = new Date();

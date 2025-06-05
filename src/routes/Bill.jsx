@@ -250,6 +250,7 @@ function Bill() {
         disabled={isValidAmount() ? false : true}
         onClick={() =>
           ctx.handlerBillSubmit({
+            billId: id,
             mode: "bill",
             senderName: ctx.user.name,
             senderId: ctx.user.id,
