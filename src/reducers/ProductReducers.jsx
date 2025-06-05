@@ -495,7 +495,7 @@ export function productReducer(state, action) {
         avatar: `https://i.pravatar.cc/100?u=${uuid()}`, // Random avatar
         lifeTimeSpending: 0,
         wallet: 0,
-        coins: 22355,
+        coins: 1000,
         notifications: { notify: false, list: [] },
         friends: [],
         bills: [],

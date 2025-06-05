@@ -6,13 +6,6 @@ import { v4 as uuid } from "uuid";
 
 const ProductContext = createContext();
 
-// const initialState = {
-//   loginNameInput: "alan@belanja.com",
-//   loginPasswordInput: "80604914",
-//   loginError: "",
-//   user: null,
-// };
-
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, defaultProduct);
   const navigate = useNavigate();
@@ -25,7 +18,7 @@ export function ProductProvider({ children }) {
     const loginInput = state.loginNameInput.trim();
     const passwordInput = state.loginPasswordInput;
 
-    const matchedUser = dataUsers.find(
+    const matchedUser = state.userList.find(
       (user) => user.email === loginInput || String(user.mobile) === loginInput
     );
 
