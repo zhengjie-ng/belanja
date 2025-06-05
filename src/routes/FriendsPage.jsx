@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import Friend from "../components/Friend";
 import styles from "./FriendsPage.module.css";
-import { Link } from "react-router-dom";
 
 function FriendsPage() {
   const ctx = useContext(ProductContext);
