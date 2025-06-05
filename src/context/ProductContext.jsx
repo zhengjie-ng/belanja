@@ -113,6 +113,7 @@ export function ProductProvider({ children }) {
   };
 
   const handlerBillSubmit = ({
+    billId,
     id,
     mode,
     amount,
@@ -125,6 +126,18 @@ export function ProductProvider({ children }) {
     dispatch({
       type: "SEND_NOTIFICATIONS",
       payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
+    dispatch({
+      type: "ADD_DEBT_LOG",
+      payload: {
+        billId,
         id,
         mode,
         amount,
@@ -247,6 +260,7 @@ export function ProductProvider({ children }) {
 
   const handlerPayFriend = (id) => {
     dispatch({ type: "PAY_FRIEND", id: id });
+    navigate(`/payfriend/${id}`);
   };
 
   const handlerPayFriendSubmit = ({
@@ -261,6 +275,17 @@ export function ProductProvider({ children }) {
   }) => {
     dispatch({
       type: "SEND_NOTIFICATIONS",
+      payload: {
+        id,
+        mode,
+        amount,
+        senderName,
+        senderId,
+        place,
+      },
+    });
+    dispatch({
+      type: "ADD_DEBT_LOG",
       payload: {
         id,
         mode,

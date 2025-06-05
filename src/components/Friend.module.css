@@ -37,7 +37,7 @@
   justify-items: center;
   /* padding-top: 20px; */
 
-  width: 100%;
+  width: 200px;
   /* padding-left: 10px; */
 }
 
@@ -51,16 +51,33 @@
   padding: 0px;
   margin: 0px;
   margin-top: 0px;
+  font-size: 14px;
+}
+
+.divButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  justify-items: right;
+  align-items: right;
+  align-content: right;
+  width: 100px;
 }
 
 .buttonActionPay,
-.buttonActionNotify {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
+.buttonActionNotify,
+.log {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   border: 1px solid transparent;
   font-weight: 600;
   margin-right: 10px;
+  box-shadow: 0px 0px 5px 1px rgb(224, 224, 224);
+}
+
+.log:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 .buttonActionPay {

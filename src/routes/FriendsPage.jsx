@@ -44,13 +44,14 @@ function FriendsPage() {
         </div>
         <div className={styles.divFriendListMap}>
           {ctx.user.friends.map((friend) => (
-            <Link
-              key={friend.id}
-              to={friend.debt > 0 ? `/payfriend/${friend.id}` : `/friends`}
-              className={styles.link}
-            >
-              <Friend key={friend.id} id={friend.id} debt={friend.debt} />
-            </Link>
+            <Friend key={friend.id} id={friend.id} debt={friend.debt} />
+            // <Link
+            //   key={friend.id}
+            //   to={friend.debt > 0 ? `/payfriend/${friend.id}` : `/friends`}
+            //   className={styles.link}
+            // >
+            //   <Friend key={friend.id} id={friend.id} debt={friend.debt} />
+            // </Link>
           ))}
         </div>
       </div>

@@ -18,7 +18,7 @@ function Bill() {
   const isValidAmount = () => {
     if (
       ctx.currentBill.mode === "split" &&
-      ctx.currentBill.floatTotal !== ctx.currentBill.payment
+      ctx.currentBill.floatTotal !== Number(ctx.currentBill.payment)
     ) {
       return false;
     }
@@ -250,6 +250,7 @@ function Bill() {
         disabled={isValidAmount() ? false : true}
         onClick={() =>
           ctx.handlerBillSubmit({
+            billId: id,
             mode: "bill",
             senderName: ctx.user.name,
             senderId: ctx.user.id,
