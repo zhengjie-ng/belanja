@@ -14,7 +14,7 @@ function PayFriend() {
     ctx.payFriendInput <= ctx.user.wallet;
 
   const ValidateValue = () => {
-    if (ctx.payFriendInput > ctx.user.wallet) {
+    if (ctx.payFriendInput > Number(ctx.user.wallet)) {
       return <p className={styles.message}>Insufficient fund in wallet</p>;
     } else if (!isValidAmount) {
       return (

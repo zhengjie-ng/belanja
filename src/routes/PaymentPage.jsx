@@ -52,7 +52,7 @@ function PaymentPage() {
   const ValidateValue = () => {
     if (!ctx.merchant.payment || ctx.merchant.payment <= 0) {
       return <p className={styles.message}>Please enter a positive value</p>;
-    } else if (ctx.merchant.payment > ctx.user.wallet) {
+    } else if (ctx.merchant.payment > Number(ctx.user.wallet)) {
       return <p className={styles.message}>Insufficient fund in wallet</p>;
     } else {
       return <p className={styles.message}></p>;
