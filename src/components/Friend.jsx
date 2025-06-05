@@ -64,23 +64,25 @@ function Friend({ id, debt }) {
   return (
     <div className={styles.divFriend}>
       <div className={styles.divFriendInner}>
-        <img
-          className={styles.imgFriend}
-          src={friend.avatar}
-          alt={friend.name}
-        ></img>
-        <div className={styles.divDetails}>
-          <p className={styles.pName}>{friend.name}</p>
-          {debtStatement}
-        </div>
-        <div className={styles.divButtons}>
-          <div className={styles.divAction}>{actionButton}</div>
-          <button
-            className={styles.log}
-            onClick={() => navigate(`/debtLog/${id}`)}
-          >
-            📒
-          </button>
+        <div className={styles.divFriendInner2}>
+          <img
+            className={styles.imgFriend}
+            src={friend.avatar}
+            alt={friend.name}
+          ></img>
+          <div className={styles.divDetails}>
+            <p className={styles.pName}>{friend.name}</p>
+            {debtStatement}
+          </div>
+          <div className={styles.divButtons}>
+            <div className={styles.divAction}>{actionButton}</div>
+            <button
+              className={styles.log}
+              onClick={() => navigate(`/debtLog/${id}`)}
+            >
+              📒
+            </button>
+          </div>
         </div>
       </div>
     </div>
