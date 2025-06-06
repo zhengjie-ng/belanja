@@ -40,7 +40,7 @@ const dataUsers = [
         location: {
           address: "500 Clemenceau Avenue North, Singapore 229495",
         },
-        date: { d: 19, m: 5, Month: "May", y: 2025 },
+        date: { d: 19, m: 5, Month: "May", y: 2025, time: "9:01:21 PM" },
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -56,11 +56,12 @@ const dataUsers = [
         payment: 98.23,
         mode: "belanja",
         settle: false,
-        date: { d: 3, m: 4, Month: "Apr", y: 2025 },
+        date: { d: 3, m: 4, Month: "Apr", y: 2025, time: "10:21:55 PM" },
         location: {
           address:
             "73A Ayer Rajah Crescent, JTC LaunchPad @ one-north, Singapore 139957",
         },
+
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
@@ -76,10 +77,11 @@ const dataUsers = [
         payment: 77.4,
         mode: "split",
         settle: false,
-        date: { d: 3, m: 2, Month: "Feb", y: 2025 },
+        date: { d: 7, m: 2, Month: "Feb", y: 2025, time: "11:11:61 AM" },
         location: {
           address: "Bedok Mall, 311 New Upper Changi Road, Singapore 467360",
         },
+
         fullPayeeList: [
           {
             id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",

@@ -13,16 +13,18 @@
 .divDate {
   display: flex;
   flex-direction: column;
-  /* background-color: aqua; */
-  width: 70px;
+  width: 90px;
   height: 80px;
-  justify-content: center;
+  justify-content: space-between;
+  height: 80px;
   align-self: left;
   justify-self: left;
+  margin-left: 10px;
 }
 
 .pM,
-.pD {
+.pD,
+.pTime {
   margin: 0px;
   padding: 0px;
   color: rgb(118, 118, 118);
@@ -37,6 +39,10 @@
   font-weight: 500;
 }
 
+.pTime {
+  font-size: 12px;
+}
+
 .billName {
   text-transform: capitalize;
   font-size: 20px;
@@ -44,6 +50,7 @@
   width: 160px;
   margin: 0px;
   text-align: left;
+  margin-left: 10px;
 }
 
 .divTotal {

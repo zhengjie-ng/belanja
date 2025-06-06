@@ -96,7 +96,8 @@ function Notification({ uuid }) {
           <Statement />
         </p>
         <p className={styles.pDate}>
-          {notification.date.d} {notification.date.Month} {notification.date.y}
+          {notification.date.d} {notification.date.Month} {notification.date.y}{" "}
+          {notification.date.time}
         </p>
       </div>
       {notification.notify && <p className={styles.dot}>●</p>}

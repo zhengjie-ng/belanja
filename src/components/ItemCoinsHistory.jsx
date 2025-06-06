@@ -48,7 +48,9 @@ function ItemCoinsHistory({ name, mode, coins, date }) {
       <div className={styles.divNameDate}>
         <Statement />
         {/* <p className={styles.name}>{name}</p> */}
-        <p className={styles.date}>{`${date.d} ${date.Month} ${date.y}`}</p>
+        <p
+          className={styles.date}
+        >{`${date.d} ${date.Month} ${date.y} ${date.time}`}</p>
       </div>
       <Coins />
     </div>
