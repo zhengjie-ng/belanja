@@ -71,7 +71,9 @@ function ItemDebtLog({ date, senderId, senderName, newDebt, place, mode }) {
     <div className={styles.divMain}>
       <div className={styles.divNameDate}>
         <Statement />
-        <p className={styles.date}>{`${date.d} ${date.Month} ${date.y}`}</p>
+        <p
+          className={styles.date}
+        >{`${date.d} ${date.Month} ${date.y} ${date.time}`}</p>
       </div>
       <Debt />
     </div>

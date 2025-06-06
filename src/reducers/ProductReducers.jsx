@@ -142,6 +142,7 @@ export function productReducer(state, action) {
       const month = now.getMonth() + 1;
       const Month = now.toLocaleDateString("en-US", { month: "short" });
       const year = now.getFullYear();
+      const time = now.toLocaleTimeString();
 
       const updatedWallet = (
         Number(state.user.wallet) - Number(state.merchant.payment)
@@ -156,7 +157,14 @@ export function productReducer(state, action) {
         merchant: {
           ...state.merchant,
           id: uuid(),
-          date: { ...state.date, d: day, m: month, Month: Month, year: year },
+          date: {
+            ...state.date,
+            d: day,
+            m: month,
+            Month: Month,
+            year: year,
+            time: time,
+          },
           location: state.location,
           settle: false,
         },
@@ -600,6 +608,7 @@ export function productReducer(state, action) {
         m: now.getMonth() + 1,
         Month: now.toLocaleDateString("en-US", { month: "short" }),
         y: now.getFullYear(),
+        time: now.toLocaleTimeString(),
       };
 
       let updatedFriends = state.user.friends;
@@ -713,6 +722,7 @@ export function productReducer(state, action) {
         m: now.getMonth() + 1,
         Month: now.toLocaleDateString("en-US", { month: "short" }),
         y: now.getFullYear(),
+        time: now.toLocaleTimeString(),
       };
 
       if (mode === "friendPaid" || mode === "nudge") {
@@ -905,6 +915,7 @@ export function productReducer(state, action) {
         m: now.getMonth() + 1,
         Month: now.toLocaleDateString("en-US", { month: "short" }),
         y: now.getFullYear(),
+        time: now.toLocaleTimeString(),
       };
       const newCoinsHistory = {
         uuid: uuid(),
@@ -930,6 +941,7 @@ export function productReducer(state, action) {
       const month = now.getMonth() + 1;
       const Month = now.toLocaleDateString("en-US", { month: "short" });
       const year = now.getFullYear();
+      const time = now.toLocaleTimeString();
 
       const updatedWallet = (
         Number(state.user.wallet) - Number(state.merchant.payment)
@@ -950,7 +962,14 @@ export function productReducer(state, action) {
           ...state.merchant,
           name: merchant.name,
           id: uuid(),
-          date: { ...state.date, d: day, m: month, Month: Month, year: year },
+          date: {
+            ...state.date,
+            d: day,
+            m: month,
+            Month: Month,
+            year: year,
+            time: time,
+          },
           location: { address: merchant.address },
           settle: false,
         },

@@ -231,6 +231,7 @@ export function ProductProvider({ children }) {
         d: new Date().getDate(),
         Month: new Date().toLocaleString("default", { month: "short" }),
         year: new Date().getFullYear(),
+        time: new Date().toLocaleTimeString(),
       },
       fullPayeeList: [
         {
