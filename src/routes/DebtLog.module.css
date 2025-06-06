@@ -45,3 +45,16 @@
   font-size: 20px;
   font-weight: 500;
 }
+
+.pDetails {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divDebtLog {
+  height: 760px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
