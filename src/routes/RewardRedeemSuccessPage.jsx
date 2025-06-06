@@ -2,6 +2,7 @@ import styles from "./RewardRedeemSuccessPage.module.css";
 import { useParams } from "react-router-dom";
 import rewardsData from "../data/Rewards";
 import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 
 function RewardRedeemSuccessPage() {
   const { rewardId } = useParams();
@@ -12,7 +13,13 @@ function RewardRedeemSuccessPage() {
     <div className={styles.divMain}>
       <h2 className={styles.h2BelanjaPay}>Redeem Successful</h2>
       <h2 className={styles.h2MerchantName}>{reward.name}</h2>
-      <p className={styles.pTick}>✔</p>
+      <motion.p
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className={styles.pTick}
+      >
+        ✔
+      </motion.p>
       <button
         className={styles.buttonBelanja}
         onClick={() => navigate("/myRewards/")}
