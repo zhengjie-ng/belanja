@@ -1,0 +1,86 @@
+.h2BelanjaPay {
+  margin-top: 150px;
+  /* font-size: 20px;
+  font-weight: 500; */
+  color: #5d3891;
+}
+
+.h2MerchantName {
+  margin-top: 60px;
+}
+
+.divMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.pTick {
+  padding: 0px;
+  margin: 0px;
+  margin-top: 50px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 30px;
+  border-radius: 35px;
+  color: white;
+  background-color: green;
+}
+
+.pAmountPaid {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 80%;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.pAmount {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.pHow {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.buttonSplit,
+.buttonBelanja,
+.buttonLater {
+  width: 90%;
+  font-size: 20px;
+  font-weight: 500;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 5px 1px rgb(204, 204, 204);
+}
+
+.buttonSplit:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+.buttonBelanja {
+  background-color: #5d3891;
+  font-weight: 600;
+  color: white;
+  margin-top: 150px;
+}
+
+.buttonBelanja:hover {
+  background-color: #4b2d76;
+}
+
+.buttonLater {
+  opacity: 30%;
+}
+
+.buttonLater:hover {
+  opacity: 100%;
+}
