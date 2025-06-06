@@ -9,6 +9,14 @@ const dataUsers = [
     lifeTimeSpending: 655.43,
     wallet: 545.22,
     coins: 22355,
+    CoinsHistory: [
+      {
+        uuid: "77ec334e-03a4-4cb8-afb8-51f7060a1399",
+        coins: 22355,
+        mode: "demo",
+        date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+      },
+    ],
     notifications: {
       notify: false,
       list: [],
@@ -18,11 +26,27 @@ const dataUsers = [
         id: "e2e66095-2d1e-4810-ba8c-e06493d4ea60",
         name: "Becky",
         debt: 20,
+        debtLog: [
+          {
+            debtId: "e0587de7-2ac4-4365-8f2a-b37ce464fa36",
+            date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+            mode: "demoAdd",
+            newDebt: 20,
+          },
+        ],
       },
       {
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
         name: "Cindy",
         debt: -40.5,
+        debtLog: [
+          {
+            debtId: "14fdcebc-6506-45e8-a619-0f8601b804c8",
+            date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+            mode: "demoMinus",
+            newDebt: 40.5,
+          },
+        ],
       },
       {
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
@@ -103,6 +127,14 @@ const dataUsers = [
     lifeTimeSpending: 54.27,
     wallet: 30.45,
     coins: 1344,
+    CoinsHistory: [
+      {
+        uuid: "e9a039b9-c50a-4274-b0ab-32af7ac6bc22",
+        coins: 1344,
+        mode: "demo",
+        date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+      },
+    ],
     notifications: {
       notify: false,
       list: [],
@@ -112,6 +144,14 @@ const dataUsers = [
         id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
         name: "Alan",
         debt: -20,
+        debtLog: [
+          {
+            debtId: "a36dfb38-1b9b-4085-8f6b-abd23e6368d5",
+            date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+            mode: "demoMinus",
+            newDebt: 20,
+          },
+        ],
       },
       {
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
@@ -130,6 +170,14 @@ const dataUsers = [
     lifeTimeSpending: 157.27,
     wallet: 330.45,
     coins: 7615,
+    CoinsHistory: [
+      {
+        uuid: "409c6215-dba4-4aec-9e74-e219d6437194",
+        coins: 7615,
+        mode: "demo",
+        date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+      },
+    ],
     notifications: {
       notify: false,
       list: [],
@@ -139,6 +187,14 @@ const dataUsers = [
         id: "69392e71-eeb8-40cc-9b4e-4770362e8d5c",
         name: "Alan",
         debt: 40.5,
+        debtLog: [
+          {
+            debtId: "c1a40501-b595-4455-ac5c-ec8a5ec6c29e",
+            date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+            mode: "demoAdd",
+            newDebt: 40.5,
+          },
+        ],
       },
       {
         id: "e2e66095-2d1e-4810-ba8c-e06493d4ea60",
@@ -149,6 +205,14 @@ const dataUsers = [
         id: "aacd7ba9-ec01-42e4-8913-a8fc8d65f3aa",
         name: "Dove",
         debt: 5,
+        debtLog: [
+          {
+            debtId: "bd2f7fbb-6378-4b55-b036-815991947203",
+            date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+            mode: "demoAdd",
+            newDebt: 5,
+          },
+        ],
       },
     ],
   },
@@ -162,6 +226,14 @@ const dataUsers = [
     lifeTimeSpending: 9.4,
     wallet: 5.45,
     coins: 536,
+    CoinsHistory: [
+      {
+        uuid: "b83f4ee9-9eee-4385-8f9b-a7688f9f1660",
+        coins: 536,
+        mode: "demo",
+        date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+      },
+    ],
     notifications: {
       notify: false,
       list: [],
@@ -176,6 +248,14 @@ const dataUsers = [
         id: "f9d972d7-0e44-4ad8-a997-56f4377e1aaf",
         name: "Cindy",
         debt: -5,
+        debtLog: [
+          {
+            debtId: "c6722830-ed08-4bb9-a996-39fcde8508cc",
+            date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+            mode: "demoMinus",
+            newDebt: 5,
+          },
+        ],
       },
     ],
   },
@@ -189,6 +269,14 @@ const dataUsers = [
     lifeTimeSpending: 1210.4,
     wallet: 655.1,
     coins: 11455,
+    CoinsHistory: [
+      {
+        uuid: "bddb0f17-35e1-4835-ace4-a7eaf5bc1707",
+        coins: 11455,
+        mode: "demo",
+        date: { d: 28, m: 5, Month: "May", y: 2025, time: "8:00:00 AM" },
+      },
+    ],
     notifications: {
       notify: false,
       list: [],

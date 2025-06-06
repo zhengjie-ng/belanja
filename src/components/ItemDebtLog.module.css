@@ -64,3 +64,8 @@
 .addDebt {
   color: rgb(169, 30, 30);
 }
+
+.date {
+  font-size: 13px;
+  opacity: 80%;
+}

@@ -464,12 +464,30 @@ export function productReducer(state, action) {
 
     case "ADD_FRIEND": {
       console.log("Adding new friend:", action.payload);
+      let updatedUserlist = state.userList.map((user) => {
+        if (user.id === action.payload.id) {
+          return {
+            ...user,
+            friends: [
+              ...user.friends,
+              { id: state.user.id, name: state.user.name, debt: 0 },
+            ],
+          };
+        }
+        return user;
+      });
+
+      updatedUserlist = [...updatedUserlist, action.payload];
+
       return {
         ...state,
-        userList: [...state.userList, action.payload],
+        userList: updatedUserlist,
         user: {
           ...state.user,
-          friends: [...state.user.friends, action.payload],
+          friends: [
+            ...state.user.friends,
+            { id: action.payload.id, name: action.payload.name, debt: 0 },
+          ],
         },
       };
     }
@@ -492,6 +510,14 @@ export function productReducer(state, action) {
         console.warn("User already exists:", existingUser);
         return state; // ✅ Prevent duplicate sign-ups
       }
+      const now = new Date();
+      const currentDate = {
+        d: now.getDate(),
+        m: now.getMonth() + 1,
+        Month: now.toLocaleDateString("en-US", { month: "short" }),
+        y: now.getFullYear(),
+        time: now.toLocaleTimeString(),
+      };
 
       // Create new user object
       const newUser = {
@@ -504,6 +530,14 @@ export function productReducer(state, action) {
         lifeTimeSpending: 0,
         wallet: 0,
         coins: 1000,
+        CoinsHistory: [
+          {
+            uuid: uuid(),
+            coins: 1000,
+            mode: "new",
+            date: currentDate,
+          },
+        ],
         notifications: { notify: false, list: [] },
         friends: [],
         bills: [],

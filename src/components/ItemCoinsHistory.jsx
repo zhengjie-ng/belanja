@@ -23,6 +23,20 @@ function ItemCoinsHistory({ name, mode, coins, date }) {
           <p className={styles.name}>{name}</p>
         </div>
       );
+    } else if (mode === "demo") {
+      return (
+        <div>
+          <p className={styles.name}>App -</p>
+          <p className={styles.name}>Demostration</p>
+        </div>
+      );
+    } else if (mode === "new") {
+      return (
+        <div>
+          <p className={styles.name}>New Sign Up -</p>
+          <p className={styles.name}>Bonus</p>
+        </div>
+      );
     }
     return null; //
   };
@@ -34,7 +48,12 @@ function ItemCoinsHistory({ name, mode, coins, date }) {
           <p className={styles.minusCoins}>-{coins}</p>
         </div>
       );
-    } else if (mode === "bill" || mode === "friendPaid") {
+    } else if (
+      mode === "bill" ||
+      mode === "friendPaid" ||
+      mode === "demo" ||
+      mode === "new"
+    ) {
       return (
         <div>
           <p className={styles.addCoins}>+{coins}</p>
