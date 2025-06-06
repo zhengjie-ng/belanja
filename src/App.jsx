@@ -27,6 +27,7 @@ import UseRewards from "./routes/UseRewards";
 import CoinsHistory from "./routes/CoinsHistory";
 import MerchantPaymentPage from "./routes/MerchantPaymentPage";
 import DebtLog from "./routes/DebtLog";
+import RewardRedeemSuccessPage from "./routes/RewardRedeemSuccessPage";
 
 import styles from "./App.module.css";
 
@@ -54,6 +55,10 @@ function App() {
               <Route path="myRewards/:uuid" element={<UseRewards />} />
               <Route path="coinsHistory" element={<CoinsHistory />} />
               <Route path="debtLog/:friendId" element={<DebtLog />} />
+              <Route
+                path="rewards/success/:rewardId"
+                element={<RewardRedeemSuccessPage />}
+              />
             </Route>
             <Route path="SignUpPage" element={<SignUpPage />} />
             <Route path="payfriend/:id" element={<PayFriend />} />
