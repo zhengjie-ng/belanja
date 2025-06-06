@@ -14,7 +14,8 @@ export function ProductProvider({ children }) {
     dispatch({ type: "LOGIN_NAME_INPUT", value: e.target.value });
   };
 
-  const handlerLoginClick = () => {
+  const handlerLoginClick = (e) => {
+    e.preventDefault();
     const loginInput = state.loginNameInput.trim();
     const passwordInput = state.loginPasswordInput;
 

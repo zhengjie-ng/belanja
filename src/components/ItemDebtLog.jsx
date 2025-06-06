@@ -7,6 +7,7 @@ function ItemDebtLog({ date, senderId, senderName, newDebt, place, mode }) {
   const ctx = useContext(ProductContext);
   const { friendId } = useParams();
   const friend = ctx.user.friends.find((friend) => friend.id === friendId);
+
   const Statement = () => {
     if (mode === "bill" && senderId === ctx.user.id) {
       return (

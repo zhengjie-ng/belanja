@@ -21,7 +21,7 @@ function LoginPage() {
     <div className={styles.divLogin}>
       <h1 className={styles.welcome}>Welcome back!</h1>
       <p>Get right back to earning Rewards!</p>
-      <form className={styles.form} action={ctx.handlerLoginClick}>
+      <form className={styles.form} action={(e) => ctx.handlerLoginClick(e)}>
         <input
           className={styles.inputMobile}
           name="username"

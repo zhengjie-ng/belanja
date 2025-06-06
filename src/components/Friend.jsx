@@ -23,7 +23,7 @@ function Friend({ id, debt }) {
     debtStatement = (
       <div className={styles.pDetails}>
         <span style={{ color: "red" }}>
-          {`You owe ${friend.name} ${Number(debt).toFixed(2)}`}.
+          {`You owe ${friend.name} $${Number(debt).toFixed(2)}`}.
         </span>
       </div>
     );
