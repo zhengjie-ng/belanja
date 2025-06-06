@@ -77,7 +77,7 @@ const dataUsers = [
         payment: 77.4,
         mode: "split",
         settle: false,
-        date: { d: 7, m: 2, Month: "Feb", y: 2025, time: "11:11:61 AM" },
+        date: { d: 7, m: 2, Month: "Feb", y: 2025, time: "11:11:31 AM" },
         location: {
           address: "Bedok Mall, 311 New Upper Changi Road, Singapore 467360",
         },
