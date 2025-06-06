@@ -91,6 +91,12 @@ function Bill() {
           󠀩󠁽≫
         </button>
         <h2 className={styles.header}>Bill Settement</h2>
+        <button
+          className={styles.btnRemove}
+          onClick={() => ctx.handleRemoveBill(id)}
+        >
+          🗑️
+        </button>
       </div>
       <ValidateValue />
 
