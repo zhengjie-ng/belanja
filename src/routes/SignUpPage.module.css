@@ -1,3 +1,89 @@
+.divMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.message {
+  background-color: rgb(255, 82, 82);
+  color: white;
+  width: 100%;
+  margin-top: 0px;
+  height: 25px;
+}
+
+.messageInactive {
+  background-color: rgb(255, 82, 82);
+  color: white;
+  width: 100%;
+  margin-top: 0px;
+  height: 25px;
+  opacity: 0%;
+}
+
+.input {
+  padding-left: 15px;
+  font-size: 18px;
+  width: 360px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  /* border: 1px solid rgb(142, 142, 142); */
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.input::placeholder {
+  opacity: 50%;
+}
+
+.label {
+  font-size: 20px;
+  opacity: 90%;
+  font-weight: 400;
+}
+
+.header {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.divHave {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.buttonSignIn {
+  background-color: transparent;
+  border: transparent;
+  color: #5d3891;
+  font-weight: 350;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  margin-top: 3px;
+  text-align: left;
+  margin-left: 4px;
+}
+
+.buttonSignIn:hover {
+  color: #7547b5;
+}
+
+.pHave {
+  margin: 0px;
+  padding: 0px;
+}
+
 .welcome {
   margin-top: 200px;
 }
@@ -18,11 +104,12 @@
 .buttonLongCreate,
 .buttonLongBack {
   font-size: 15px;
-  width: 90%;
+  width: 100%;
   border-radius: 100px;
   border: 1px solid black;
   height: 50px;
   font-weight: bolder;
+  margin-bottom: 10px;
 }
 
 .buttonLongCreate {

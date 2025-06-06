@@ -102,13 +102,13 @@ function Welcome() {
       <h2 className={styles.spend}>Welcome to Belanja!</h2>
       <p className={styles.spend}>Spend with us and earn rewards today!</p>
 
-      <input
+      {/* <input
         className={styles.inputMobile}
         name="username"
         placeholder="Enter your mobile number "
         type="Number"
         required
-      />
+      /> */}
 
       <button
         className={styles.buttonLongCreate}
