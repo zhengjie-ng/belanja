@@ -469,7 +469,7 @@ export function productReducer(state, action) {
     case "ADD_MERCHANT_BILL":
       return {
         ...state,
-        bills: [...state.bills, action.payload.newBill], //Append new bill
+        bills: [action.payload.newBill, ...state.bills], //Append new bill
       };
 
     case "SIGN_UP": {
@@ -954,6 +954,15 @@ export function productReducer(state, action) {
           location: { address: merchant.address },
           settle: false,
         },
+      };
+    }
+
+    case "REMOVE_BILL": {
+      const updatedBills = state.bills.filter((bill) => bill.id !== action.id);
+      return {
+        ...state,
+        bills: updatedBills,
+        user: { ...state.user, bills: updatedBills },
       };
     }
 

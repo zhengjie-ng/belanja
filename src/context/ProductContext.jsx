@@ -184,13 +184,15 @@ export function ProductProvider({ children }) {
         id: uuid(),
         name: name,
         email: `${name.toLowerCase()}@belanja.com`, // Placeholder email
+        password: 80604914,
         mobile: "", // Default blank mobile
-        avatar: `https://i.pravatar.cc/100?u=${uuid()}`,
+        avatar: `https://i.pravatar.cc/100?u=${name}`,
         lifeTimeSpending: 0,
         wallet: 0,
-        coins: 22355,
+        coins: 1000,
+        debt: 0,
         notifications: { notify: false, list: [] },
-        friends: [],
+        friends: [{ id: state.user.id, name: state.user.name, debt: 0 }],
         bills: [],
       };
 
@@ -357,6 +359,12 @@ export function ProductProvider({ children }) {
       navigate("/settle");
     }
   };
+
+  const handleRemoveBill = (id) => {
+    dispatch({ type: "REMOVE_BILL", id });
+    navigate("/bills/");
+  };
+
   const data = {
     userList: state.userList,
     loginNameInput: state.loginNameInput,
@@ -402,6 +410,7 @@ export function ProductProvider({ children }) {
     handleRedeemReward,
     handleUseReward,
     handlerClickHomepageMerchantMakePayment,
+    handleRemoveBill,
   };
 
   return (
