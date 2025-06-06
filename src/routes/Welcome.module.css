@@ -49,6 +49,7 @@
 .buttonLongCreate {
   color: white;
   background-color: #5d3891;
+  margin-top: 10px;
 }
 
 .buttonLongCreate:hover {
