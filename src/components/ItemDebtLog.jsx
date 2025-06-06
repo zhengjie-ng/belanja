@@ -37,6 +37,13 @@ function ItemDebtLog({ date, senderId, senderName, newDebt, place, mode }) {
           <p className={styles.name}>You</p>
         </div>
       );
+    } else if (mode === "demoAdd" || mode === "demoMinus") {
+      return (
+        <div>
+          <p className={styles.name}>App -</p>
+          <p className={styles.name}>Demostration</p>
+        </div>
+      );
     }
   };
 
@@ -44,25 +51,37 @@ function ItemDebtLog({ date, senderId, senderName, newDebt, place, mode }) {
     if (mode === "bill" && senderId === ctx.user.id) {
       return (
         <div>
-          <p className={styles.minusDebt}>-{newDebt}</p>
+          <p className={styles.minusDebt}>-{Number(newDebt).toFixed(2)}</p>
         </div>
       );
     } else if (mode === "bill" && senderId !== ctx.user.id) {
       return (
         <div>
-          <p className={styles.addDebt}>+{newDebt}</p>
+          <p className={styles.addDebt}>+{Number(newDebt).toFixed(2)}</p>
         </div>
       );
     } else if (mode === "friendPaid" && senderId === ctx.user.id) {
       return (
         <div>
-          <p className={styles.minusDebt}>-{newDebt}</p>
+          <p className={styles.minusDebt}>-{Number(newDebt).toFixed(2)}</p>
         </div>
       );
     } else if (mode === "friendPaid" && senderId !== ctx.user.id) {
       return (
         <div>
-          <p className={styles.addDebt}>+{newDebt}</p>
+          <p className={styles.addDebt}>+Number(newDebt).toFixed(2)}</p>
+        </div>
+      );
+    } else if (mode === "demoAdd") {
+      return (
+        <div>
+          <p className={styles.addDebt}>+{Number(newDebt).toFixed(2)}</p>
+        </div>
+      );
+    } else if (mode === "demoMinus") {
+      return (
+        <div>
+          <p className={styles.minusDebt}>-{Number(newDebt).toFixed(2)}</p>
         </div>
       );
     }

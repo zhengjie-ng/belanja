@@ -181,6 +181,14 @@ export function ProductProvider({ children }) {
       });
     } else {
       console.log(`Creating new friend: ${name}`);
+      const now = new Date();
+      const currentDate = {
+        d: now.getDate(),
+        m: now.getMonth() + 1,
+        Month: now.toLocaleDateString("en-US", { month: "short" }),
+        y: now.getFullYear(),
+        time: now.toLocaleTimeString(),
+      };
       const newFriend = {
         id: uuid(),
         name: name,
@@ -191,6 +199,14 @@ export function ProductProvider({ children }) {
         lifeTimeSpending: 0,
         wallet: 0,
         coins: 1000,
+        CoinsHistory: [
+          {
+            uuid: uuid(),
+            coins: 1000,
+            mode: "new",
+            date: currentDate,
+          },
+        ],
         debt: 0,
         notifications: { notify: false, list: [] },
         friends: [{ id: state.user.id, name: state.user.name, debt: 0 }],
