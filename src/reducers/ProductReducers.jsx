@@ -503,7 +503,7 @@ export function productReducer(state, action) {
       const existingUser = state.userList.find(
         (user) =>
           user.email === action.payload.email ||
-          user.mobile === action.payload.mobile
+          String(user.mobile) === String(action.payload.mobile)
       );
 
       if (existingUser) {

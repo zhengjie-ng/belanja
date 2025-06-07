@@ -3,10 +3,12 @@ import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import ItemBill from "../components/ItemBill";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MerchantBillForm from "../components/MerchantBillForm";
 
 function BillsPage() {
   const ctx = useContext(ProductContext);
+  const navigate = useNavigate();
 
   const findIfSettled = (id) => {
     const bill = ctx.bills.find((bill) => bill.id === id);
@@ -16,14 +18,23 @@ function BillsPage() {
   return (
     <>
       {/* Merchant Bill Entry Form */}
-    <div className={styles.billFormWrapper}>
-      <div className={styles.billFormContainer}>
-        <MerchantBillForm />
+      <div className={styles.billFormWrapper}>
+        <div className={styles.billFormContainer}>
+          {/* <MerchantBillForm /> */}
+        </div>
       </div>
-    </div>
 
       <div className={styles.divHeader}>
-        <h2 className={styles.h2Bills}>Bills</h2>
+        <div className={styles.divBillAdd}>
+          <h2 className={styles.h2Bills}>Bills</h2>
+          <button
+            className={styles.buttonAdd}
+            onClick={() => navigate("/addBill")}
+          >
+            ➕
+          </button>
+        </div>
+
         <hr className={styles.hrLine}></hr>
       </div>
 

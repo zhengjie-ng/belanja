@@ -1,0 +1,132 @@
+.h2BelanjaPay {
+  margin-top: 40px;
+  /* font-size: 20px;
+  font-weight: 500; */
+  color: #5d3891;
+}
+
+.message {
+  height: 25px;
+  font-style: italic;
+  color: rgb(227, 26, 26);
+}
+
+.buttonBack {
+  transform: rotate(-180deg);
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #5d3891;
+  margin-top: 20px;
+  opacity: 100%;
+}
+
+.buttonBack:hover {
+  opacity: 100%;
+}
+
+.divPayField {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(224, 224, 224);
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.inputPayField {
+  text-align: center;
+  background-color: rgb(224, 224, 224);
+  border: none;
+  font-size: 50px;
+  width: 95%;
+}
+
+.inputPayField:focus {
+  outline: none;
+}
+
+.inputPayField:focus::placeholder {
+  color: transparent;
+}
+
+.inputPayField::-webkit-outer-spin-button,
+.inputPayField::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.buttonLong,
+.buttonLongCreate,
+.buttonLongBack {
+  font-size: 15px;
+  width: 80%;
+  border-radius: 100px;
+  border: 1px solid black;
+  height: 50px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.buttonLongCreate {
+  margin-top: 10px;
+  color: white;
+  background-color: #5d3891;
+}
+
+.buttonLongBack {
+  border: 0px solid black;
+  color: rgb(107, 107, 107);
+}
+
+.buttonLongCreate:hover {
+  background-color: #6a518e;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  gap: 5px;
+}
+
+.input {
+  /* padding-left: 15px; */
+  font-size: 16px;
+  width: 360px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  text-align: center;
+  /* border: 1px solid rgb(142, 142, 142); */
+  /* margin-bottom: 10px;
+  margin-top: 5px; */
+}
+
+.input::placeholder {
+  opacity: 50%;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.label {
+  font-size: 18px;
+  opacity: 90%;
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+.pText {
+  font-style: italic;
+  opacity: 70%;
+  margin-top: 20px;
+}
