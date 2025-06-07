@@ -1,32 +1,47 @@
 .paynowContainer {
-    text-align: center;
-    padding: 36px;
-    position: relative;
-    padding-top: 140px;
+  text-align: center;
+  padding: 36px;
+  position: relative;
+  padding-top: 140px;
 }
 
 .backButton {
-    position: absolute;
-    top: 20px;
-    left: 15px;
-    background: none;
-    border: none;
-    font-size: 19px;
-    color: #007bff;
-    cursor: pointer;
-    font-weight: bold;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  background: none;
+  border: none;
+  font-size: 19px;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.buttonBack {
+  position: absolute;
+  top: 20px;
+  left: 5px;
+  transform: rotate(-180deg);
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #5d3891;
+  opacity: 100%;
+  margin-right: 370px;
 }
 
 .doneButton {
   margin-top: 20px;
-  padding: 15px;       
-  font-size: 23px;            
+  padding: 15px;
+  font-size: 23px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 7px;
   cursor: pointer;
-  width: 100%;                
+  width: 100%;
 }
 
 .customImage {
@@ -37,5 +52,5 @@
 }
 
 .instructionText {
-  font-size: 20px; 
+  font-size: 20px;
 }
