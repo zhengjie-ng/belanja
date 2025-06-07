@@ -1,3 +1,144 @@
+.divMain {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  gap: 10px;
+}
+
+.h2BelanjaPay {
+  margin-top: 40px;
+  /* font-size: 20px;
+  font-weight: 500; */
+  color: #5d3891;
+  margin-bottom: 20px;
+}
+
+.divPayField {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(224, 224, 224);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+.inputPayField {
+  text-align: center;
+  background-color: rgb(224, 224, 224);
+  border: none;
+  font-size: 50px;
+}
+
+.inputPayField:focus {
+  outline: none;
+}
+
+.inputPayField:focus::placeholder {
+  color: transparent;
+}
+
+.inputPayField::-webkit-outer-spin-button,
+.inputPayField::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.buttonBack {
+  transform: rotate(-180deg);
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #5d3891;
+  margin-top: 20px;
+  opacity: 100%;
+  margin-right: 370px;
+}
+
+.buttonBack:hover {
+  opacity: 100%;
+}
+
+.walletBalance {
+  margin-top: 30px;
+}
+
+.divButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  gap: 10px;
+}
+
+.divPaymentMethods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 120px;
+}
+
+.divPaymentOptions {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 5px;
+}
+
+.labelPaymentLabel {
+  font-size: 18px;
+}
+.inputOption {
+  font-size: 15px;
+}
+.buttonPreset {
+  font-size: 15px;
+  width: 80px;
+  height: 50px;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 10px;
+}
+
+.buttonPreset:hover {
+  border: 1px solid rgb(102, 102, 102);
+}
+
+.buttonConfirmButton {
+  font-size: 15px;
+  width: 90%;
+  border-radius: 100px;
+  border: 1px solid black;
+  height: 50px;
+  font-weight: bolder;
+  margin-top: 30px;
+  color: white;
+  background-color: #5d3891;
+}
+
+.buttonConfirmButton:hover {
+  background-color: #6a518e;
+}
+
+.buttonCancelButton {
+  font-size: 15px;
+  width: 90%;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  height: 50px;
+  font-weight: bolder;
+  opacity: 100%;
+  color: rgb(127, 127, 127);
+}
+
+.buttonCancelButton:hover {
+  color: black;
+}
+
 .topupContainer {
   padding: 20px;
   text-align: center;
@@ -11,14 +152,14 @@
 
 .dollarSign {
   position: absolute;
-  top:23%;
+  top: 23%;
   left: 27px;
   font-size: 40px;
 }
 
 .amountInput {
   margin: 10px;
-  padding: 30px 30px 30px 50px; 
+  padding: 30px 30px 30px 50px;
   width: 95%;
   font-size: 40px;
   border: 3px solid #bbb7b7;
@@ -42,14 +183,14 @@
 
 .confirmButton {
   margin-top: 20px;
-  padding: 15px 30px;        
-  font-size: 25px;            
+  padding: 15px 30px;
+  font-size: 25px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 7px;
   cursor: pointer;
-  width: 100%;                
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -57,24 +198,24 @@
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 5px;
-  text-align: left;       
-  display: block;          
+  text-align: left;
+  display: block;
 }
 
 .paymentMethods {
-    margin-top: 150px;
-    margin-bottom: 50px;
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 
 .paymentLabel {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 20px;
-    font-size: 30px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20px;
+  font-size: 30px;
 }
 
 .paymentOptions label {
-    margin-right: 40px;
-    font-size: 22px; 
-    cursor: pointer;
+  margin-right: 40px;
+  font-size: 22px;
+  cursor: pointer;
 }
