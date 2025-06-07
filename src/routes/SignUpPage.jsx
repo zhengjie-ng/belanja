@@ -45,14 +45,14 @@ function SignUpPage() {
         <p className={styles.messageInactive}></p>
       )}
       <h2 className={styles.header}>Create your account</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label className={styles.label}>Name</label>
         <br></br>
         <input
           className={styles.input}
           name="name"
           type="text"
-          placeholder="ex: wendy"
+          placeholder="e.g. Wendy"
           onChange={handleChange}
           required
         />
@@ -63,7 +63,7 @@ function SignUpPage() {
           className={styles.input}
           name="email"
           type="email"
-          placeholder="ex: wendy@gmail.com"
+          placeholder="e.g. wendy@gmail.com"
           onChange={handleChange}
           required
         />
@@ -74,7 +74,7 @@ function SignUpPage() {
           className={styles.input}
           name="mobile"
           type="text"
-          placeholder="81234567"
+          placeholder="e.g. 81234567"
           onChange={handleChange}
           required
         />
@@ -94,7 +94,11 @@ function SignUpPage() {
         <button className={styles.buttonLongCreate} type="submit">
           Sign Up
         </button>
-        <button className={styles.buttonLongBack} onClick={() => navigate("/")}>
+        <button
+          className={styles.buttonLongBack}
+          type="button"
+          onClick={() => navigate("/")}
+        >
           Back to Home
         </button>
       </form>

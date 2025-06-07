@@ -222,7 +222,7 @@ export function ProductProvider({ children }) {
 
   const handlerSignUp = (name, email, mobile, password) => {
     const existingUser = state.userList.find(
-      (user) => user.email === email || user.mobile.toString() === mobile
+      (user) => user.email === email || String(user.mobile) === String(mobile)
     );
 
     if (existingUser) {
@@ -241,9 +241,11 @@ export function ProductProvider({ children }) {
     const newBill = {
       id: uuid(), // Generate unique UUID
       name: newBillData.name,
+      manual: true,
       payment: parseFloat(newBillData.payment),
       mode: newBillData.mode,
       settle: false,
+      location: { address: newBillData.address },
       date: {
         d: new Date().getDate(),
         Month: new Date().toLocaleString("default", { month: "short" }),

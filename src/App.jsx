@@ -28,6 +28,7 @@ import CoinsHistory from "./routes/CoinsHistory";
 import MerchantPaymentPage from "./routes/MerchantPaymentPage";
 import DebtLog from "./routes/DebtLog";
 import RewardRedeemSuccessPage from "./routes/RewardRedeemSuccessPage";
+import AddBill from "./routes/AddBill";
 
 import styles from "./App.module.css";
 
@@ -55,6 +56,7 @@ function App() {
               <Route path="myRewards/:uuid" element={<UseRewards />} />
               <Route path="coinsHistory" element={<CoinsHistory />} />
               <Route path="debtLog/:friendId" element={<DebtLog />} />
+              <Route path="addBill/" element={<AddBill />} />
               <Route
                 path="rewards/success/:rewardId"
                 element={<RewardRedeemSuccessPage />}
