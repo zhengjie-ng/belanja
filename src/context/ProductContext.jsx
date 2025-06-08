@@ -115,6 +115,7 @@ export function ProductProvider({ children }) {
     senderId,
     place,
     coins,
+    manual,
   }) => {
     dispatch({ type: "BILL_SUBMIT", coins });
     dispatch({
@@ -126,6 +127,7 @@ export function ProductProvider({ children }) {
         senderName,
         senderId,
         place,
+        manual,
       },
     });
     dispatch({

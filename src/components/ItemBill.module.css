@@ -51,6 +51,7 @@
   margin: 0px;
   text-align: left;
   margin-left: 10px;
+  word-wrap: break-word;
 }
 
 .divTotal {
@@ -128,4 +129,26 @@
   font-weight: 500;
   color: white;
   transform: rotate(-90deg);
+}
+
+.divManual {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 150px;
+}
+
+.divManual > .billName {
+  margin-left: 0px;
+  width: 150px;
+}
+
+.pManual {
+  font-size: 12px;
+  font-style: italic;
+  margin: 0px;
+  padding: 0px;
+  font-weight: 100;
+  text-align: left;
 }

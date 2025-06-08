@@ -433,7 +433,13 @@ export function productReducer(state, action) {
         return payeeUser;
       });
 
-      const updatedCoins = Number(state.user.coins) + Number(action.coins);
+      let updatedCoins = null;
+
+      if (newCurrentBill?.manual) {
+        updatedCoins = Number(state.user.coins);
+      } else {
+        updatedCoins = Number(state.user.coins) + Number(action.coins);
+      }
 
       return {
         ...state,
@@ -749,7 +755,8 @@ export function productReducer(state, action) {
     }
 
     case "SEND_NOTIFICATIONS": {
-      const { id, mode, amount, senderName, senderId, place } = action.payload;
+      const { id, mode, amount, senderName, senderId, place, manual } =
+        action.payload;
       const now = new Date();
       const currentDate = {
         d: now.getDate(),
@@ -770,6 +777,7 @@ export function productReducer(state, action) {
           notify: true,
           date: currentDate,
           uuid: uuid(),
+          manual,
         };
 
         const updatedUserList = state.userList.map((user) => {
@@ -809,6 +817,7 @@ export function productReducer(state, action) {
               notify: true,
               date: currentDate,
               uuid: uuid(),
+              manual,
             };
             return {
               ...payeeUser,

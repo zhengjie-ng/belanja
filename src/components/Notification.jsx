@@ -38,7 +38,11 @@ function Notification({ uuid }) {
         return (
           <>
             <span className={styles.span}>{notification.senderName} </span>
-            split the bill equally from{" "}
+            split{" "}
+            {notification.manual && (
+              <span className={styles.manual}>manual </span>
+            )}
+            bill equally from{" "}
             <span className={styles.span}>{notification.place}</span>, please
             pay{" "}
             <span className={styles.amount}>
@@ -50,9 +54,12 @@ function Notification({ uuid }) {
         return (
           <>
             <span className={styles.span}>{notification.senderName} </span>
-            split the bill from{" "}
-            <span className={styles.span}>{notification.place}</span>, please
-            pay{" "}
+            split{" "}
+            {notification.manual && (
+              <span className={styles.manual}>manual </span>
+            )}
+            bill from <span className={styles.span}>{notification.place}</span>,
+            please pay{" "}
             <span className={styles.amount}>
               ${Number(notification.amount).toFixed(2)}
             </span>
@@ -62,9 +69,12 @@ function Notification({ uuid }) {
         return (
           <>
             <span className={styles.span}>{notification.senderName} </span>
-            split the bill from{" "}
-            <span className={styles.span}>{notification.place}</span>, please
-            pay{" "}
+            split{" "}
+            {notification.manual && (
+              <span className={styles.manual}>manual </span>
+            )}{" "}
+            bill from <span className={styles.span}>{notification.place}</span>,
+            please pay{" "}
             <span className={styles.amount}>
               ${Number(notification.amount).toFixed(2)}
             </span>

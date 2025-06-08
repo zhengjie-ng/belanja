@@ -36,7 +36,24 @@ function ItemBill({ id }) {
         <p className={styles.pD}>{currentBill.date.d}</p>
         <p className={styles.pTime}>{currentBill.date?.time}</p>
       </div>
-      <h2 className={styles.billName}>{currentBill.name}</h2>
+      {currentBill?.manual ? (
+        <div className={styles.divManual}>
+          <h2 className={styles.billName}>{currentBill.name}</h2>
+          <p className={styles.pManual}>* Manually added bill</p>
+        </div>
+      ) : (
+        <h2 className={styles.billName}>{currentBill.name}</h2>
+      )}
+      {/* <h2 className={styles.billName}>
+        {currentBill?.manual ? (
+          <div className={styles.divManual}>
+            {currentBill.name}
+            <span className={styles.spanM}>* Manually added bill</span>
+          </div>
+        ) : (
+          currentBill.name
+        )}
+      </h2> */}
       <div className={styles.divTotal}>
         <p className={styles.pTotal}>Total Paid</p>
         <p className={styles.pPayment}>{`$${Number(currentBill.payment).toFixed(
