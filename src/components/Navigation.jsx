@@ -8,12 +8,12 @@ function Navigation() {
   const ctx = useContext(ProductContext);
   const [unsettledBillNumber, setUnsettledBillNumber] = useState("");
 
-  const bills = useMemo(() => ctx.user?.bills || [], [ctx.user?.bills]);
+  // const bills = useMemo(() => ctx.user?.bills || [], [ctx.user?.bills]);
 
   useEffect(() => {
-    const unsettled = bills.filter((bill) => bill.settle === false);
+    const unsettled = ctx.bills.filter((bill) => bill.settle === false);
     setUnsettledBillNumber(unsettled.length > 0 ? unsettled.length : "");
-  }, [bills]);
+  }, [ctx.bills]);
 
   return (
     <div className={styles.divMain}>

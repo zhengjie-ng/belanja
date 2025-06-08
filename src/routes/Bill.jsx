@@ -225,29 +225,47 @@ function Bill() {
 
       {ctx.currentBill.mode === "=" && (
         <>
-          <p className={styles.coins}>{`You will earn 🪙${coinsEarned}`}</p>
+          <p className={styles.coins}>
+            {ctx.currentBill?.manual
+              ? `*Manually added bill will not earn 🪙coins`
+              : `You will earn 🪙${coinsEarned}`}
+          </p>
         </>
       )}
 
       {ctx.currentBill.mode === "split" && (
         <>
-          <p className={styles.coins}>{`You will earn 🪙${coinsEarned}`}</p>
+          <p className={styles.coins}>
+            {ctx.currentBill?.manual
+              ? `*Manually added bill will not earn 🪙coins`
+              : `You will earn 🪙${coinsEarned}`}
+          </p>
         </>
       )}
 
       {ctx.currentBill.mode === "%" && (
         <>
-          <p className={styles.coins}>{`You will earn 🪙${coinsEarned}`}</p>
+          <p className={styles.coins}>
+            {ctx.currentBill?.manual
+              ? `*Manually added bill will not earn 🪙coins`
+              : `You will earn 🪙${coinsEarned}`}
+          </p>
         </>
       )}
 
       {ctx.currentBill.mode === "belanja" && (
         <>
           <p className={styles.coins}>
-            {`You will earn 2x coins of 🪙${coinsEarned} `}
-            <span className={styles.coinsStrikeOut}>
-              {Math.round(ctx.currentBill.payment)}
-            </span>
+            {ctx.currentBill?.manual
+              ? "*Manually added bill will not earn 🪙coins"
+              : `You will earn 2x coins of 🪙${coinsEarned} `}
+            {ctx.currentBill?.manual ? (
+              ""
+            ) : (
+              <span className={styles.coinsStrikeOut}>
+                {Math.round(ctx.currentBill.payment)}
+              </span>
+            )}
           </p>
         </>
       )}
@@ -262,6 +280,7 @@ function Bill() {
             senderId: ctx.user.id,
             place: ctx.currentBill.name,
             coins: coinsEarned,
+            manual: ctx.currentBill.manual,
           })
         }
       >
